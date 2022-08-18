@@ -7,6 +7,10 @@
         internal object Pop()
         {
             var heldObjectCount = HeldObjects.Count;
+            if(heldObjectCount < 1)
+            {
+                throw new InvalidOperationException();
+            }
 
             var lastObject = HeldObjects.LastOrDefault();
             HeldObjects.RemoveAt(heldObjectCount-1);

@@ -34,5 +34,12 @@ namespace Crafting_Code_Exercises.Exercise1
             Assert.AreEqual(firstInput, secondResult);
             Assert.AreEqual(secondInput, firstResult);
         }
+
+        [TestMethod]
+        public void Throw_exeption_when_popping_empty_stack()
+        {
+            var UnderTest = new Stack();
+            Assert.ThrowsException<InvalidOperationException>(() => UnderTest.Pop());
+        }
     }
 }
