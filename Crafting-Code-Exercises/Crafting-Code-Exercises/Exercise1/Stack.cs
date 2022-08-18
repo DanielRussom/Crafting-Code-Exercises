@@ -2,16 +2,21 @@
 {
     internal class Stack
     {
-        object HeldObject;
+        readonly List<object> HeldObjects = new();
 
         internal object Pop()
         {
-            return HeldObject;
+            var heldObjectCount = HeldObjects.Count;
+
+            var lastObject = HeldObjects.LastOrDefault();
+            HeldObjects.RemoveAt(heldObjectCount-1);
+
+            return lastObject;
         }
 
         internal void Push(object input)
         {
-            HeldObject = input;
+            HeldObjects.Add(input);
         }
     }
 }
