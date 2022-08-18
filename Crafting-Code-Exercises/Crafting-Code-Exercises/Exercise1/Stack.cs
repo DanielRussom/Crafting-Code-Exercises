@@ -4,23 +4,34 @@
     {
         readonly List<object> HeldObjects = new();
 
+        internal void Push(object input)
+        {
+            HeldObjects.Add(input);
+        }
+
         internal object Pop()
         {
-            var heldObjectCount = HeldObjects.Count;
-            if(heldObjectCount < 1)
+            if (HeldObjectsIsEmpty())
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("No objects to pop.");
             }
 
-            var lastObject = HeldObjects.LastOrDefault();
-            HeldObjects.RemoveAt(heldObjectCount-1);
+            var lastObject = HeldObjects.Last();
+
+            RemoveLastObject();
 
             return lastObject;
         }
 
-        internal void Push(object input)
+        private bool HeldObjectsIsEmpty()
         {
-            HeldObjects.Add(input);
+            return !HeldObjects.Any();
+        }
+
+        private void RemoveLastObject()
+        {
+            var lastObjectIndex = HeldObjects.Count - 1;
+            HeldObjects.RemoveAt(lastObjectIndex);
         }
     }
 }
