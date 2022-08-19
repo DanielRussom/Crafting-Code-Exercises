@@ -4,16 +4,18 @@
     {
         internal string Convert(int input)
         {
-            if(input == 5)
-            {
-                return "V";
-            }
-            
             var result = string.Empty;
+            
+            if(input >= 5)
+            {
+                result += "V";
+                input -= 5;
+            }
 
-            for(int i = 0; i < input; i++)
+            while(input > 0)
             {
                 result += "I";
+                input -= 1;
             }
 
             return result;
