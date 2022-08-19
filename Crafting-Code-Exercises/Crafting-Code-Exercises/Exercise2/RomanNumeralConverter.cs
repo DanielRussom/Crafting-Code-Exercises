@@ -2,19 +2,16 @@
 {
     internal class RomanNumeralConverter
     {
-        internal object Convert(int input)
+        internal string Convert(int input)
         {
-            if (input > 2)
+            var result = string.Empty;
+
+            for(int i = 0; i < input; i++)
             {
-                return "III";
+                result += "I";
             }
 
-            if (input > 1)
-            {
-                return "II";
-            }
-
-            return "I";
+            return result;
         }
     }
 }
