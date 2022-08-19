@@ -12,7 +12,13 @@
                 input -= 5;
             }
 
-            while(input > 0)
+            if (input == 4)
+            {
+                result += "IV";
+                input -= 4;
+            }
+
+            while (input > 0)
             {
                 result += "I";
                 input -= 1;

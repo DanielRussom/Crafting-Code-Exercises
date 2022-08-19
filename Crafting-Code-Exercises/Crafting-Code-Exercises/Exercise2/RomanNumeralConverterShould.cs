@@ -9,6 +9,7 @@ namespace Crafting_Code_Exercises.Exercise2
         [DataRow(1, "I")]
         [DataRow(2, "II")]
         [DataRow(3, "III")]
+        [DataRow(4, "IV")]
         [DataRow(5, "V")]
         [DataRow(6, "VI")]
         public void Convert_input_to_expected_output(int input, string expected)
