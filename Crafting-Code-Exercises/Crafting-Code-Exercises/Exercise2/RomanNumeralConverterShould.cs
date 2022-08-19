@@ -6,23 +6,15 @@ namespace Crafting_Code_Exercises.Exercise2
     public class RomanNumeralConverterShould
     {
         [TestMethod]
-        public void Convert_1_to_I()
+        [DataRow(1, "I")]
+        [DataRow(2, "II")]
+        public void Convert_input_to_expected_output(int input, string expected)
         {
             var UnderTest = new RomanNumeralConverter();
 
-            var result = UnderTest.Convert(1);
+            var result = UnderTest.Convert(input);
 
-            Assert.AreEqual("I", result);
-        }
-
-        [TestMethod]
-        public void Convert_2_to_II()
-        {
-            var UnderTest = new RomanNumeralConverter();
-
-            var result = UnderTest.Convert(2);
-
-            Assert.AreEqual("II", result);
+            Assert.AreEqual(expected, result);
         }
     }
 }
