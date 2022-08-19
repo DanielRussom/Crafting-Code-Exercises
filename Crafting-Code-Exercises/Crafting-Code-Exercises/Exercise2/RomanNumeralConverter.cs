@@ -4,6 +4,11 @@
     {
         internal object Convert(int input)
         {
+            if(input > 1)
+            {
+                return "II";
+            }
+
             return "I";
         }
     }
