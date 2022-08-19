@@ -4,6 +4,11 @@
     {
         internal string Convert(int input)
         {
+            if(input == 5)
+            {
+                return "V";
+            }
+            
             var result = string.Empty;
 
             for(int i = 0; i < input; i++)
