@@ -8,4 +8,5 @@ Personal repo for Codurance's Crafting Code exercises.
 | ---- | ------
 | Warm Up | Complete
 | Roman Numerals | Complete
-| Leap Year | In-Progress
+| Leap Year | Complete
+| Mocking | Complete
