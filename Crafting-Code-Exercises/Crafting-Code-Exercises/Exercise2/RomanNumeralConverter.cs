@@ -1,27 +1,32 @@
-﻿namespace Crafting_Code_Exercises.Exercise2
+﻿using System.Linq;
+using static Crafting_Code_Exercises.Exercise2.RomanNumeralConverter;
+
+namespace Crafting_Code_Exercises.Exercise2
 {
-    internal class RomanNumeralConverter
+    public class RomanNumeralConverter
     {
-        internal string Convert(int input)
+        public enum RomanNumerals
+        {
+            X = 10,
+            IX = 9,
+            V = 5,
+            IV = 4,
+            I = 1
+        }
+
+        public static string Convert(int input)
         {
             var result = string.Empty;
-            
-            if(input >= 5)
-            {
-                result += "V";
-                input -= 5;
-            }
 
-            if (input == 4)
-            {
-                result += "IV";
-                input -= 4;
-            }
+            var numeralValues = Enum.GetValues<RomanNumerals>().ToList().OrderByDescending(x => (int)x);
 
-            while (input > 0)
+            foreach (var numeral in numeralValues)
             {
-                result += "I";
-                input -= 1;
+                while (input >= (int)numeral)
+                {
+                    result += numeral.ToString();
+                    input -= (int)numeral;
+                }
             }
 
             return result;

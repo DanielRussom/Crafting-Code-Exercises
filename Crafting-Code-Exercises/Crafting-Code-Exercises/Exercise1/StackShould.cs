@@ -3,7 +3,7 @@
 namespace Crafting_Code_Exercises.Exercise1
 {
     [TestClass]
-    public class StackShould
+    internal class StackShould
     {
         private Stack UnderTest;
 
