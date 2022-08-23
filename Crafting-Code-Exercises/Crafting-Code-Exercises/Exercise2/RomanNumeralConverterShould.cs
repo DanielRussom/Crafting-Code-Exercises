@@ -6,9 +6,9 @@ namespace Crafting_Code_Exercises.Exercise2
     public class RomanNumeralConverterShould
     {
         [TestMethod]
-        [DataRow (1, "I", DisplayName = "1 to I")]
-        [DataRow (2, "II", DisplayName = "2 to II")]
-        [DataRow (3, "III", DisplayName = "3 to III")]
+        [DataRow(1, "I", DisplayName = "1 to I")]
+        [DataRow(2, "II", DisplayName = "2 to II")]
+        [DataRow(3, "III", DisplayName = "3 to III")]
         [DataRow(4, "IV", DisplayName = "4 to IV")]
         [DataRow(5, "V", DisplayName = "5 to V")]
         [DataRow(6, "VI", DisplayName = "6 to VI")]

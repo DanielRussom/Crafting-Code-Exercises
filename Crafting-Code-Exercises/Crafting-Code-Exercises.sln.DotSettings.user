@@ -7,5 +7,6 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9919232a_002Dbcdc_002D49f8_002Dbc41_002De404cd07c11b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LeapYearValidatorShould #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::A38F3CF7-2EA9-488F-87D2-D3961DC727B4::net6.0::Crafting_Code_Exercises.Exercise3.LeapYearValidatorShould&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::A38F3CF7-2EA9-488F-87D2-D3961DC727B4::net6.0::Crafting_Code_Exercises.NthFibonacci.FibonacciNumberGeneratorShould&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
