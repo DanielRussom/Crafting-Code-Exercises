@@ -1,12 +1,6 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6ca77fc6_002D49f1_002D4d39_002Da3dd_002D593cd90366a8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LeapYearValidatorShould" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b4594d4e_002D1a94_002D4f49_002D8d92_002D8ecadbd9e994/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AnagramGeneratorShould" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;MSTest::A38F3CF7-2EA9-488F-87D2-D3961DC727B4::net6.0::Crafting_Code_Exercises.Exercise3.LeapYearValidatorShould&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9919232a_002Dbcdc_002D49f8_002Dbc41_002De404cd07c11b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LeapYearValidatorShould #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;MSTest::A38F3CF7-2EA9-488F-87D2-D3961DC727B4::net6.0::Crafting_Code_Exercises.Exercise3.LeapYearValidatorShould&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::A38F3CF7-2EA9-488F-87D2-D3961DC727B4::net6.0::Crafting_Code_Exercises.NthFibonacci.FibonacciNumberGeneratorShould&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::A38F3CF7-2EA9-488F-87D2-D3961DC727B4::net6.0::Crafting_Code_Exercises.Anagrams.AnagramGeneratorShould&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
