@@ -4,6 +4,17 @@
     {
         internal static bool GetBoolean(string input)
         {
+
+            if (input.Contains('('))
+            {
+                var splitParenthesesCommands = input.Split('(', ')').Select(x => x.Trim()).ToList();
+                splitParenthesesCommands[1] = GetBoolean(splitParenthesesCommands[1]).ToString().ToUpper();
+
+                input = string.Join(' ', splitParenthesesCommands);
+            }
+
+            input = input.Trim();
+
             if (input == "NOT TRUE")
             {
                 return false;
@@ -14,11 +25,11 @@
                 return true;
             }
 
-            var splitOrInput = input.Split(" OR ");
-            if (splitOrInput.Length > 1)
+            var splitOrCommands = input.Split(" OR ");
+            if (splitOrCommands.Length > 1)
             {
                 var result = false;
-                foreach (var operand in splitOrInput)
+                foreach (var operand in splitOrCommands)
                 {
                     result |= GetBoolean(operand);
                 }
@@ -26,11 +37,11 @@
                 return result;
             }
 
-            var splitAndInput = input.Split(" AND ");
-            if (splitAndInput.Length > 1)
+            var splitAndCommands = input.Split(" AND ");
+            if (splitAndCommands.Length > 1)
             {
                 var result = true;
-                foreach (var operand in splitAndInput)
+                foreach (var operand in splitAndCommands)
                 {
                     result &= GetBoolean(operand);
                 }

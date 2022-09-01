@@ -43,6 +43,8 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.BooleanCal
         [DataRow("TRUE OR TRUE OR TRUE AND FALSE", true)]
         [DataRow("TRUE AND FALSE OR TRUE OR TRUE AND FALSE", true)]
         [DataRow("TRUE OR FALSE AND NOT FALSE", true)]
+        [DataRow("(TRUE OR TRUE OR TRUE) AND FALSE", false)]
+        [DataRow("NOT (TRUE AND TRUE)", false)]
         public void Return_expected_boolean(string input, bool expected)
         {
             var result = BooleanCalculator.GetBoolean(input);
