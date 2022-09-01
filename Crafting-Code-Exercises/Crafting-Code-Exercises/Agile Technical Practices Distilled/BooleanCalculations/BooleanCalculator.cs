@@ -10,6 +10,11 @@
                 var splitParenthesesCommands = input.Split('(', ')').Select(x => x.Trim()).ToList();
                 splitParenthesesCommands[1] = GetBoolean(splitParenthesesCommands[1]).ToString().ToUpper();
 
+                if(splitParenthesesCommands.Count > 3)
+                {
+                    splitParenthesesCommands[3] = GetBoolean(splitParenthesesCommands[3]).ToString().ToUpper();
+                }
+                
                 input = string.Join(' ', splitParenthesesCommands);
             }
 
