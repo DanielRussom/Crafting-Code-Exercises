@@ -4,9 +4,37 @@
     {
         internal static bool GetBoolean(string input)
         {
-
             if (input.Contains('('))
             {
+                var isNested = false;
+                var counter = 0;
+                foreach(var character in input)
+                {
+                    if(character == '(')
+                    {
+                        counter++;
+                    }
+
+                    if(character == ')')
+                    {
+                        counter--;
+                    }
+
+                    if(counter > 1)
+                    {
+                        isNested = true;
+                        break;
+                    }
+                }
+
+                if (isNested)
+                {
+                    var openingIndex = input.IndexOf('(');
+                    var closingIndex = input.LastIndexOf(')');
+
+                    input = input.Substring(openingIndex+1, closingIndex- openingIndex - 1);
+                }
+
                 var splitParenthesesCommands = input.Split('(', ')').Select(x => x.Trim()).ToList();
                 splitParenthesesCommands[1] = GetBoolean(splitParenthesesCommands[1]).ToString().ToUpper();
 
