@@ -1,4 +1,4 @@
-﻿namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.TicTacToeGame
+﻿    namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.TicTacToeGame
 {
     internal class TicTacToe
     {
