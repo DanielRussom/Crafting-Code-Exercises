@@ -50,7 +50,7 @@
                 var matchingPlayerCount = 0;
                 for (int yPosition = 0; yPosition <= 2; yPosition++)
                 {
-                    if (_board[xPosition, yPosition] == "X")
+                    if (_board[xPosition, yPosition] == player)
                     {
                         matchingPlayerCount++;
                     }
@@ -58,18 +58,23 @@
 
                 if (matchingPlayerCount == 3)
                 {
-                    Winner = "X";
+                    Winner = player;
                 }
             }
 
-            if(_board[0, 0] == "X" && _board[1, 1] == "X" && _board[2, 2] == "X")
+            if(_board[0, 0] == player && _board[1, 1] == player && _board[2, 2] == player)
             {
-                Winner = "X";
+                Winner = player;
             }
 
-            if (_board[0, 2] == "X" && _board[1, 1] == "X" && _board[2, 0] == "X")
+            if (_board[0, 2] == player && _board[1, 1] == player && _board[2, 0] == player)
             {
-                Winner = "X";
+                Winner = player;
+            }
+
+            if(_moveNumber == 9 && Winner == String.Empty)
+            {
+                Winner = "DRAW";
             }
 
             return true;
