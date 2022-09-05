@@ -46,6 +46,23 @@
                 }
             }
 
+            for (int xPosition = 0; xPosition <= 2; xPosition++)
+            {
+                var matchingPlayerCount = 0;
+                for (int yPosition = 0; yPosition <= 2; yPosition++)
+                {
+                    if (_board[xPosition, yPosition] == "X")
+                    {
+                        matchingPlayerCount++;
+                    }
+                }
+
+                if (matchingPlayerCount == 3)
+                {
+                    Winner = "X";
+                }
+            }
+
             return true;
         }
     }
