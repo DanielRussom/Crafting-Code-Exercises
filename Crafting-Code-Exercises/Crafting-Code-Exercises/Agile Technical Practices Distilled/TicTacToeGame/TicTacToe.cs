@@ -63,6 +63,11 @@
                 }
             }
 
+            if(_board[0, 0] == "X" && _board[1, 1] == "X" && _board[2, 2] == "X")
+            {
+                Winner = "X";
+            }
+
             return true;
         }
     }

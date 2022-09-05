@@ -131,5 +131,18 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.TicTacToeG
             var result = UnderTest.Winner;
             Assert.AreEqual("X", result);
         }
+
+        [TestMethod]
+        public void Report_win_for_X_when_upward_diagonal_matches()
+        {
+            UnderTest.PlaceCounter("X", 0, 0);
+            UnderTest.PlaceCounter("O", 0, 1);
+            UnderTest.PlaceCounter("X", 1, 1);
+            UnderTest.PlaceCounter("O", 0, 2);
+            UnderTest.PlaceCounter("X", 2, 2);
+
+            var result = UnderTest.Winner;
+            Assert.AreEqual("X", result);
+        }
     }
 }
