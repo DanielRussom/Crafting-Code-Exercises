@@ -117,6 +117,20 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.TicTacToeG
         }
 
         [TestMethod]
+        public void Report_win_for_O_when_three_Os_are_in_a_horizontal_row_on_row_0()
+        {
+            UnderTest.PlaceCounter("X", 1, 2);
+            UnderTest.PlaceCounter("O", 0, 0);
+            UnderTest.PlaceCounter("X", 1, 1);
+            UnderTest.PlaceCounter("O", 1, 0);
+            UnderTest.PlaceCounter("X", 2, 2);
+            UnderTest.PlaceCounter("O", 2, 0);
+
+            var result = UnderTest.Winner;
+            Assert.AreEqual("O", result);
+        }
+
+        [TestMethod]
         [DataRow(0, 1)]
         [DataRow(1, 2)]
         [DataRow(2, 0)]
@@ -140,6 +154,19 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.TicTacToeG
             UnderTest.PlaceCounter("X", 1, 1);
             UnderTest.PlaceCounter("O", 0, 2);
             UnderTest.PlaceCounter("X", 2, 2);
+
+            var result = UnderTest.Winner;
+            Assert.AreEqual("X", result);
+        }
+
+        [TestMethod]
+        public void Report_win_for_X_when_downward_diagonal_matches()
+        {
+            UnderTest.PlaceCounter("X", 0, 2);
+            UnderTest.PlaceCounter("O", 0, 1);
+            UnderTest.PlaceCounter("X", 1, 1);
+            UnderTest.PlaceCounter("O", 0, 0);
+            UnderTest.PlaceCounter("X", 2, 0);
 
             var result = UnderTest.Winner;
             Assert.AreEqual("X", result);

@@ -29,20 +29,19 @@
             _lastPlayer = player;
             _moveNumber++;
 
-
             for(int yPosition = 0; yPosition <= 2; yPosition++)
             {
                 var matchingPlayerCount = 0;
                 for(int xPosition = 0; xPosition <= 2; xPosition++)
                 {
-                    if (_board[xPosition, yPosition] == "X")
+                    if (_board[xPosition, yPosition] == player)
                     {
                         matchingPlayerCount++;
                     }
                 }
 
                 if (matchingPlayerCount == 3) {
-                    Winner = "X";
+                    Winner = player;
                 }
             }
 
@@ -64,6 +63,11 @@
             }
 
             if(_board[0, 0] == "X" && _board[1, 1] == "X" && _board[2, 2] == "X")
+            {
+                Winner = "X";
+            }
+
+            if (_board[0, 2] == "X" && _board[1, 1] == "X" && _board[2, 0] == "X")
             {
                 Winner = "X";
             }
