@@ -11,7 +11,5 @@
             _xValue = xValue;
             _yValue = yValue;
         }
-
-
     }
 }
