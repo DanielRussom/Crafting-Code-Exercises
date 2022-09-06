@@ -4,6 +4,10 @@
     {
         internal void PlaceCounter(Coordinate coordinate, Player player)
         {
+            if(player.Equals(new Player("X"))){
+                return;
+            }
+            
             throw new InvalidMoveException();
         }
     }
