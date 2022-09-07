@@ -31,16 +31,14 @@
             return coordinate.ToString();
         }
 
-        internal string PlayerToString()
-        {
-            return player.ToString();
-        }
-
         internal bool CompareYCoordinate(Coordinate toCompare)
         {
             return coordinate.CompareY(toCompare);
+        }
 
-
+        internal string PlayerToString()
+        {
+            return player.ToString();
         }
     }
 }

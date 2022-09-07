@@ -32,10 +32,19 @@
 
         internal bool IsPlayerWinner(Player player)
         {
-            var playerCoordinates = moveHistory.Where(x => x.ComparePlayer(player)
-               && x.CompareYCoordinate(new Coordinate(-1, 0)));
+            var loopCounter = 0;
+            var isWinnerFound = false;
 
-            return playerCoordinates.Count() == 3;
+            while (loopCounter <= 2 && !isWinnerFound)
+            {
+                var matchingPlayerCounters = moveHistory.Where(x => x.ComparePlayer(player)
+                   && x.CompareYCoordinate(new Coordinate(-1, loopCounter))).Count();
+
+                isWinnerFound = matchingPlayerCounters == 3;
+                loopCounter++;
+            }
+
+            return isWinnerFound;
         }
     }
 }
