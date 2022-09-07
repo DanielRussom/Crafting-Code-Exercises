@@ -33,7 +33,10 @@
         internal bool IsPlayerWinner(Player player)
         {
             var loopCounter = 0;
+            var descendingloopCounter = 2;
             var isWinnerFound = false;
+            var matchingDiagonalAscendingCounters = 0;
+            var matchingDiagonalDescendingCounters = 0;
 
             while (loopCounter <= 2 && !isWinnerFound)
             {
@@ -43,8 +46,20 @@
                 var matchingVerticalCounters = moveHistory.Where(x => x.ComparePlayer(player)
                    && x.CompareXCoordinate(new Coordinate(loopCounter, -1))).Count();
 
-                isWinnerFound = matchingHorizontalCounters == 3 || matchingVerticalCounters == 3;
+                matchingDiagonalAscendingCounters += moveHistory.Where(x => x.ComparePlayer(player)
+                   && x.CompareYCoordinate(new Coordinate(-1, loopCounter)) 
+                   && x.CompareXCoordinate(new Coordinate(loopCounter, -1))).Count();
+
+                matchingDiagonalDescendingCounters += moveHistory.Where(x => x.ComparePlayer(player)
+                   && x.CompareYCoordinate(new Coordinate(-1, descendingloopCounter))
+                   && x.CompareXCoordinate(new Coordinate(loopCounter, -1))).Count();
+
+                isWinnerFound = matchingHorizontalCounters == 3 
+                    || matchingVerticalCounters == 3 
+                    || matchingDiagonalAscendingCounters == 3
+                    || matchingDiagonalDescendingCounters == 3;
                 loopCounter++;
+                descendingloopCounter--;
             }
 
             return isWinnerFound;
