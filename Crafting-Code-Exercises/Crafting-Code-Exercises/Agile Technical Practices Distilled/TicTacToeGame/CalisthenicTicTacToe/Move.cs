@@ -11,6 +11,11 @@
             this.coordinate = coordinate;
         }
 
+        internal string PlayerToString()
+        {
+            return player.ToString();
+        }
+
         internal bool CompareCoordinates(Move toCompare)
         {
             return coordinate.Equals(toCompare.coordinate);
@@ -36,9 +41,9 @@
             return coordinate.CompareY(toCompare);
         }
 
-        internal string PlayerToString()
+        internal bool CompareXCoordinate(Coordinate toCompare)
         {
-            return player.ToString();
+            return coordinate.CompareX(toCompare);
         }
     }
 }

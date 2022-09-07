@@ -269,5 +269,21 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.TicTacToeG
 
             Assert.IsTrue(underTest.IsPlayerWinner(playerO));
         }
+
+        [TestMethod]
+        public void Report_X_as_the_winner_when_they_have_3_in_a_vertical_column_in_column_0()
+        {
+            var underTest = new TicTacToeObjectCalisthenics();
+            var playerX = new Player("X");
+            var playerO = new Player("O");
+
+            underTest.PlaceCounter(new Move(playerX, new Coordinate(0, 0)));
+            underTest.PlaceCounter(new Move(playerO, new Coordinate(1, 2)));
+            underTest.PlaceCounter(new Move(playerX, new Coordinate(0, 1)));
+            underTest.PlaceCounter(new Move(playerO, new Coordinate(1, 1)));
+            underTest.PlaceCounter(new Move(playerX, new Coordinate(0, 2)));
+
+            Assert.IsTrue(underTest.IsPlayerWinner(playerX));
+        }
     }
 }

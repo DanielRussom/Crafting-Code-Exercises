@@ -37,10 +37,13 @@
 
             while (loopCounter <= 2 && !isWinnerFound)
             {
-                var matchingPlayerCounters = moveHistory.Where(x => x.ComparePlayer(player)
+                var matchingHorizontalCounters = moveHistory.Where(x => x.ComparePlayer(player)
                    && x.CompareYCoordinate(new Coordinate(-1, loopCounter))).Count();
 
-                isWinnerFound = matchingPlayerCounters == 3;
+                var matchingVerticalCounters = moveHistory.Where(x => x.ComparePlayer(player)
+                   && x.CompareXCoordinate(new Coordinate(loopCounter, -1))).Count();
+
+                isWinnerFound = matchingHorizontalCounters == 3 || matchingVerticalCounters == 3;
                 loopCounter++;
             }
 
