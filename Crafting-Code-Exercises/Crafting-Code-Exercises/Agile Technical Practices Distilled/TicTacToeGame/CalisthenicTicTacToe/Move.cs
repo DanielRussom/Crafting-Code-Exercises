@@ -35,5 +35,12 @@
         {
             return player.ToString();
         }
+
+        internal bool CompareYCoordinate(Coordinate toCompare)
+        {
+            return coordinate.CompareY(toCompare);
+
+
+        }
     }
 }

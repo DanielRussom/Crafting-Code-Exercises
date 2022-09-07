@@ -5,6 +5,11 @@
         private int currentMoveNumber = 0;
         private MoveHistory moveHistory = new();
 
+        internal bool IsPlayerWinner(Player player)
+        {
+            return moveHistory.IsPlayerWinner(player);
+        }
+
         internal void PlaceCounter(Move move)
         {
             if (moveHistory.HaveCoordinatesBeenUsed(move))

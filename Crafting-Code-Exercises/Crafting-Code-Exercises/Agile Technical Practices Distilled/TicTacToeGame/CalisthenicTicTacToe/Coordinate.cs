@@ -16,5 +16,10 @@
         {
             return $"{_xValue},{_yValue}";
         }
+
+        internal bool CompareY(Coordinate toCompare)
+        {
+            return toCompare._yValue == _yValue;
+        }
     }
 }

@@ -29,5 +29,13 @@
 
             return moveHistory.Any(x => x.CompareCoordinates(move));
         }
+
+        internal bool IsPlayerWinner(Player player)
+        {
+            var playerCoordinates = moveHistory.Where(x => x.ComparePlayer(player)
+               && x.CompareYCoordinate(new Coordinate(-1, 0)));
+
+            return playerCoordinates.Count() == 3;
+        }
     }
 }

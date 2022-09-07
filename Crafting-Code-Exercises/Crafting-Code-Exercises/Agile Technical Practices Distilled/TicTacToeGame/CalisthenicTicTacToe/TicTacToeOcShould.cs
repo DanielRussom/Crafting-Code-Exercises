@@ -170,5 +170,21 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.TicTacToeG
             var exception = Assert.ThrowsException<InvalidMoveException>(action);
             Assert.AreEqual($"Coordinate {duplicateCoordinate} already played", exception.Message);
         }
+
+        [TestMethod]
+        public void Report_X_as_the_winner_when_they_have_3_in_a_horizontal_row()
+        {
+            var underTest = new TicTacToeObjectCalisthenics();
+            var playerX = new Player("X");
+            var playerO = new Player("O");
+
+            underTest.PlaceCounter(new Move(playerX, new Coordinate(0, 0)));
+            underTest.PlaceCounter(new Move(playerO, new Coordinate(0, 1)));
+            underTest.PlaceCounter(new Move(playerX, new Coordinate(1, 0)));
+            underTest.PlaceCounter(new Move(playerO, new Coordinate(1, 1)));
+            underTest.PlaceCounter(new Move(playerX, new Coordinate(2, 0)));
+
+            Assert.IsTrue(underTest.IsPlayerWinner(playerX));
+        }
     }
 }
