@@ -13,5 +13,10 @@
         {
             return _name == toCompare._name;
         }
+
+        public override string ToString()
+        {
+            return _name;
+        }
     }
 }

@@ -25,5 +25,15 @@
         {
             return player.Equals(toCompare);
         }
+
+        public string CoordinateToString()
+        {
+            return coordinate.ToString();
+        }
+
+        internal string PlayerToString()
+        {
+            return player.ToString();
+        }
     }
 }

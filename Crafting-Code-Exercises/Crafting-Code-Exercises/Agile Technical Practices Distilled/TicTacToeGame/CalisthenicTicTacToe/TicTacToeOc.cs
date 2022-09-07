@@ -4,34 +4,30 @@
     {
         private int currentMoveNumber = 0;
         private MoveHistory moveHistory = new();
-        
+
         internal void PlaceCounter(Move move)
         {
             if (moveHistory.HaveCoordinatesBeenUsed(move))
             {
-                throw new InvalidMoveException();
+                var errorMessage = $"Coordinate {move.CoordinateToString()} already played";
+                throw new InvalidMoveException(errorMessage);
             }
 
             if (moveHistory.CompareLastPlayer(move))
             {
-                throw new InvalidMoveException();
+                var errorMessage = $"Player {move.PlayerToString()} is not allowed to play this turn";
+                throw new InvalidMoveException(errorMessage);
             }
 
-            if (currentMoveNumber > 0)
+            if (currentMoveNumber == 0 && !move.ComparePlayer(new Player("X")))
             {
-                moveHistory.AddMove(move);
-                currentMoveNumber++;
-                return;
+                var errorMessage = $"Player {move.PlayerToString()} is not allowed to play this turn";
+                throw new InvalidMoveException(errorMessage);
             }
 
-            if (move.ComparePlayer(new Player("X")))
-            {
-                moveHistory.AddMove(move);
-                currentMoveNumber++;
-                return;
-            }
-            
-            throw new InvalidMoveException();
+            moveHistory.AddMove(move);
+            currentMoveNumber++;
+            return;
         }
     }
 }

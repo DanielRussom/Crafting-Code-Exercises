@@ -11,5 +11,10 @@
             _xValue = xValue;
             _yValue = yValue;
         }
+
+        public override string ToString()
+        {
+            return $"{_xValue},{_yValue}";
+        }
     }
 }
