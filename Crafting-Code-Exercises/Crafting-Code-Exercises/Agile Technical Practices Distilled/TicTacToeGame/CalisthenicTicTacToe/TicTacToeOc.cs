@@ -3,30 +3,30 @@
     internal class TicTacToeObjectCalisthenics
     {
         private int currentMoveNumber = 0;
-        private Move LastMove = new(new Player(String.Empty), new Coordinate(-1, -1));
+        private MoveHistory moveHistory = new();
         
         internal void PlaceCounter(Move move)
         {
-            if (move.CompareCoordinates(LastMove))
+            if (moveHistory.HaveCoordinatesBeenUsed(move))
             {
                 throw new InvalidMoveException();
             }
 
-            if (move.ComparePlayer(LastMove))
+            if (moveHistory.CompareLastPlayer(move))
             {
                 throw new InvalidMoveException();
             }
 
             if (currentMoveNumber > 0)
             {
-                LastMove = move;
+                moveHistory.AddMove(move);
                 currentMoveNumber++;
                 return;
             }
 
             if (move.ComparePlayer(new Player("X")))
             {
-                LastMove = move;
+                moveHistory.AddMove(move);
                 currentMoveNumber++;
                 return;
             }

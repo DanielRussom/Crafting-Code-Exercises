@@ -11,19 +11,19 @@
             this.coordinate = coordinate;
         }
 
-        internal bool CompareCoordinates(Move lastMove)
+        internal bool CompareCoordinates(Move toCompare)
         {
-            return coordinate.Equals(lastMove.coordinate);
+            return coordinate.Equals(toCompare.coordinate);
         }
 
-        internal bool ComparePlayer(Move lastMove)
+        internal bool ComparePlayer(Move toCompare)
         {
-            return player.Equals(lastMove.player);
+            return player.Equals(toCompare.player);
         }
 
-        internal bool ComparePlayer(Player player)
+        internal bool ComparePlayer(Player toCompare)
         {
-            return player.Equals(player);
+            return player.Equals(toCompare);
         }
     }
 }

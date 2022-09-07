@@ -116,7 +116,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.TicTacToeG
 
         [TestMethod]
         [ExpectedException(typeof(InvalidMoveException))]
-        public void Prevent_the_same_coordinates_being_twice_in_a_row()
+        public void Prevent_the_same_coordinates_being_played_twice_in_a_row()
         {
             var underTest = new TicTacToeObjectCalisthenics();
             var coordinate = new Coordinate(0, 0);
@@ -125,6 +125,20 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.TicTacToeG
             underTest.PlaceCounter(new Move(playerX, coordinate));
 
             underTest.PlaceCounter(new Move(playerO, coordinate));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidMoveException))]
+        public void Prevent_the_same_coordinates_being_twice_a_turn_apart()
+        {
+            var underTest = new TicTacToeObjectCalisthenics();
+            var coordinate = new Coordinate(0, 0);
+            var playerX = new Player("X");
+            var playerO = new Player("O");
+            underTest.PlaceCounter(new Move(playerX, coordinate));
+
+            underTest.PlaceCounter(new Move(playerO, new Coordinate(0, 1)));
+            underTest.PlaceCounter(new Move(playerX, coordinate));
         }
     }
 }
