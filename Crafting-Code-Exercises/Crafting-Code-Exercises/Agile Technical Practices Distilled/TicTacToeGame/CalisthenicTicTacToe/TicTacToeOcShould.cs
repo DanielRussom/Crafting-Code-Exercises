@@ -434,5 +434,26 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.TicTacToeG
 
             Assert.IsTrue(underTest.IsPlayerWinner(playerO));
         }
+
+        [TestMethod]
+        public void Report_no_winner_when_9_moves_are_played_without_a_match()
+        {
+            var underTest = new TicTacToeObjectCalisthenics();
+            var playerX = new Player("X");
+            var playerO = new Player("O");
+
+            underTest.PlaceCounter(new Move(playerX, new Coordinate(0, 1)));
+            underTest.PlaceCounter(new Move(playerO, new Coordinate(0, 0)));
+            underTest.PlaceCounter(new Move(playerX, new Coordinate(1, 1)));
+            underTest.PlaceCounter(new Move(playerO, new Coordinate(1, 0)));
+            underTest.PlaceCounter(new Move(playerX, new Coordinate(2, 0)));
+            underTest.PlaceCounter(new Move(playerO, new Coordinate(0, 2)));
+            underTest.PlaceCounter(new Move(playerX, new Coordinate(1, 2)));
+            underTest.PlaceCounter(new Move(playerO, new Coordinate(2, 1)));
+            underTest.PlaceCounter(new Move(playerX, new Coordinate(2, 2)));
+
+            Assert.IsFalse(underTest.IsPlayerWinner(playerX));
+            Assert.IsFalse(underTest.IsPlayerWinner(playerO));
+        }
     }
 }
