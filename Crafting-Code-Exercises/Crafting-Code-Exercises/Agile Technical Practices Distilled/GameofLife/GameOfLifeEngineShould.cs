@@ -104,9 +104,29 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         }
 
         [TestMethod]
-        public void FailEqualityCheckForTrueTrueVsTrueFalse()
+        [DataRow(new [] {true, true}, new [] {true, false}, BoardEqualityState.IsNotEqual)]
+        [DataRow(new [] {true, true}, new [] {true, true }, BoardEqualityState.IsEqual)]
+        [DataRow(new [] {true, true}, new [] {false, true }, BoardEqualityState.IsNotEqual)]
+        public void CheckEqualityOfThese1By2Boards(bool[] seedData, bool[] boardToCompareData, BoardEqualityState expectedBoardEqualityState)
         {
-            // 1
+            var seed = new List<List<bool>>
+            {
+                new(seedData)
+            };
+
+            var boardToCompare = new Board(new List<List<bool>>
+            {
+                new(boardToCompareData)
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+
+            Assert.AreEqual(expectedBoardEqualityState, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+        }
+
+        [TestMethod]
+        public void FailEqualityCheckForTrueTrueVsFalse()
+        {
             var seed = new List<List<bool>>
             {
                 new()
@@ -115,12 +135,11 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
                 }
             };
 
-            // 0
             var boardToCompare = new Board(new List<List<bool>>
             {
                 new()
                 {
-                    true, false
+                    false
                 }
             });
 
@@ -130,50 +149,21 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         }
 
         [TestMethod]
-        public void PassEqualityCheckForTrueTrueVsTrueTrue()
+        public void FailEqualityCheckForTrueTrueTrueVsTrueTrueFalse()
         {
-            // 1
             var seed = new List<List<bool>>
             {
                 new()
                 {
-                    true, true
+                    true, true, true
                 }
             };
 
-            // 0
             var boardToCompare = new Board(new List<List<bool>>
             {
                 new()
                 {
-                    true, true
-                }
-            });
-
-            var gameOfLifeEngine = new GameOfLifeEngine(seed);
-
-            Assert.AreEqual(BoardEqualityState.IsEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
-        }
-
-
-        [TestMethod]
-        public void FailEqualityCheckForTrueTrueVsFalseTrue()
-        {
-            // 1
-            var seed = new List<List<bool>>
-            {
-                new()
-                {
-                    true, true
-                }
-            };
-
-            // 0
-            var boardToCompare = new Board(new List<List<bool>>
-            {
-                new()
-                {
-                    false, true
+                    true, true, false
                 }
             });
 

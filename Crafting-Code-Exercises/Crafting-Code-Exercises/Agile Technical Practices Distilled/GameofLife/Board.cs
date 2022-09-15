@@ -21,7 +21,7 @@
                 return BoardEqualityState.IsEqual;
             }
 
-            if (_state[0].Count > 1 && _state[0][1] != boardToCompare._state[0][1]) return BoardEqualityState.IsNotEqual;
+            if (_state[0].Count > 1 && boardToCompare._state[0].Count > 1 && _state[0][1] != boardToCompare._state[0][1]) return BoardEqualityState.IsNotEqual;
             if (_state[0][0] == boardToCompare._state[0][0]) return BoardEqualityState.IsEqual;
 
             return BoardEqualityState.IsNotEqual;
