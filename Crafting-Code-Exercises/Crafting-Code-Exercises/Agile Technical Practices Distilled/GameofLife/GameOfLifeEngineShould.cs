@@ -104,7 +104,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         }
 
         [TestMethod]
-        public void FailEqualityCheckFor2By1BoardsThatAreDifferent()
+        public void FailEqualityCheckForTrueTrueVsTrueFalse()
         {
             // 1
             var seed = new List<List<bool>>
@@ -121,6 +121,59 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
                 new()
                 {
                     true, false
+                }
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+
+            Assert.AreEqual(BoardEqualityState.IsNotEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+        }
+
+        [TestMethod]
+        public void PassEqualityCheckForTrueTrueVsTrueTrue()
+        {
+            // 1
+            var seed = new List<List<bool>>
+            {
+                new()
+                {
+                    true, true
+                }
+            };
+
+            // 0
+            var boardToCompare = new Board(new List<List<bool>>
+            {
+                new()
+                {
+                    true, true
+                }
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+
+            Assert.AreEqual(BoardEqualityState.IsEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+        }
+
+
+        [TestMethod]
+        public void FailEqualityCheckForTrueTrueVsFalseTrue()
+        {
+            // 1
+            var seed = new List<List<bool>>
+            {
+                new()
+                {
+                    true, true
+                }
+            };
+
+            // 0
+            var boardToCompare = new Board(new List<List<bool>>
+            {
+                new()
+                {
+                    false, true
                 }
             });
 

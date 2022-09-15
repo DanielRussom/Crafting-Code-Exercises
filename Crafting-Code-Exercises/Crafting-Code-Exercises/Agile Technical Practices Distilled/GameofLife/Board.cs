@@ -24,10 +24,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
                 return true;
             }
 
-            if (_state[0].Count > 1)
-            {
-                return _state[0][1] == boardToCompare._state[0][1];
-            }
+            if (_state[0].Count > 1 && _state[0][1] != boardToCompare._state[0][1]) return false;
 
             return _state[0][0] == boardToCompare._state[0][0];
         }
