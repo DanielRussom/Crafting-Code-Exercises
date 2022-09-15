@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using static Crafting_Code_Exercises.Exercise2.RomanNumeralConverter;
-
-namespace Crafting_Code_Exercises.Exercise2
+﻿namespace Crafting_Code_Exercises.Exercise2
 {
     public class RomanNumeralConverter
     {

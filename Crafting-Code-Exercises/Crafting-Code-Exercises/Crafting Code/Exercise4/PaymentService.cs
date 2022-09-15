@@ -1,6 +1,4 @@
-﻿using Moq;
-
-namespace Crafting_Code_Exercises.Exercise4
+﻿namespace Crafting_Code_Exercises.Exercise4
 {
     public class PaymentService
     {

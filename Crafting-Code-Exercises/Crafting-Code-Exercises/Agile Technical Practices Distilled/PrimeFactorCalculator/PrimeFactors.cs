@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.PrimeFactorCalculator
+﻿namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.PrimeFactorCalculator
 {
     internal class PrimeFactors
     {
