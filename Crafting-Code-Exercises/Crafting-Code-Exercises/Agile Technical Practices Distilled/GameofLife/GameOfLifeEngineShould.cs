@@ -104,27 +104,6 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         }
 
         [TestMethod]
-        [DataRow(new [] {true, true}, new [] {true, false}, BoardEqualityState.IsNotEqual)]
-        [DataRow(new [] {true, true}, new [] {true, true }, BoardEqualityState.IsEqual)]
-        [DataRow(new [] {true, true}, new [] {false, true }, BoardEqualityState.IsNotEqual)]
-        public void CheckEqualityOfThese1By2Boards(bool[] seedData, bool[] boardToCompareData, BoardEqualityState expectedBoardEqualityState)
-        {
-            var seed = new List<List<bool>>
-            {
-                new(seedData)
-            };
-
-            var boardToCompare = new Board(new List<List<bool>>
-            {
-                new(boardToCompareData)
-            });
-
-            var gameOfLifeEngine = new GameOfLifeEngine(seed);
-
-            Assert.AreEqual(expectedBoardEqualityState, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
-        }
-
-        [TestMethod]
         public void FailEqualityCheckForTrueTrueVsFalse()
         {
             var seed = new List<List<bool>>
@@ -147,29 +126,30 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             Assert.AreEqual(BoardEqualityState.IsNotEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
         }
-
+        
         [TestMethod]
-        public void FailEqualityCheckForTrueTrueTrueVsTrueTrueFalse()
+        [DataRow(new[] { true, true }, new[] { true, false }, BoardEqualityState.IsNotEqual)]
+        [DataRow(new[] { true, true }, new[] { true, true }, BoardEqualityState.IsEqual)]
+        [DataRow(new[] { true, true }, new[] { false, true }, BoardEqualityState.IsNotEqual)]
+        [DataRow(new[] { true, true }, new[] { false, false }, BoardEqualityState.IsNotEqual)]
+        [DataRow(new[] { true, true, true }, new[] { true, true, false}, BoardEqualityState.IsNotEqual)]
+        [DataRow(new[] { true, true, true }, new[] { true, true, true}, BoardEqualityState.IsEqual)]
+        [DataRow(new[] { true, false, true }, new[] { true, true, true}, BoardEqualityState.IsNotEqual)]
+        public void CheckEqualityOfTheseBoards(bool[] seedData, bool[] boardToCompareData, BoardEqualityState expectedBoardEqualityState)
         {
             var seed = new List<List<bool>>
             {
-                new()
-                {
-                    true, true, true
-                }
+                new(seedData)
             };
 
             var boardToCompare = new Board(new List<List<bool>>
             {
-                new()
-                {
-                    true, true, false
-                }
+                new(boardToCompareData)
             });
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(BoardEqualityState.IsNotEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(expectedBoardEqualityState, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
         }
     }
 }
