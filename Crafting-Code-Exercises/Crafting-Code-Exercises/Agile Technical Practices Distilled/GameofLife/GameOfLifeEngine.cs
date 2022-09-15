@@ -11,7 +11,7 @@
 
         internal BoardEqualityState IsBoardStateEqualTo(Board expectedBoard)
         {
-            return _board.Equals(expectedBoard) ? BoardEqualityState.IsEqual : BoardEqualityState.IsNotEqual;
+            return _board.Equals(expectedBoard);
         }
     }
 }

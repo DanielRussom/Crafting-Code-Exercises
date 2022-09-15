@@ -1,9 +1,6 @@
-﻿using Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.TicTacToeGame.CalisthenicTicTacToe;
-using IFormatProvider = System.IFormatProvider;
-
-namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
+﻿namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 {
-    internal class Board : IEquatable<Board>
+    internal class Board
     {
         private readonly List<List<bool>> _state;
 
@@ -12,21 +9,22 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             _state = state;
         }
 
-        public bool Equals(Board boardToCompare)
+        public BoardEqualityState Equals(Board boardToCompare)
         {
-            if (_state.Count != boardToCompare._state.Count) return false;
+            if (_state.Count != boardToCompare._state.Count) return BoardEqualityState.IsNotEqual;
 
             if (_state.Count == 0
                 || _state[0].Count == 0
                 || boardToCompare._state.Count == 0
                 || boardToCompare._state[0].Count == 0)
             {
-                return true;
+                return BoardEqualityState.IsEqual;
             }
 
-            if (_state[0].Count > 1 && _state[0][1] != boardToCompare._state[0][1]) return false;
+            if (_state[0].Count > 1 && _state[0][1] != boardToCompare._state[0][1]) return BoardEqualityState.IsNotEqual;
+            if (_state[0][0] == boardToCompare._state[0][0]) return BoardEqualityState.IsEqual;
 
-            return _state[0][0] == boardToCompare._state[0][0];
+            return BoardEqualityState.IsNotEqual;
         }
     }
 }
