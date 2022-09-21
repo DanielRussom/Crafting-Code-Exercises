@@ -4,9 +4,9 @@
     {
         private Board _board;
 
-        public GameOfLifeEngine(List<Row> seed)
+        public GameOfLifeEngine(Board seed)
         {
-            _board = new Board(seed);
+            _board = seed;
         }
 
         internal BoardEqualityState IsBoardStateEqualTo(Board expectedBoard)

@@ -1,6 +1,6 @@
 ﻿namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 {
-    internal class Cell
+    public class Cell
     {
         private readonly bool _state;
 
