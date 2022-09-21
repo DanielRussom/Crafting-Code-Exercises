@@ -4,7 +4,7 @@
     {
         private Board _board;
 
-        public GameOfLifeEngine(List<List<bool>> seed)
+        public GameOfLifeEngine(List<Row> seed)
         {
             _board = new Board(seed);
         }

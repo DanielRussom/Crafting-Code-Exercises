@@ -8,8 +8,8 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         [TestMethod]
         public void GenerateZeroByZeroDimensionBoardUsingEmptySeed()
         {
-            var expectedBoard = new Board(new List<List<bool>>());
-            var gameOfLifeEngine = new GameOfLifeEngine(new List<List<bool>>());
+            var expectedBoard = new Board(new List<Row>());
+            var gameOfLifeEngine = new GameOfLifeEngine(new List<Row>());
 
             Assert.AreEqual(BoardEqualityState.IsEqual, gameOfLifeEngine.IsBoardStateEqualTo(expectedBoard));
         }
@@ -18,21 +18,21 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         public void FailEqualityCheckTwoSingleCellBoardsAreDifferent()
         {
             // 1
-            var seed = new List<List<bool>>
+            var seed = new List<Row>
             {
-                new()
+                new(new List<Cell>
                 {
-                  true  
-                }
+                  new(true)
+                })
             };
 
             // 0
-            var boardToCompare = new Board(new List<List<bool>>
+            var boardToCompare = new Board(new List<Row>
             {
-                new()
+                new(new List<Cell>
                 {
-                    false
-                }
+                    new(false)
+                })
             });
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
@@ -44,21 +44,21 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         public void PassEqualityCheckTwoSingleCellBoardsAreTheSame()
         {
             // 1
-            var seed = new List<List<bool>>
+            var seed = new List<Row>
             {
-                new()
+                new(new List<Cell>
                 {
-                    true
-                }
+                    new(true)
+                })
             };
 
             // 0
-            var boardToCompare = new Board(new List<List<bool>>
+            var boardToCompare = new Board(new List<Row>
             {
-                new()
+                new(new List<Cell>
                 {
-                    true
-                }
+                    new(true)
+                })
             });
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
@@ -70,16 +70,16 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         public void FailEqualityCheckForAOneDimensionalSeedAndAnEmptyBoard()
         {
             // 1
-            var seed = new List<List<bool>>
+            var seed = new List<Row>
             {
-                new()
+                new(new List<Cell>
                 {
-                    true
-                }
+                    new(true)
+                })
             };
 
             //
-            var boardToCompare = new Board(new List<List<bool>>());
+            var boardToCompare = new Board(new List<Row>());
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
@@ -90,12 +90,12 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         public void FailEqualityCheckForAnEmptySeedAndAOneDimensionalBoard()
         {
             // 
-            var seed = new List<List<bool>>();
+            var seed = new List<Row>();
             
             // 1
-            var boardToCompare = new Board(new List<List<bool>>
+            var boardToCompare = new Board(new List<Row>
             {
-                new() {true}
+                new(new List<Cell>{new (true)})
             });
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
@@ -106,20 +106,20 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         [TestMethod]
         public void FailEqualityCheckForTrueTrueVsFalse()
         {
-            var seed = new List<List<bool>>
+            var seed = new List<Row>
             {
-                new()
+                new (new List<Cell>
                 {
-                    true, true
-                }
+                    new (true), new (true)
+                })
             };
 
-            var boardToCompare = new Board(new List<List<bool>>
+            var boardToCompare = new Board(new List<Row>
             {
-                new()
+                new(new List<Cell>
                 {
-                    false
-                }
+                    new(false)
+                })
             });
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
@@ -137,15 +137,13 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         [DataRow(new[] { true, false, true }, new[] { true, true, true}, BoardEqualityState.IsNotEqual)]
         public void CheckEqualityOfTheseBoards(bool[] seedData, bool[] boardToCompareData, BoardEqualityState expectedBoardEqualityState)
         {
-            var seed = new List<List<bool>>
-            {
-                new(seedData)
-            };
+            var seed = new List<Row>();
+            var seedDataCells = seedData.Select(cellState => new Cell(cellState)).ToList();
+            seed.Add(new Row(seedDataCells));
 
-            var boardToCompare = new Board(new List<List<bool>>
-            {
-                new(boardToCompareData)
-            });
+            var boardToCompareDataCells = boardToCompareData.Select(cellState => new Cell(cellState)).ToList();
+
+            var boardToCompare = new Board(new List<Row> { new (boardToCompareDataCells) });
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 

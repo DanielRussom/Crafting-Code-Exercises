@@ -2,33 +2,26 @@
 {
     internal class Board
     {
-        private readonly List<List<bool>> _state;
+        private readonly List<Row> _rows;
 
-        public Board(List<List<bool>> state)
+        public Board(List<Row> rows)
         {
-            _state = state;
+            _rows = rows;
         }
 
         public BoardEqualityState Equals(Board boardToCompare)
         {
-            if (_state.Count != boardToCompare._state.Count) return BoardEqualityState.IsNotEqual;
+            if (_rows.Count != boardToCompare._rows.Count) return BoardEqualityState.IsNotEqual;
 
-            if (_state.Count == 0
-                || _state[0].Count == 0
-                || boardToCompare._state.Count == 0
-                || boardToCompare._state[0].Count == 0)
+            if (_rows.Count == 0
+                || _rows[0].GetCellCount() == 0
+                || boardToCompare._rows.Count == 0
+                || boardToCompare._rows[0].GetCellCount() == 0)
             {
                 return BoardEqualityState.IsEqual;
             }
 
-            var isEqual = true;
-            var index = 0;
-
-            while (index < _state[0].Count && isEqual)
-            {
-                isEqual = boardToCompare._state[0].Count >= index + 1 && _state[0][index] == boardToCompare._state[0][index];
-                index++;
-            }
+            var isEqual = _rows[0].Equals(boardToCompare._rows[0]);
 
             return isEqual ? BoardEqualityState.IsEqual : BoardEqualityState.IsNotEqual;
         }
