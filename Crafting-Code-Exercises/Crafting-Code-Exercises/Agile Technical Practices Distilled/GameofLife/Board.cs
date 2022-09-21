@@ -13,10 +13,7 @@
         {
             if (_rows.Count != boardToCompare._rows.Count) return BoardEqualityState.IsNotEqual;
 
-            if (_rows.Count == 0
-                || _rows[0].GetCellCount() == 0
-                || boardToCompare._rows.Count == 0
-                || boardToCompare._rows[0].GetCellCount() == 0)
+            if (_rows.Count == 0)
             {
                 return BoardEqualityState.IsEqual;
             }
