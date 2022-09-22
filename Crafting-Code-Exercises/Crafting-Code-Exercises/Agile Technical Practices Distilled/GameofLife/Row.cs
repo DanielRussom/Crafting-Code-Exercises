@@ -32,7 +32,7 @@
 
             while (index < GetCellCount() && isEqual)
             {
-                isEqual = GetCellCount() >= index + 1 && _cells[index].Equals(other._cells[index]);
+                isEqual = _cells[index].Equals(other._cells[index]);
                 index++;
             }
 
