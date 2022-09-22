@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.ComponentModel;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 {
@@ -161,7 +162,29 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         }
 
         [TestMethod]
-        [DataRow(new[] { true }, new[] { true }, new[] { true }, new[] { true }, BoardEqualityState.IsEqual)]
+        // Row 2 // [X]    [ ]
+        // Row 1 // [X] vs [X]
+        [DataRow(new[] { true }, new[] { true }, new[] { true }, new[] { false }, BoardEqualityState.IsNotEqual, DisplayName = "1")]
+
+        // Row 2 // [X]     [X ]
+        // Row 1 // [X] vs  [X ] 
+        [DataRow(new[] { true }, new[] { true }, new[] { true, false }, new[] { true, false }, BoardEqualityState.IsEqual, DisplayName = "2")]
+
+        // Row 2 // [XX]    [X ]
+        // Row 1 // [X] vs  [X ] 
+        [DataRow(new[] { true }, new[] { true, true }, new[] { true, false }, new[] { true, false }, BoardEqualityState.IsNotEqual, DisplayName = "3")]
+
+        // Row 2 // [ X]    [ X]
+        // Row 1 // [XX] vs [XX] 
+        [DataRow(new[] { true, true }, new[] { false , true }, new[] { true, true }, new[] { false, true }, BoardEqualityState.IsEqual, DisplayName = "4")]
+
+        // Row 2 // [XX]    [XX]
+        // Row 1 // [X] vs  [X ] 
+        [DataRow(new[] { true }, new[] { true, true }, new[] { true, false }, new[] { true, true }, BoardEqualityState.IsEqual, DisplayName = "5")]
+
+        // Row 2 // [ X]    [ X]
+        // Row 1 // [X ] vs [X] 
+        [DataRow(new[] { true, false }, new[] { false , true }, new[] { true }, new[] { false, true }, BoardEqualityState.IsEqual, DisplayName = "6")]
         public void CheckEqualityOfTheseDoubleRowBoards(bool[] row1SeedData, bool[] row2SeedData,
             bool[] boardToCompareRow1, bool[] boardToCompareData2, BoardEqualityState expectedBoardEqualityState)
         {
@@ -169,7 +192,6 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             {
                 new(row1SeedData.Select(cellState => new Cell(cellState)).ToList()),
                 new(row2SeedData.Select(cellState => new Cell(cellState)).ToList())
-
             });
 
             var boardToCompare = new Board(new List<Row>

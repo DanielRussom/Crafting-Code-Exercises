@@ -20,6 +20,11 @@
 
             var isEqual = _rows[0].Equals(boardToCompare._rows[0]);
 
+            if (_rows.Count > 1) 
+            {
+                isEqual &= _rows[1].Equals(boardToCompare._rows[1]);
+            }
+
             return isEqual ? BoardEqualityState.IsEqual : BoardEqualityState.IsNotEqual;
         }
     }
