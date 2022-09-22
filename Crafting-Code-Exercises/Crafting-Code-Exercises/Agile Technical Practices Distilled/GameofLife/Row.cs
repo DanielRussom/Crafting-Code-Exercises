@@ -9,7 +9,7 @@
             _cells = cells;
         }
 
-        public int GetCellCount()
+        private int GetCellCount()
         {
             return _cells.Count;
         }

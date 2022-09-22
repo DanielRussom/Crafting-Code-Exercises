@@ -175,7 +175,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
         // Row 2 // [ X]    [ X]
         // Row 1 // [XX] vs [XX] 
-        [DataRow(new[] { true, true }, new[] { false , true }, new[] { true, true }, new[] { false, true }, BoardEqualityState.IsEqual, DisplayName = "4")]
+        [DataRow(new[] { true, true }, new[] { false, true }, new[] { true, true }, new[] { false, true }, BoardEqualityState.IsEqual, DisplayName = "4")]
 
         // Row 2 // [XX]    [XX]
         // Row 1 // [X] vs  [X ] 
@@ -183,17 +183,17 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
         // Row 2 // [ X]    [ X]
         // Row 1 // [X ] vs [X] 
-        [DataRow(new[] { true, false }, new[] { false , true }, new[] { true }, new[] { false, true }, BoardEqualityState.IsEqual, DisplayName = "6")]
+        [DataRow(new[] { true, false }, new[] { false, true }, new[] { true }, new[] { false, true }, BoardEqualityState.IsEqual, DisplayName = "6")]
 
         // Row 2 // [ X]    [ X]
         // Row 1 // [X] vs  [X ] 
-        [DataRow(new[] { true }, new[] { false , true }, new[] { true, false }, new[] { false, true }, BoardEqualityState.IsEqual, DisplayName = "7")]
+        [DataRow(new[] { true }, new[] { false, true }, new[] { true, false }, new[] { false, true }, BoardEqualityState.IsEqual, DisplayName = "7")]
 
         // Row 2 // [ X]    [ X]
         // Row 1 // [X] vs  [XX] 
-        [DataRow(new[] { true }, new[] { false , true }, new[] { true, true }, new[] { false, true }, BoardEqualityState.IsNotEqual, DisplayName = "8")]
+        [DataRow(new[] { true }, new[] { false, true }, new[] { true, true }, new[] { false, true }, BoardEqualityState.IsNotEqual, DisplayName = "8")]
         public void CheckEqualityOfTheseDoubleRowBoards(bool[] row1SeedData, bool[] row2SeedData,
-            bool[] boardToCompareRow1, bool[] boardToCompareData2, BoardEqualityState expectedBoardEqualityState)
+            bool[] boardToCompareRow1, bool[] boardToCompareRow2, BoardEqualityState expectedBoardEqualityState)
         {
             var seed = new Board(new List<Row>
             {
@@ -204,7 +204,34 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             var boardToCompare = new Board(new List<Row>
             {
                 new(boardToCompareRow1.Select(cellState => new Cell(cellState)).ToList()),
-                new(boardToCompareData2.Select(cellState => new Cell(cellState)).ToList())
+                new(boardToCompareRow2.Select(cellState => new Cell(cellState)).ToList())
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+
+            Assert.AreEqual(expectedBoardEqualityState, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+        }
+
+        [TestMethod]
+        // Row 3 // [X]    [ ]
+        // Row 2 // [X]    [X]
+        // Row 1 // [X] vs [X] 
+        [DataRow(new[] { true }, new[] { true }, new[] { true }, new[] { true }, new[] { true }, new[] { false }, BoardEqualityState.IsNotEqual, DisplayName = "1")]
+        public void CheckEqualityOfTheseTripleRowBoards(bool[] row1SeedData, bool[] row2SeedData, bool[] row3SeedData,
+            bool[] boardToCompareRow1, bool[] boardToCompareRow2, bool[] boardToCompareRow3, BoardEqualityState expectedBoardEqualityState)
+        {
+            var seed = new Board(new List<Row>
+            {
+                new(row1SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row2SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row3SeedData.Select(cellState => new Cell(cellState)).ToList())
+            });
+
+            var boardToCompare = new Board(new List<Row>
+            {
+                new(boardToCompareRow1.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow2.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow3.Select(cellState => new Cell(cellState)).ToList())
             });
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
