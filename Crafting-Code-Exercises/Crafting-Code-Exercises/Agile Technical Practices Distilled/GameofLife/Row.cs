@@ -14,20 +14,21 @@
             return _cells.Count;
         }
 
+        private void PadWithEmptyCells(int upperLimit)
+        {
+            while (GetCellCount() < upperLimit)
+            {
+                _cells.Add(new(false));
+            }
+        }
+
         public bool Equals(Row other)
         {
             var isEqual = true;
             var index = 0;
-
-            while (other.GetCellCount() < GetCellCount())
-            {
-                other._cells.Add(new(false));
-            }
-
-            while (GetCellCount() < other.GetCellCount())
-            {
-                _cells.Add(new(false));
-            }
+            
+            other.PadWithEmptyCells(GetCellCount());
+            PadWithEmptyCells(other.GetCellCount());
 
             while (index < GetCellCount() && isEqual)
             {
