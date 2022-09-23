@@ -118,6 +118,47 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         }
 
         [TestMethod]
+        public void PassEqualityCheckForAnEmptySeedAndAOneDimensionalBoard()
+        {
+            // 1
+            var seed = new Board(new List<Row>());
+
+            //
+            var boardToCompare = new Board(new List<Row>
+            {
+                new(new List<Cell>
+                {
+                    new(false)
+                })
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+
+            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+        }
+
+        [TestMethod]
+        public void PassEqualityCheckForAnEmptySeedAndATwoDimensionalBoard()
+        {
+            // 1
+            var seed = new Board(new List<Row>());
+
+            //
+            var boardToCompare = new Board(new List<Row>
+            {
+                new(new List<Cell>
+                {
+                    new(false)
+                }),
+                new(new List<Cell>())
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+
+            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+        }
+
+        [TestMethod]
         public void FailEqualityCheckForAnEmptySeedAndAOneDimensionalBoard()
         {
             // 
@@ -248,12 +289,50 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         }
 
         [TestMethod]
-        // Row 3 // [X]    [ ]
-        // Row 2 // [X]    [X]
         // Row 1 // [X] vs [X] - IsNotEqual 
-        [DataRow(new[] { true }, new[] { true }, new[] { true }, new[] { true }, new[] { true }, new[] { false }, EqualityState.IsNotEqual, DisplayName = "1")]
-        public void CheckEqualityOfTheseTripleRowBoards(bool[] row1SeedData, bool[] row2SeedData, bool[] row3SeedData,
-            bool[] boardToCompareRow1, bool[] boardToCompareRow2, bool[] boardToCompareRow3, EqualityState expectedEqualityState)
+        // Row 2 // [X]    [X]
+        // Row 3 // [X]    [ ]
+        [DataRow(new[] { true }, new[] { true }, 
+            new[] { true }, new[] { true }, 
+            new[] { true }, new[] { false }, EqualityState.IsNotEqual, DisplayName = "1")]
+
+        // Row 1 // [X X] vs [X X] - IsNotEqual 
+        // Row 2 // [XXX]    [XXX]
+        // Row 3 // [XX ]    [ X ]
+        [DataRow(new[] { true, false, true }, new[] { true, false, true }, 
+            new[] { true, true, true }, new[] { true, true, true }, 
+            new[] { true, true, false }, new[] { false, true, false}, EqualityState.IsNotEqual, DisplayName = "2")]
+
+        // Row 1 // [X X] vs [X X] - IsNotEqual 
+        // Row 2 // [  X]    [XXX]
+        // Row 3 // [ X ]    [ X ]
+        [DataRow(new[] { true, false, true }, new[] { true, false, true }, 
+            new[] { false, false, true}, new[] { true, true, true }, 
+            new[] { false, true, false}, new[] { false, true, false}, EqualityState.IsNotEqual, DisplayName = "3")]
+
+        // Row 1 // [  X] vs [X X] - IsNotEqual 
+        // Row 2 // [  X]    [XXX]
+        // Row 3 // [XX ]    [ X ]
+        [DataRow(new[] { false, false, true, }, new[] { true, false, true }, 
+            new[] { false, false, true }, new[] { true, true, true }, 
+            new[] { true, true, false }, new[] { false, true, false }, EqualityState.IsNotEqual, DisplayName = "4")]
+
+        // Row 1 // [ X ] vs [ X] - IsEqual 
+        // Row 2 // [  X]    [  X]
+        // Row 3 // [XX ]    [XX]
+        [DataRow(new[] { false, true, false, }, new[] { false, true },
+            new[] { false, false, true }, new[] { false, false, true },
+            new[] { true, true, false }, new[] { true, true}, EqualityState.IsEqual, DisplayName = "5")]
+
+        // Row 1 // [ X ] vs [ X] - IsEqual 
+        // Row 2 // [  X]    [  X]
+        // Row 3 // [XX ]    [XX]
+        [DataRow(new[] { false, true, false, }, new[] { false, true },
+            new[] { false, false, true }, new[] { false, false, true },
+            new[] { true, true, false }, new[] { true, true }, EqualityState.IsEqual, DisplayName = "6")]
+        public void CheckEqualityOfTheseTripleRowBoards(bool[] row1SeedData,
+            bool[] boardToCompareRow1, bool[] boardToCompareRow2, bool[] row2SeedData, bool[] row3SeedData,
+            bool[] boardToCompareRow3, EqualityState expectedEqualityState)
         {
             var seed = new Board(new List<Row>
             {
@@ -267,6 +346,64 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
                 new(boardToCompareRow1.Select(cellState => new Cell(cellState)).ToList()),
                 new(boardToCompareRow2.Select(cellState => new Cell(cellState)).ToList()),
                 new(boardToCompareRow3.Select(cellState => new Cell(cellState)).ToList())
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+        }
+
+        [TestMethod]
+        // Row 1 // [ X ] vs [ X] - IsNotEqual 
+        // Row 2 // [  X]    [  X]
+        // Row 3 // [XX ]   
+        [DataRow(new[] { false, true, false, }, new[] { false, true },
+            new[] { false, false, true }, new[] { false, false, true },
+            new[] { true, true, false }, EqualityState.IsNotEqual, DisplayName = "FailEqualityOfThisThreeRowSeedVsTwoRowBoard")]
+        public void FailEqualityOfThisThreeRowSeedVsTwoRowBoard(bool[] row1SeedData,
+            bool[] boardToCompareRow1, bool[] boardToCompareRow2, bool[] row2SeedData, bool[] row3SeedData,
+            EqualityState expectedEqualityState)
+        {
+            var seed = new Board(new List<Row>
+            {
+                new(row1SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row2SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row3SeedData.Select(cellState => new Cell(cellState)).ToList())
+            });
+
+            var boardToCompare = new Board(new List<Row>
+            {
+                new(boardToCompareRow1.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow2.Select(cellState => new Cell(cellState)).ToList()),
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+        }
+
+        [TestMethod]
+        // Row 1 // [ X ] vs [ X] - IsNotEqual 
+        // Row 2 // [  X]    [  X]
+        // Row 3 // [XX ]   
+        [DataRow(new[] { false, true, false, }, new[] { false, true },
+            new[] { false, false, true }, new[] { false, false, true },
+            new[] { true, true, false }, EqualityState.IsNotEqual, DisplayName = "FailEqualityOfThisTwoRowSeedVsThreeRowBoard")]
+        public void FailEqualityOfThisTwoRowSeedVsThreeRowBoard(bool[] row1SeedData,
+            bool[] boardToCompareRow1, bool[] boardToCompareRow2, bool[] row2SeedData, bool[] boardToCompareRow3,
+            EqualityState expectedEqualityState)
+        {
+            var seed = new Board(new List<Row>
+            {
+                new(row1SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row2SeedData.Select(cellState => new Cell(cellState)).ToList()),
+            });
+
+            var boardToCompare = new Board(new List<Row>
+            {
+                new(boardToCompareRow1.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow2.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow3.Select(cellState => new Cell(cellState)).ToList()),
             });
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
