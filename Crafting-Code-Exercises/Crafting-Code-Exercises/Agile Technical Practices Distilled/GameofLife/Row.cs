@@ -22,21 +22,21 @@
             }
         }
 
-        public bool Equals(Row rowToCompare)
+        public EqualityState Equals(Row rowToCompare)
         {
-            var isEqual = true;
-            var index = 0;
-            
             rowToCompare.PadWithEmptyCells(GetCellCount());
             PadWithEmptyCells(rowToCompare.GetCellCount());
+            
+            var index = 0;
+            var isEqual = true;
 
             while (index < GetCellCount() && isEqual)
             {
-                isEqual = _cells[index].Equals(rowToCompare._cells[index]);
+                isEqual = _cells[index].Equals(rowToCompare._cells[index]) == EqualityState.IsEqual;
                 index++;
             }
 
-            return isEqual;
+            return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
         }
     }
 }

@@ -9,9 +9,9 @@
             _state = state;
         }
 
-        public bool Equals(Cell other)
+        public EqualityState Equals(Cell other)
         {
-            return _state == other._state;
+            return _state == other._state ? EqualityState.IsEqual : EqualityState.IsNotEqual;
         } 
     }
 }

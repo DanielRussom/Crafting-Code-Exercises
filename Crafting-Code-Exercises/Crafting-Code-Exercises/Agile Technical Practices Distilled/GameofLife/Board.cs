@@ -22,7 +22,7 @@
             }
         }
 
-        public BoardEqualityState Equals(Board boardToCompare)
+        public EqualityState Equals(Board boardToCompare)
         {
             PadWithEmptyRows(boardToCompare.GetRowCount());
             boardToCompare.PadWithEmptyRows(GetRowCount());
@@ -30,13 +30,13 @@
             var index = 0;
             var isEqual = true;
 
-            while (index < GetRowCount())
+            while (index < GetRowCount() && isEqual)
             {
-                isEqual &= _rows[index].Equals(boardToCompare._rows[index]);
+                isEqual &= _rows[index].Equals(boardToCompare._rows[index]) == EqualityState.IsEqual;
                 index++;
             }
 
-            return isEqual ? BoardEqualityState.IsEqual : BoardEqualityState.IsNotEqual;
+            return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
         }
     }
 }
