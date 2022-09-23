@@ -22,17 +22,17 @@
             }
         }
 
-        public bool Equals(Row other)
+        public bool Equals(Row rowToCompare)
         {
             var isEqual = true;
             var index = 0;
             
-            other.PadWithEmptyCells(GetCellCount());
-            PadWithEmptyCells(other.GetCellCount());
+            rowToCompare.PadWithEmptyCells(GetCellCount());
+            PadWithEmptyCells(rowToCompare.GetCellCount());
 
             while (index < GetCellCount() && isEqual)
             {
-                isEqual = _cells[index].Equals(other._cells[index]);
+                isEqual = _cells[index].Equals(rowToCompare._cells[index]);
                 index++;
             }
 

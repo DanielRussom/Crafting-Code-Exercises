@@ -14,25 +14,26 @@
             return _rows.Count;
         }
 
+        private void PadWithEmptyRows(int upperLimit)
+        {
+            while (GetRowCount() < upperLimit)
+            {
+                _rows.Add(new(new List<Cell>()));
+            }
+        }
+
         public BoardEqualityState Equals(Board boardToCompare)
         {
-            if (GetRowCount() != boardToCompare.GetRowCount()) return BoardEqualityState.IsNotEqual;
+            PadWithEmptyRows(boardToCompare.GetRowCount());
+            boardToCompare.PadWithEmptyRows(GetRowCount());
 
-            if (GetRowCount() == 0)
+            var index = 0;
+            var isEqual = true;
+
+            while (index < GetRowCount())
             {
-                return BoardEqualityState.IsEqual;
-            }
-
-            var isEqual = _rows[0].Equals(boardToCompare._rows[0]);
-
-            if (GetRowCount() > 1) 
-            {
-                isEqual &= _rows[1].Equals(boardToCompare._rows[1]);
-            }
-
-            if (GetRowCount() > 2)
-            {
-                isEqual &= _rows[2].Equals(boardToCompare._rows[2]);
+                isEqual &= _rows[index].Equals(boardToCompare._rows[index]);
+                index++;
             }
 
             return isEqual ? BoardEqualityState.IsEqual : BoardEqualityState.IsNotEqual;
