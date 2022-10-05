@@ -12,7 +12,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             var expectedBoard = new Board(new List<Row>());
             var gameOfLifeEngine = new GameOfLifeEngine(new Board(new List<Row>()));
 
-            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.IsBoardStateEqualTo(expectedBoard));
+            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.BoardIsEqualTo(expectedBoard));
         }
 
         [TestMethod]
@@ -22,7 +22,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             var expectedBoard = new Board(new List<Row> { new(new List<Cell>()) });
             var gameOfLifeEngine = new GameOfLifeEngine(new Board(new List<Row> { new(new List<Cell>()) }));
 
-            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.IsBoardStateEqualTo(expectedBoard));
+            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.BoardIsEqualTo(expectedBoard));
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(EqualityState.IsNotEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(EqualityState.IsNotEqual, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
         [TestMethod]
@@ -74,7 +74,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
         [TestMethod]
@@ -94,7 +94,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(EqualityState.IsNotEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(EqualityState.IsNotEqual, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
         [TestMethod]
@@ -114,7 +114,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
         [TestMethod]
@@ -134,7 +134,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
         [TestMethod]
@@ -155,7 +155,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(EqualityState.IsEqual, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
         [TestMethod]
@@ -172,7 +172,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(EqualityState.IsNotEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(EqualityState.IsNotEqual, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
         [TestMethod]
@@ -196,7 +196,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(EqualityState.IsNotEqual, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(EqualityState.IsNotEqual, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
         [TestMethod]
@@ -233,7 +233,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
         [TestMethod]
@@ -285,7 +285,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
         [TestMethod]
@@ -330,9 +330,9 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         [DataRow(new[] { false, true, false, }, new[] { false, true },
             new[] { false, false, true }, new[] { false, false, true },
             new[] { true, true, false }, new[] { true, true }, EqualityState.IsEqual, DisplayName = "6")]
-        public void CheckEqualityOfTheseTripleRowBoards(bool[] row1SeedData,
-            bool[] boardToCompareRow1, bool[] boardToCompareRow2, bool[] row2SeedData, bool[] row3SeedData,
-            bool[] boardToCompareRow3, EqualityState expectedEqualityState)
+        public void CheckEqualityOfTheseTripleRowBoards(bool[] row1SeedData, bool[] boardToCompareRow1, 
+            bool[] row2SeedData, bool[] boardToCompareRow2, 
+            bool[] row3SeedData, bool[] boardToCompareRow3, EqualityState expectedEqualityState)
         {
             var seed = new Board(new List<Row>
             {
@@ -350,7 +350,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
         [TestMethod]
@@ -360,9 +360,9 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
         [DataRow(new[] { false, true, false, }, new[] { false, true },
             new[] { false, false, true }, new[] { false, false, true },
             new[] { true, true, false }, EqualityState.IsNotEqual, DisplayName = "FailEqualityOfThisThreeRowSeedVsTwoRowBoard")]
-        public void FailEqualityOfThisThreeRowSeedVsTwoRowBoard(bool[] row1SeedData,
-            bool[] boardToCompareRow1, bool[] boardToCompareRow2, bool[] row2SeedData, bool[] row3SeedData,
-            EqualityState expectedEqualityState)
+        public void FailEqualityOfThisThreeRowSeedVsTwoRowBoard(bool[] row1SeedData, bool[] boardToCompareRow1, 
+            bool[] row2SeedData, bool[] boardToCompareRow2, 
+            bool[] row3SeedData, EqualityState expectedEqualityState)
         {
             var seed = new Board(new List<Row>
             {
@@ -379,19 +379,19 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
         [TestMethod]
         // Row 1 // [ X ] vs [ X] - IsNotEqual 
         // Row 2 // [  X]    [  X]
-        // Row 3 // [XX ]   
+        // Row 3 //          [XX ]   
         [DataRow(new[] { false, true, false, }, new[] { false, true },
             new[] { false, false, true }, new[] { false, false, true },
             new[] { true, true, false }, EqualityState.IsNotEqual, DisplayName = "FailEqualityOfThisTwoRowSeedVsThreeRowBoard")]
-        public void FailEqualityOfThisTwoRowSeedVsThreeRowBoard(bool[] row1SeedData,
-            bool[] boardToCompareRow1, bool[] boardToCompareRow2, bool[] row2SeedData, bool[] boardToCompareRow3,
-            EqualityState expectedEqualityState)
+        public void FailEqualityOfThisTwoRowSeedVsThreeRowBoard(bool[] row1SeedData, bool[] boardToCompareRow1, 
+            bool[] row2SeedData, bool[] boardToCompareRow2, 
+            bool[] boardToCompareRow3, EqualityState expectedEqualityState)
         {
             var seed = new Board(new List<Row>
             {
@@ -408,7 +408,115 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             var gameOfLifeEngine = new GameOfLifeEngine(seed);
 
-            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.IsBoardStateEqualTo(boardToCompare));
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
+        }
+
+        [TestMethod]
+        [DataRow(new[] { true }, EqualityState.IsEqual, DisplayName = "ApplyUnderPopulationRuleToASingleCellSeedComparingAgainstEmptyBoard")]
+        public void ApplyUnderPopulationRuleToASingleCellSeedComparingAgainstEmptyBoard(bool[] row1SeedData,
+            EqualityState expectedEqualityState)
+        {
+            var seed = new Board(new List<Row>
+            {
+                new(row1SeedData.Select(cellState => new Cell(cellState)).ToList()),
+            });
+
+            var boardToCompare = new Board(new List<Row>());
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+            gameOfLifeEngine.Tick();
+
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
+        }
+
+        [TestMethod]
+        [DataRow(new[] { true }, new[] { false }, EqualityState.IsEqual, DisplayName = "ApplyUnderPopulationRuleToASingleCellSeedComparingAgainstFalse")]
+        public void ApplyUnderPopulationRuleToASingleCellSeedComparingAgainstFalse(bool[] row1SeedData, bool[] boardToCompareRow1,
+            EqualityState expectedEqualityState)
+        {
+            var seed = new Board(new List<Row>
+            {
+                new(row1SeedData.Select(cellState => new Cell(cellState)).ToList()),
+            });
+
+            var boardToCompare = new Board(new List<Row>
+            {
+                new(boardToCompareRow1.Select(cellState => new Cell(cellState)).ToList()),
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+            gameOfLifeEngine.Tick();
+
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
+        }
+
+        [TestMethod]
+        // Row 1 // [  X] vs [   ] - IsEqual after one tick
+        // Row 2 // [ X ]    [   ]
+        // Row 3 // [   ]    [   ]
+        [DataRow(new[] { false, false, true, }, new[] { false, false, false },
+            new[] { false, true, false }, new[] { false, false, false },
+            new[] { false, false, false }, new[] { false, false, false }, EqualityState.IsEqual, DisplayName = "ApplyUnderPopulationRuleTo3By3SeedComparingAfterOneTick 1")]
+        
+        // Row 1 // [   ] vs [   ] - IsEqual after one tick
+        // Row 2 // [ X ]    [   ]
+        // Row 3 // [   ]    [   ]
+        [DataRow(new[] { false, false, false, }, new[] { false, false, false},
+            new[] { false, true, false }, new[] { false, false, false },
+            new[] { false, false, false }, new[] { false, false, false }, EqualityState.IsEqual, DisplayName = "ApplyUnderPopulationRuleTo3By3SeedComparingAfterOneTick 2")]
+        public void ApplyUnderPopulationRuleTo3By3SeedComparingAfterOneTick(bool[] row1SeedData, bool[] boardToCompareRow1, 
+            bool[] row2SeedData, bool[] boardToCompareRow2, 
+            bool[] row3SeedData, bool[] boardToCompareRow3, EqualityState expectedEqualityState)
+        {
+            var seed = new Board(new List<Row>
+            {
+                new(row1SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row2SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row3SeedData.Select(cellState => new Cell(cellState)).ToList())
+            });
+
+            var boardToCompare = new Board(new List<Row>
+            {
+                new(boardToCompareRow1.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow2.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow3.Select(cellState => new Cell(cellState)).ToList())
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+            gameOfLifeEngine.Tick();
+
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
+        }
+
+        [TestMethod]
+        // Row 1 // [  X] vs [   ] - IsEqual after one tick
+        // Row 2 // [ X ]    [ X ]
+        // Row 3 // [X  ]    [   ]
+        [DataRow(new[] { false, false, true, }, new[] { false, false, false },
+            new[] { false, true, false }, new[] { false, true, false },
+            new[] { true, false, false }, new[] { false, false, false }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 1")]
+        public void ApplySurvivalRuleTo3By3SeedComparingAfterOneTick(bool[] row1SeedData, bool[] boardToCompareRow1,
+            bool[] row2SeedData, bool[] boardToCompareRow2,
+            bool[] row3SeedData, bool[] boardToCompareRow3, EqualityState expectedEqualityState)
+        {
+            var seed = new Board(new List<Row>
+            {
+                new(row1SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row2SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row3SeedData.Select(cellState => new Cell(cellState)).ToList())
+            });
+
+            var boardToCompare = new Board(new List<Row>
+            {
+                new(boardToCompareRow1.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow2.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow3.Select(cellState => new Cell(cellState)).ToList())
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+            gameOfLifeEngine.Tick();
+
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
     }
 }
