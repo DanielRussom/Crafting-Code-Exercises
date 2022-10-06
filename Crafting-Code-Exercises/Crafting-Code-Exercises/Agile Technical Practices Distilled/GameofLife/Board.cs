@@ -46,6 +46,7 @@
             if (_rows.Count < 3) return neighbourCount;
 
             neighbourCount.IncrementBy(_rows[0].GetNumberOfLiveNeighboursForCentreCell());
+            neighbourCount.IncrementBy(_rows[1].GetNumberOfLiveNeighboursForCentreCellInCentreRow());
             neighbourCount.IncrementBy(_rows[2].GetNumberOfLiveNeighboursForCentreCell());
 
             return neighbourCount;

@@ -511,6 +511,13 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             new[] { false, true, false }, new[] { false, true, false },
             new[] { false, true, false }, new[] { false, false, false }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 3")]
 
+        // Row 1 // [   ] vs [   ] - IsEqual after one tick
+        // Row 2 // [XXX]    [ X ]
+        // Row 3 // [   ]    [   ]
+        [DataRow(new[] { false, false, false, }, new[] { false, false, false },
+            new[] { true, true, true }, new[] { false, true, false },
+            new[] { false, false, false }, new[] { false, false, false }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 4")]
+
         public void ApplySurvivalRuleTo3By3SeedComparingAfterOneTick(bool[] row1SeedData, bool[] boardToCompareRow1,
             bool[] row2SeedData, bool[] boardToCompareRow2,
             bool[] row3SeedData, bool[] boardToCompareRow3, EqualityState expectedEqualityState)

@@ -52,5 +52,15 @@
 
             return new LiveNeighbourCount(neighourCount);
         }
+
+        public LiveNeighbourCount GetNumberOfLiveNeighboursForCentreCellInCentreRow()
+        {
+            var neighourCount = 0;
+
+            if (_cells[0].Equals(new(true)) == EqualityState.IsEqual) neighourCount++;
+            if (_cells[2].Equals(new(true)) == EqualityState.IsEqual) neighourCount++;
+
+            return new LiveNeighbourCount(neighourCount);
+        }
     }
 }
