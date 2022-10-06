@@ -38,5 +38,17 @@
 
             return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
         }
+
+        internal int GetNumberOfLiveNeighboursForCentreCell()
+        {
+            if (_rows.Count < 3) return 0;
+
+            var neighourCount = 0;
+
+            neighourCount += _rows[0].GetNumberOfLiveNeighboursForCentreCell();
+            neighourCount += _rows[2].GetNumberOfLiveNeighboursForCentreCell();
+
+            return neighourCount;
+        }
     }
 }
