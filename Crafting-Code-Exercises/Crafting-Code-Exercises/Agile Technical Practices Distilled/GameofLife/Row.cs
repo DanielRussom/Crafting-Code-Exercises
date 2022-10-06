@@ -42,10 +42,13 @@
         public LiveNeighbourCount GetNumberOfLiveNeighboursForCentreCell()
         {
             var neighourCount = 0;
+            var loopCounter = 0;
 
-            if (_cells[0].Equals(new(true)) == EqualityState.IsEqual) neighourCount++;
-            if (_cells[1].Equals(new(true)) == EqualityState.IsEqual) neighourCount++;
-            if (_cells[2].Equals(new(true)) == EqualityState.IsEqual) neighourCount++;
+            while (loopCounter <= 2)
+            {
+                if (_cells[loopCounter].Equals(new(true)) == EqualityState.IsEqual) neighourCount++;
+                loopCounter++;
+            }
 
             return new LiveNeighbourCount(neighourCount);
         }

@@ -41,14 +41,14 @@
 
         internal LiveNeighbourCount GetNumberOfLiveNeighboursForCentreCell()
         {
-            if (_rows.Count < 3) return new LiveNeighbourCount(0);
+            var neighbourCount = new LiveNeighbourCount(0);
 
-            var neighourCount = new LiveNeighbourCount(0);
+            if (_rows.Count < 3) return neighbourCount;
 
-            neighourCount.IncrementBy(_rows[0].GetNumberOfLiveNeighboursForCentreCell());
-            neighourCount.IncrementBy(_rows[2].GetNumberOfLiveNeighboursForCentreCell());
+            neighbourCount.IncrementBy(_rows[0].GetNumberOfLiveNeighboursForCentreCell());
+            neighbourCount.IncrementBy(_rows[2].GetNumberOfLiveNeighboursForCentreCell());
 
-            return neighourCount;
+            return neighbourCount;
         }
     }
 }
