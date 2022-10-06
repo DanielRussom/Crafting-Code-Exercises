@@ -16,31 +16,30 @@
 
         public void Tick()
         {
-
             var numberOfLiveNeighbours = _board.GetNumberOfLiveNeighboursForCentreCell();
-            if (numberOfLiveNeighbours >= 2)
+            if (numberOfLiveNeighbours.IsUnderPopulated() == PopulationState.UnderPopulated)
             {
-                var boardWithLiveCenterOnly = new Board(new List<Row>
-                {
-                    new( new List<Cell>
-                    {
-                        new(false), new(false), new(false),
-                    }),
-                    new( new List<Cell>
-                    {
-                        new(false), new(true), new(false),
-                    }),
-                    new( new List<Cell>
-                    {
-                        new(false), new(false), new(false),
-                    })
-                });
-
-                _board = boardWithLiveCenterOnly;
+                _board = new Board(new List<Row>());
                 return;
             }
 
-            _board = new Board(new List<Row>());
+            var boardWithLiveCenterOnly = new Board(new List<Row>
+            {
+                new( new List<Cell>
+                {
+                    new(false), new(false), new(false),
+                }),
+                new( new List<Cell>
+                {
+                    new(false), new(true), new(false),
+                }),
+                new( new List<Cell>
+                {
+                    new(false), new(false), new(false),
+                })
+            });
+
+            _board = boardWithLiveCenterOnly;
         }
     }
 }

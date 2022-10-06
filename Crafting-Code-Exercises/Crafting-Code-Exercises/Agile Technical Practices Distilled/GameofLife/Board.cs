@@ -39,14 +39,14 @@
             return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
         }
 
-        internal int GetNumberOfLiveNeighboursForCentreCell()
+        internal LiveNeighbourCount GetNumberOfLiveNeighboursForCentreCell()
         {
-            if (_rows.Count < 3) return 0;
+            if (_rows.Count < 3) return new LiveNeighbourCount(0);
 
-            var neighourCount = 0;
+            var neighourCount = new LiveNeighbourCount(0);
 
-            neighourCount += _rows[0].GetNumberOfLiveNeighboursForCentreCell();
-            neighourCount += _rows[2].GetNumberOfLiveNeighboursForCentreCell();
+            neighourCount.IncrementBy(_rows[0].GetNumberOfLiveNeighboursForCentreCell());
+            neighourCount.IncrementBy(_rows[2].GetNumberOfLiveNeighboursForCentreCell());
 
             return neighourCount;
         }
