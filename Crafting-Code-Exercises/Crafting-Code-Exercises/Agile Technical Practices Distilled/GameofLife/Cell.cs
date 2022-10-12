@@ -2,7 +2,7 @@
 {
     public class Cell
     {
-        private readonly bool _state;
+        private bool _state;
 
         public Cell(bool state)
         {
@@ -12,6 +12,11 @@
         public EqualityState Equals(Cell other)
         {
             return _state == other._state ? EqualityState.IsEqual : EqualityState.IsNotEqual;
-        } 
+        }
+
+        internal void SetCellState(bool cellState)
+        {
+            _state = cellState;
+        }
     }
 }

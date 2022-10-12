@@ -518,6 +518,27 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             new[] { true, true, true }, new[] { false, true, false },
             new[] { false, false, false }, new[] { false, false, false }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 4")]
 
+        // Row 1 // [   ] vs [   ] - IsEqual after one tick
+        // Row 2 // [ XX]    [ X ]
+        // Row 3 // [X  ]    [   ]
+        [DataRow(new[] { false, false, false, }, new[] { false, false, false },
+            new[] { false, true, true }, new[] { false, true, false },
+            new[] { true, false, false }, new[] { false, false, false }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 5")]
+
+        // Row 1 // [   ] vs [   ] - IsEqual after one tick
+        // Row 2 // [ X ]    [ X ]
+        // Row 3 // [X X]    [   ]
+        [DataRow(new[] { false, false, false, }, new[] { false, false, false },
+            new[] { false, true, false }, new[] { false, true, false },
+            new[] { true, false, true }, new[] { false, false, false }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 6")]
+
+        // Row 1 // [X  ] vs [   ] - IsEqual after one tick
+        // Row 2 // [X  ]    [X  ]
+        // Row 3 // [X  ]    [   ]
+        [DataRow(new[] { true, false, false, }, new[] { false, false, false },
+            new[] { true, false, false }, new[] { true, false, false },
+            new[] { true, false, false }, new[] { false, false, false }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 7")]
+
         public void ApplySurvivalRuleTo3By3SeedComparingAfterOneTick(bool[] row1SeedData, bool[] boardToCompareRow1,
             bool[] row2SeedData, bool[] boardToCompareRow2,
             bool[] row3SeedData, bool[] boardToCompareRow3, EqualityState expectedEqualityState)

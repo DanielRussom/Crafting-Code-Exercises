@@ -51,5 +51,23 @@
 
             return neighbourCount;
         }
+        
+        internal LiveNeighbourCount GetNumberOfLiveNeighboursForLeftCentreCell()
+        {
+            var neighbourCount = new LiveNeighbourCount(0);
+
+            if (_rows.Count < 3) return neighbourCount;
+
+            neighbourCount.IncrementBy(_rows[0].GetNumberOfLiveNeighboursForLeftCentreCell());
+            neighbourCount.IncrementBy(_rows[1].GetNumberOfLiveNeighboursForLeftCentreCellInCentreRow());
+            neighbourCount.IncrementBy(_rows[2].GetNumberOfLiveNeighboursForLeftCentreCell());
+
+            return neighbourCount;
+        }
+                
+        internal void SetCellState(int xCoordinate, int yCoordinate, bool cellState)
+        {
+            _rows[yCoordinate].SetCellState(xCoordinate, cellState);
+        }
     }
 }

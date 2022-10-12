@@ -20,10 +20,11 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             _value += liveNeighbourCount._value;
         }
 
-        public PopulationState IsUnderPopulated()
+        public PopulationState GetPopulationState()
         {
             if (_value < 2) return PopulationState.UnderPopulated;
-            return PopulationState.NotUnderPopulated;
+            if (_value >= 2 && _value <= 3) return PopulationState.PerfectlyPopulated;
+            return PopulationState.Default;
         }
     }
 }

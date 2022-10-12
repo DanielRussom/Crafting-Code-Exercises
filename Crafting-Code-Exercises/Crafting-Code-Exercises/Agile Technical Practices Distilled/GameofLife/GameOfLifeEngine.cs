@@ -16,30 +16,36 @@
 
         public void Tick()
         {
-            var numberOfLiveNeighbours = _board.GetNumberOfLiveNeighboursForCentreCell();
-            if (numberOfLiveNeighbours.IsUnderPopulated() == PopulationState.UnderPopulated)
+            var newBoard = new Board(new List<Row>
             {
-                _board = new Board(new List<Row>());
-                return;
+                new ( new() {new Cell(false), new Cell(false), new Cell(false) }),
+                new ( new() {new Cell(false), new Cell(false), new Cell(false) }),
+                new ( new() {new Cell(false), new Cell(false), new Cell(false) })
+            });
+            
+            var numberOfLiveNeighboursForCentreCell = _board.GetNumberOfLiveNeighboursForCentreCell();
+            if (numberOfLiveNeighboursForCentreCell.GetPopulationState() == PopulationState.UnderPopulated)
+            {
+                newBoard.SetCellState(1, 1, false);
+            }
+            
+            if (numberOfLiveNeighboursForCentreCell.GetPopulationState() == PopulationState.PerfectlyPopulated)
+            {
+                newBoard.SetCellState(1, 1, true);
             }
 
-            var boardWithLiveCenterOnly = new Board(new List<Row>
+            var numberOfLiveNeighboursForLeftCentreCell = _board.GetNumberOfLiveNeighboursForLeftCentreCell();
+            if (numberOfLiveNeighboursForLeftCentreCell.GetPopulationState() == PopulationState.UnderPopulated)
             {
-                new( new List<Cell>
-                {
-                    new(false), new(false), new(false),
-                }),
-                new( new List<Cell>
-                {
-                    new(false), new(true), new(false),
-                }),
-                new( new List<Cell>
-                {
-                    new(false), new(false), new(false),
-                })
-            });
+                newBoard.SetCellState(0, 1, false);
+            }
 
-            _board = boardWithLiveCenterOnly;
+            if (numberOfLiveNeighboursForLeftCentreCell.GetPopulationState() == PopulationState.PerfectlyPopulated)
+            {
+                newBoard.SetCellState(0, 1, true);
+            }
+
+            _board = newBoard;
         }
     }
 }

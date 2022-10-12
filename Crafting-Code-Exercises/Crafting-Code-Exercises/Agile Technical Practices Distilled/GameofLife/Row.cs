@@ -41,26 +41,54 @@
 
         public LiveNeighbourCount GetNumberOfLiveNeighboursForCentreCell()
         {
-            var neighourCount = 0;
+            var neighbourCount = 0;
             var loopCounter = 0;
 
             while (loopCounter <= 2)
             {
-                if (_cells[loopCounter].Equals(new(true)) == EqualityState.IsEqual) neighourCount++;
+                if (_cells[loopCounter].Equals(new(true)) == EqualityState.IsEqual) neighbourCount++;
                 loopCounter++;
             }
 
-            return new LiveNeighbourCount(neighourCount);
+            return new LiveNeighbourCount(neighbourCount);
+        }
+
+        internal LiveNeighbourCount GetNumberOfLiveNeighboursForLeftCentreCell()
+        {
+            var neighbourCount = 0;
+            var loopCounter = 0;
+
+            while (loopCounter <= 1)
+            {
+                if (_cells[loopCounter].Equals(new(true)) == EqualityState.IsEqual) neighbourCount++;
+                loopCounter++;
+            }
+
+            return new LiveNeighbourCount(neighbourCount);
         }
 
         public LiveNeighbourCount GetNumberOfLiveNeighboursForCentreCellInCentreRow()
         {
-            var neighourCount = 0;
+            var neighbourCount = 0;
 
-            if (_cells[0].Equals(new(true)) == EqualityState.IsEqual) neighourCount++;
-            if (_cells[2].Equals(new(true)) == EqualityState.IsEqual) neighourCount++;
+            if (_cells[0].Equals(new(true)) == EqualityState.IsEqual) neighbourCount++;
+            if (_cells[2].Equals(new(true)) == EqualityState.IsEqual) neighbourCount++;
 
-            return new LiveNeighbourCount(neighourCount);
+            return new LiveNeighbourCount(neighbourCount);
+        }
+
+        internal LiveNeighbourCount GetNumberOfLiveNeighboursForLeftCentreCellInCentreRow()
+        {
+            var neighbourCount = 0;
+
+            if (_cells[1].Equals(new(true)) == EqualityState.IsEqual) neighbourCount++;
+
+            return new LiveNeighbourCount(neighbourCount);
+        }
+
+        internal void SetCellState(int xCoordinate, bool cellState)
+        {
+            _cells[xCoordinate].SetCellState(cellState);
         }
     }
 }
