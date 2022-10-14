@@ -68,10 +68,5 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             return neighbourCount;
         }
-                
-        internal void SetCellState(int xCoordinate, int yCoordinate, bool cellState)
-        {
-            _rows[yCoordinate].SetCellState(xCoordinate, cellState);
-        }
     }
 }

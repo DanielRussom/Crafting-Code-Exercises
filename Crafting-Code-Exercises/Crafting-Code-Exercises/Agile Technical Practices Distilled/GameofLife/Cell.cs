@@ -15,10 +15,5 @@
         {
             return _state == other._state ? EqualityState.IsEqual : EqualityState.IsNotEqual;
         }
-
-        internal void SetCellState(bool cellState)
-        {
-            _state = cellState;
-        }
     }
 }

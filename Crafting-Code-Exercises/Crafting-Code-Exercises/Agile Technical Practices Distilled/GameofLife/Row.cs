@@ -87,10 +87,5 @@
 
             return new LiveNeighbourCount(neighbourCount);
         }
-
-        internal void SetCellState(int xCoordinate, bool cellState)
-        {
-            _cells[xCoordinate].SetCellState(cellState);
-        }
     }
 }
