@@ -16,7 +16,7 @@
             return _cells.Count;
         }
 
-        private void PadWithEmptyCells(int upperLimit)
+        private void PadWithEmptyCells(int upperLimit) You are here - wrapping up this and the integer in GetCellCount
         {
             while (GetCellCount() < upperLimit)
             {
@@ -44,12 +44,10 @@
         public LiveNeighbourCount GetNumberOfLiveNeighboursForCentreCell()
         {
             var neighbourCount = 0;
-            var loopCounter = 0;
 
-            while (loopCounter <= 2)
+            for (var loopCounter = 0; loopCounter <= 2; loopCounter++)
             {
                 if (_cells[loopCounter].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
-                loopCounter++;
             }
 
             return new LiveNeighbourCount(neighbourCount);
@@ -58,12 +56,10 @@
         internal LiveNeighbourCount GetNumberOfLiveNeighboursForLeftCentreCell()
         {
             var neighbourCount = 0;
-            var loopCounter = 0;
 
-            while (loopCounter <= 1)
+            for (var loopCounter = 0; loopCounter <= 1; loopCounter++)
             {
                 if (_cells[loopCounter].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
-                loopCounter++;
             }
 
             return new LiveNeighbourCount(neighbourCount);
