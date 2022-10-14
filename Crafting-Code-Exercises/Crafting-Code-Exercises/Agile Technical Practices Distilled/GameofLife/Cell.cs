@@ -4,6 +4,8 @@
     {
         private bool _state;
 
+        public bool State => _state;
+
         public Cell(bool state)
         {
             _state = state;

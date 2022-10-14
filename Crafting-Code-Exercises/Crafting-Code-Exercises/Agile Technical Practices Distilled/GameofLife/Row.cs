@@ -4,6 +4,8 @@
     {
         private readonly List<Cell> _cells;
 
+        public List<Cell> Cells => _cells;
+
         public Row(List<Cell> cells)
         {
             _cells = cells;

@@ -31,7 +31,8 @@
             
             if (numberOfLiveNeighboursForCentreCell.GetPopulationState() == PopulationState.PerfectlyPopulated)
             {
-                newBoard.SetCellState(1, 1, true);
+                var cellState = _board.Rows[1].Cells[1].State; // Matt King 14/10/2022 - This is a temporary workaround to enable us to continue to defer moving to using a loop.  Ramove this!!
+                if (cellState) newBoard.SetCellState(1, 1, true);
             }
 
             var numberOfLiveNeighboursForLeftCentreCell = _board.GetNumberOfLiveNeighboursForLeftCentreCell();
@@ -42,7 +43,8 @@
 
             if (numberOfLiveNeighboursForLeftCentreCell.GetPopulationState() == PopulationState.PerfectlyPopulated)
             {
-                newBoard.SetCellState(0, 1, true);
+                var cellState = _board.Rows[1].Cells[0].State; // Matt King 14/10/2022 - This is a temporary workaround to enable us to continue to defer moving to using a loop.  Ramove this!!
+                if (cellState) newBoard.SetCellState(0, 1, true);
             }
 
             _board = newBoard;

@@ -1,8 +1,12 @@
-﻿namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
+﻿using System.Data;
+
+namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 {
     public class Board
     {
         private readonly List<Row> _rows;
+        public List<Row> Rows => _rows;
+
 
         public Board(List<Row> rows)
         {
