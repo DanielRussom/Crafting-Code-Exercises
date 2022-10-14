@@ -17,12 +17,12 @@
         public void Tick()
         {
             var newCellsRow = new List<Cell>();
-            var newCellState = false;
+            var newCellState = CellState.Dead;
 
             var numberOfLiveNeighboursForLeftCentreCell = _board.GetNumberOfLiveNeighboursForLeftCentreCell();
             if (numberOfLiveNeighboursForLeftCentreCell.GetPopulationState() == PopulationState.UnderPopulated)
             {
-                newCellState = false;
+                newCellState = CellState.Dead;
             }
 
             if (numberOfLiveNeighboursForLeftCentreCell.GetPopulationState() == PopulationState.PerfectlyPopulated)
@@ -36,7 +36,7 @@
             var numberOfLiveNeighboursForCentreCell = _board.GetNumberOfLiveNeighboursForCentreCell();
             if (numberOfLiveNeighboursForCentreCell.GetPopulationState() == PopulationState.UnderPopulated)
             {
-                newCellState = false;
+                newCellState = CellState.Dead;
             }
 
             if (numberOfLiveNeighboursForCentreCell.GetPopulationState() == PopulationState.PerfectlyPopulated)
@@ -49,9 +49,9 @@
 
             var newBoard = new Board(new List<Row>
             {
-                new ( new() {new Cell(false), new Cell(false), new Cell(false) }),
+                new ( new() {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead) }),
                 new (newCellsRow),
-                new ( new() {new Cell(false), new Cell(false), new Cell(false) })
+                new ( new() {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead) })
             });
 
             _board = newBoard;

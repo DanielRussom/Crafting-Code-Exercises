@@ -20,7 +20,7 @@
         {
             while (GetCellCount() < upperLimit)
             {
-                _cells.Add(new(false));
+                _cells.Add(new(CellState.Dead));
             }
         }
 
@@ -48,7 +48,7 @@
 
             while (loopCounter <= 2)
             {
-                if (_cells[loopCounter].Equals(new(true)) == EqualityState.IsEqual) neighbourCount++;
+                if (_cells[loopCounter].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
                 loopCounter++;
             }
 
@@ -62,7 +62,7 @@
 
             while (loopCounter <= 1)
             {
-                if (_cells[loopCounter].Equals(new(true)) == EqualityState.IsEqual) neighbourCount++;
+                if (_cells[loopCounter].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
                 loopCounter++;
             }
 
@@ -73,8 +73,8 @@
         {
             var neighbourCount = 0;
 
-            if (_cells[0].Equals(new(true)) == EqualityState.IsEqual) neighbourCount++;
-            if (_cells[2].Equals(new(true)) == EqualityState.IsEqual) neighbourCount++;
+            if (_cells[0].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
+            if (_cells[2].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
 
             return new LiveNeighbourCount(neighbourCount);
         }
@@ -83,7 +83,7 @@
         {
             var neighbourCount = 0;
 
-            if (_cells[1].Equals(new(true)) == EqualityState.IsEqual) neighbourCount++;
+            if (_cells[1].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
 
             return new LiveNeighbourCount(neighbourCount);
         }

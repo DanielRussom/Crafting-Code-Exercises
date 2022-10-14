@@ -2,11 +2,11 @@
 {
     public class Cell
     {
-        private bool _state;
+        private CellState _state;
 
-        public bool State => _state;
+        public CellState State => _state;
 
-        public Cell(bool state)
+        public Cell(CellState state)
         {
             _state = state;
         }

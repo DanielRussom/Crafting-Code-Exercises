@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
+﻿namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 {
     public class Board
     {
