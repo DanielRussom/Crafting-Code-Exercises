@@ -35,41 +35,15 @@
             return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
         }
 
-        internal LiveNeighbourCount GetNumberOfLiveNeighboursForCentreCell()
+        internal LiveNeighbourCount GetNumberOfLiveNeighboursForCell(int column)
         {
             var neighbourCount = new LiveNeighbourCount(0);
 
             if (_rows.Count < 3) return neighbourCount;
 
-            neighbourCount.IncrementBy(_rows[0].GetNumberOfLiveNeighboursForCentreCell());
-            neighbourCount.IncrementBy(_rows[1].GetNumberOfLiveNeighboursForCentreCellInCentreRow());
-            neighbourCount.IncrementBy(_rows[2].GetNumberOfLiveNeighboursForCentreCell());
-
-            return neighbourCount;
-        }
-        
-        internal LiveNeighbourCount GetNumberOfLiveNeighboursForLeftCentreCell()
-        {
-            var neighbourCount = new LiveNeighbourCount(0);
-
-            if (_rows.Count < 3) return neighbourCount;
-
-            neighbourCount.IncrementBy(_rows[0].GetNumberOfLiveNeighboursForLeftCentreCell());
-            neighbourCount.IncrementBy(_rows[1].GetNumberOfLiveNeighboursForLeftCentreCellInCentreRow());
-            neighbourCount.IncrementBy(_rows[2].GetNumberOfLiveNeighboursForLeftCentreCell());
-
-            return neighbourCount;
-        }
-
-        public LiveNeighbourCount GetNumberOfLiveNeighboursForRightCentreCell()
-        {
-            var neighbourCount = new LiveNeighbourCount(0);
-
-            if (_rows.Count < 3) return neighbourCount;
-
-            neighbourCount.IncrementBy(_rows[0].GetNumberOfLiveNeighboursForRightCentreCell());
-            neighbourCount.IncrementBy(_rows[1].GetNumberOfLiveNeighboursForRightCentreCellInCentreRow());
-            neighbourCount.IncrementBy(_rows[2].GetNumberOfLiveNeighboursForRightCentreCell());
+            neighbourCount.IncrementBy(_rows[0].GetNumberOfLiveNeighboursForBorderingRow(column));
+            neighbourCount.IncrementBy(_rows[1].GetNumberOfLiveNeighboursForContainingRow(column));
+            neighbourCount.IncrementBy(_rows[2].GetNumberOfLiveNeighboursForBorderingRow(column));
 
             return neighbourCount;
         }

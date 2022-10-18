@@ -36,11 +36,16 @@
             return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
         }
 
-        public LiveNeighbourCount GetNumberOfLiveNeighboursForCentreCell()
+        public LiveNeighbourCount GetNumberOfLiveNeighboursForBorderingRow(int column)
         {
             var neighbourCount = 0;
+            var loopStart = column - 1;
+            var loopEnd = column + 1;
 
-            for (var loopCounter = 0; loopCounter <= 2; loopCounter++)
+            if (loopStart < 0) loopStart = 0;
+            if (loopEnd >= _cells.Count) loopEnd = _cells.Count - 1;
+
+            for (var loopCounter = loopStart; loopCounter <= loopEnd; loopCounter++)
             {
                 if (_cells[loopCounter].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
             }
@@ -48,54 +53,14 @@
             return new LiveNeighbourCount(neighbourCount);
         }
 
-        internal LiveNeighbourCount GetNumberOfLiveNeighboursForLeftCentreCell()
+        public LiveNeighbourCount GetNumberOfLiveNeighboursForContainingRow(int column)
         {
             var neighbourCount = 0;
+            var start = column - 1;
+            var end = column + 1;
 
-            for (var loopCounter = 0; loopCounter <= 1; loopCounter++)
-            {
-                if (_cells[loopCounter].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
-            }
-
-            return new LiveNeighbourCount(neighbourCount);
-        }
-
-        public LiveNeighbourCount GetNumberOfLiveNeighboursForRightCentreCell()
-        {
-            var neighbourCount = 0;
-
-            for (var loopCounter = 1; loopCounter <= 2; loopCounter++)
-            {
-                if (_cells[loopCounter].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
-            }
-
-            return new LiveNeighbourCount(neighbourCount);
-        }
-
-        public LiveNeighbourCount GetNumberOfLiveNeighboursForCentreCellInCentreRow()
-        {
-            var neighbourCount = 0;
-
-            if (_cells[0].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
-            if (_cells[2].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
-
-            return new LiveNeighbourCount(neighbourCount);
-        }
-
-        internal LiveNeighbourCount GetNumberOfLiveNeighboursForLeftCentreCellInCentreRow()
-        {
-            var neighbourCount = 0;
-
-            if (_cells[1].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
-
-            return new LiveNeighbourCount(neighbourCount);
-        }
-        
-        public LiveNeighbourCount GetNumberOfLiveNeighboursForRightCentreCellInCentreRow()
-        {
-            var neighbourCount = 0;
-
-            if (_cells[1].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
+            if (start >= 0 && _cells[start].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
+            if (end < _cells.Count && _cells[end].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
 
             return new LiveNeighbourCount(neighbourCount);
         }
