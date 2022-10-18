@@ -50,7 +50,11 @@
             }
 
             neighbourCount.IncrementBy(_rows[cellPosition.Row].GetNumberOfLiveNeighboursForContainingRow(cellPosition));
-            neighbourCount.IncrementBy(_rows[endRow].GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
+
+            if (endRow < _rows.Count)
+            {
+                neighbourCount.IncrementBy(_rows[endRow].GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
+            }
 
             return neighbourCount;
         }
