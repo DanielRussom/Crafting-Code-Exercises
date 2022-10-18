@@ -19,9 +19,9 @@
             var newCellsRow = new List<Cell>();
             var newCellState = CellState.Dead;
 
-            for (int loopCounter = 0; loopCounter <=2; loopCounter++)
+            for (var loopCounter = 0; loopCounter <=2; loopCounter++)
             {
-                var numberOfLiveNeighboursForCell = _board.GetNumberOfLiveNeighboursForCell(loopCounter);
+                var numberOfLiveNeighboursForCell = _board.GetNumberOfLiveNeighboursForCell(new ColumnPosition(loopCounter));
                 if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.UnderPopulated)
                 {
                     newCellState = CellState.Dead;

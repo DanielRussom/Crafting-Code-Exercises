@@ -36,11 +36,11 @@
             return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
         }
 
-        public LiveNeighbourCount GetNumberOfLiveNeighboursForBorderingRow(int column)
+        public LiveNeighbourCount GetNumberOfLiveNeighboursForBorderingRow(ColumnPosition columnPosition)
         {
             var neighbourCount = 0;
-            var loopStart = column - 1;
-            var loopEnd = column + 1;
+            var loopStart = columnPosition.Value - 1;
+            var loopEnd = columnPosition.Value + 1;
 
             if (loopStart < 0) loopStart = 0;
             if (loopEnd >= _cells.Count) loopEnd = _cells.Count - 1;
@@ -53,11 +53,11 @@
             return new LiveNeighbourCount(neighbourCount);
         }
 
-        public LiveNeighbourCount GetNumberOfLiveNeighboursForContainingRow(int column)
+        public LiveNeighbourCount GetNumberOfLiveNeighboursForContainingRow(ColumnPosition columnPosition)
         {
             var neighbourCount = 0;
-            var start = column - 1;
-            var end = column + 1;
+            var start = columnPosition.Value - 1;
+            var end = columnPosition.Value + 1;
 
             if (start >= 0 && _cells[start].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
             if (end < _cells.Count && _cells[end].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
