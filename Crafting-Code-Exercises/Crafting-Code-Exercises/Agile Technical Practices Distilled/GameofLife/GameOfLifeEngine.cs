@@ -16,68 +16,32 @@
 
         public void Tick()
         {
-            var newCellsRow = new List<Cell>();
-            var newCellState = CellState.Dead;
             var newRows = new List<Row>();
 
-            for (var loopCounter = 0; loopCounter <= 2; loopCounter++)
+            for (var rowLoopCounter = 0; rowLoopCounter <= 2; rowLoopCounter++)
             {
-                var numberOfLiveNeighboursForCell = _board.GetNumberOfLiveNeighboursForCell(new CellPosition(0, loopCounter));
-                if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.UnderPopulated)
+                var newCellsRow = new List<Cell>();
+                var newCellState = CellState.Dead;
+
+                for (var columnLoopCounter = 0; columnLoopCounter <= 2; columnLoopCounter++)
                 {
-                    newCellState = CellState.Dead;
+                    var numberOfLiveNeighboursForCell = _board.GetNumberOfLiveNeighboursForCell(new CellPosition(rowLoopCounter, columnLoopCounter));
+                    if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.UnderPopulated)
+                    {
+                        newCellState = CellState.Dead;
+                    }
+
+                    if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.PerfectlyPopulated)
+                    {
+                        var currentLeftCentreCellState = _board.Rows[rowLoopCounter].Cells[columnLoopCounter].State; // Matt King 14/10/2022 - This is a temporary workaround to enable us to continue to defer moving to using a loop.  Remove this!!
+                        newCellState = currentLeftCentreCellState;
+                    }
+
+                    newCellsRow.Add(new Cell(newCellState));
                 }
 
-                if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.PerfectlyPopulated)
-                {
-                    var currentLeftCentreCellState = _board.Rows[0].Cells[loopCounter].State; // Matt King 14/10/2022 - This is a temporary workaround to enable us to continue to defer moving to using a loop.  Remove this!!
-                    newCellState = currentLeftCentreCellState;
-                }
-
-                newCellsRow.Add(new Cell(newCellState));
+                newRows.Add(new(newCellsRow));
             }
-
-            newRows.Add(new(newCellsRow));
-            newCellsRow = new List<Cell>();
-
-            for (var loopCounter = 0; loopCounter <= 2; loopCounter++)
-            {
-                var numberOfLiveNeighboursForCell = _board.GetNumberOfLiveNeighboursForCell(new CellPosition(1, loopCounter));
-                if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.UnderPopulated)
-                {
-                    newCellState = CellState.Dead;
-                }
-
-                if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.PerfectlyPopulated)
-                {
-                    var currentLeftCentreCellState = _board.Rows[1].Cells[loopCounter].State; // Matt King 14/10/2022 - This is a temporary workaround to enable us to continue to defer moving to using a loop.  Remove this!!
-                    newCellState = currentLeftCentreCellState;
-                }
-
-                newCellsRow.Add(new Cell(newCellState));
-            }
-
-            newRows.Add(new(newCellsRow));
-            newCellsRow = new List<Cell>();
-
-            for (var loopCounter = 0; loopCounter <= 2; loopCounter++)
-            {
-                var numberOfLiveNeighboursForCell = _board.GetNumberOfLiveNeighboursForCell(new CellPosition(2, loopCounter));
-                if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.UnderPopulated)
-                {
-                    newCellState = CellState.Dead;
-                }
-
-                if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.PerfectlyPopulated)
-                {
-                    var currentLeftCentreCellState = _board.Rows[2].Cells[loopCounter].State; // Matt King 14/10/2022 - This is a temporary workaround to enable us to continue to defer moving to using a loop.  Remove this!!
-                    newCellState = currentLeftCentreCellState;
-                }
-
-                newCellsRow.Add(new Cell(newCellState));
-            }
-
-            newRows.Add(new(newCellsRow));
 
             var newBoard = new Board(newRows);
             _board = newBoard;
