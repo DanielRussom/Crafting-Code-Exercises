@@ -53,7 +53,15 @@
                 newCellState = CellState.Dead;
             }
 
-            var currentCellState = _board.Rows[cellPosition.Row].Cells[cellPosition.Column].State;
+            var currentCellState = CellState.Dead;
+
+            // Matt King 18/10/22 - Remove this check and push this logic down into the Get PopulationState method.
+            if (_board.Rows.Count > cellPosition.Row &&
+                _board.Rows[cellPosition.Row].Cells.Count > cellPosition.Column)
+            {
+                currentCellState = _board.Rows[cellPosition.Row].Cells[cellPosition.Column].State;
+            }
+            
             if (currentCellState == CellState.Dead && populatedState == PopulationState.NewlyPopulated)
             {
                 newCellState = CellState.Alive;

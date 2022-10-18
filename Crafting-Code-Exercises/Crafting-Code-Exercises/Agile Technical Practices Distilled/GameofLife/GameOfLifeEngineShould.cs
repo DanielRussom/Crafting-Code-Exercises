@@ -505,18 +505,18 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             new[] { CellState.Dead, CellState.Dead, CellState.Alive }, new[] { CellState.Dead, CellState.Dead, CellState.Dead }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 2")]
         
         // Row 1 // [ X ] vs [   ] - IsEqual after one tick
-        // Row 2 // [ X ]    [ X ]
+        // Row 2 // [ X ]    [XXX]
         // Row 3 // [ X ]    [   ]
         [DataRow(new[] { CellState.Dead, CellState.Alive, CellState.Dead, }, new[] { CellState.Dead, CellState.Dead, CellState.Dead },
-            new[] { CellState.Dead, CellState.Alive, CellState.Dead }, new[] { CellState.Dead, CellState.Alive, CellState.Dead },
+            new[] { CellState.Dead, CellState.Alive, CellState.Dead }, new[] { CellState.Alive, CellState.Alive, CellState.Alive },
             new[] { CellState.Dead, CellState.Alive, CellState.Dead }, new[] { CellState.Dead, CellState.Dead, CellState.Dead }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 3")]
 
-        // Row 1 // [   ] vs [   ] - IsEqual after one tick
+        // Row 1 // [   ] vs [ X ] - IsEqual after one tick
         // Row 2 // [XXX]    [ X ]
-        // Row 3 // [   ]    [   ]
-        [DataRow(new[] { CellState.Dead, CellState.Dead, CellState.Dead, }, new[] { CellState.Dead, CellState.Dead, CellState.Dead },
+        // Row 3 // [   ]    [ X ]
+        [DataRow(new[] { CellState.Dead, CellState.Dead, CellState.Dead, }, new[] { CellState.Dead, CellState.Alive, CellState.Dead },
             new[] { CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Dead, CellState.Alive, CellState.Dead },
-            new[] { CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Dead, CellState.Dead, CellState.Dead }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 4")]
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Dead, CellState.Alive, CellState.Dead }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 4")]
 
         // Row 1 // [   ] vs [   ] - IsEqual after one tick
         // Row 2 // [ XX]    [ X ]
@@ -583,20 +583,19 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 
             Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
-
-
-        // Row 1 // [X X] vs [   ] - IsEqual after one tick
-        // Row 2 // [ X ]    [   ]
-        // Row 3 // [X X]    [   ]
-        [DataRow(new[] { CellState.Alive, CellState.Dead, CellState.Alive, }, new[] { CellState.Dead, CellState.Dead, CellState.Dead },
-            new[] { CellState.Dead, CellState.Alive, CellState.Dead }, new[] { CellState.Dead, CellState.Dead, CellState.Dead },
-            new[] { CellState.Alive, CellState.Dead, CellState.Alive }, new[] { CellState.Dead, CellState.Dead, CellState.Dead }, EqualityState.IsEqual, DisplayName = "ApplyOverPopulationRuleTo3By3SeedComparingAfterOneTick 1")]
+        
+        // Row 1 // [X X] vs [ X ] - IsEqual after one tick
+        // Row 2 // [ X ]    [X X]
+        // Row 3 // [X X]    [ X ]
+        [DataRow(new[] { CellState.Alive, CellState.Dead, CellState.Alive, }, new[] { CellState.Dead, CellState.Alive, CellState.Dead },
+            new[] { CellState.Dead, CellState.Alive, CellState.Dead }, new[] { CellState.Alive, CellState.Dead, CellState.Alive },
+            new[] { CellState.Alive, CellState.Dead, CellState.Alive }, new[] { CellState.Dead, CellState.Alive, CellState.Dead }, EqualityState.IsEqual, DisplayName = "ApplyOverPopulationRuleTo3By3SeedComparingAfterOneTick 1")]
 
         // Row 1 // [   ] vs [   ] - IsEqual after one tick
-        // Row 2 // [XX ]    [X  ]
+        // Row 2 // [XX ]    [X X]
         // Row 3 // [XXX]    [X X]
         [DataRow(new[] { CellState.Dead, CellState.Dead, CellState.Dead, }, new[] { CellState.Dead, CellState.Dead, CellState.Dead },
-            new[] { CellState.Alive, CellState.Alive, CellState.Dead }, new[] { CellState.Alive, CellState.Dead, CellState.Dead },
+            new[] { CellState.Alive, CellState.Alive, CellState.Dead }, new[] { CellState.Alive, CellState.Dead, CellState.Alive },
             new[] { CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Alive, CellState.Dead, CellState.Alive }, EqualityState.IsEqual, DisplayName = "ApplyOverPopulationRuleTo3By3SeedComparingAfterOneTick 2")]
 
         [TestMethod]
