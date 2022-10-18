@@ -539,6 +539,13 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             new[] { CellState.Alive, CellState.Dead, CellState.Dead }, new[] { CellState.Alive, CellState.Dead, CellState.Dead },
             new[] { CellState.Alive, CellState.Dead, CellState.Dead }, new[] { CellState.Dead, CellState.Dead, CellState.Dead }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 7")]
 
+        // Row 1 // [  X] vs [   ] - IsEqual after one tick
+        // Row 2 // [  X]    [  X]
+        // Row 3 // [  X]    [   ]
+        [DataRow(new[] { CellState.Dead, CellState.Dead, CellState.Alive, }, new[] { CellState.Dead, CellState.Dead, CellState.Dead },
+            new[] { CellState.Dead, CellState.Dead, CellState.Alive }, new[] { CellState.Dead, CellState.Dead, CellState.Alive },
+            new[] { CellState.Dead, CellState.Dead, CellState.Alive }, new[] { CellState.Dead, CellState.Dead, CellState.Dead }, EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterOneTick 8")]
+
         public void ApplySurvivalRuleTo3By3SeedComparingAfterOneTick(CellState[] row1SeedData, CellState[] boardToCompareRow1,
             CellState[] row2SeedData, CellState[] boardToCompareRow2,
             CellState[] row3SeedData, CellState[] boardToCompareRow3, EqualityState expectedEqualityState)

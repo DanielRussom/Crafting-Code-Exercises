@@ -60,6 +60,18 @@
             return new LiveNeighbourCount(neighbourCount);
         }
 
+        public LiveNeighbourCount GetNumberOfLiveNeighboursForRightCentreCell()
+        {
+            var neighbourCount = 0;
+
+            for (var loopCounter = 1; loopCounter <= 2; loopCounter++)
+            {
+                if (_cells[loopCounter].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
+            }
+
+            return new LiveNeighbourCount(neighbourCount);
+        }
+
         public LiveNeighbourCount GetNumberOfLiveNeighboursForCentreCellInCentreRow()
         {
             var neighbourCount = 0;
@@ -71,6 +83,15 @@
         }
 
         internal LiveNeighbourCount GetNumberOfLiveNeighboursForLeftCentreCellInCentreRow()
+        {
+            var neighbourCount = 0;
+
+            if (_cells[1].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
+
+            return new LiveNeighbourCount(neighbourCount);
+        }
+        
+        public LiveNeighbourCount GetNumberOfLiveNeighboursForRightCentreCellInCentreRow()
         {
             var neighbourCount = 0;
 

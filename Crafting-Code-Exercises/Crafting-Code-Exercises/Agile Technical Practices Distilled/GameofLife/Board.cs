@@ -60,5 +60,18 @@
 
             return neighbourCount;
         }
+
+        public LiveNeighbourCount GetNumberOfLiveNeighboursForRightCentreCell()
+        {
+            var neighbourCount = new LiveNeighbourCount(0);
+
+            if (_rows.Count < 3) return neighbourCount;
+
+            neighbourCount.IncrementBy(_rows[0].GetNumberOfLiveNeighboursForRightCentreCell());
+            neighbourCount.IncrementBy(_rows[1].GetNumberOfLiveNeighboursForRightCentreCellInCentreRow());
+            neighbourCount.IncrementBy(_rows[2].GetNumberOfLiveNeighboursForRightCentreCell());
+
+            return neighbourCount;
+        }
     }
 }
