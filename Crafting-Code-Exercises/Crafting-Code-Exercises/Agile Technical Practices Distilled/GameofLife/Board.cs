@@ -5,20 +5,14 @@
         private readonly List<Row> _rows;
         public List<Row> Rows => _rows;
 
-
         public Board(List<Row> rows)
         {
             _rows = rows;
         }
 
-        private int GetRowCount()
+        private void PadWithEmptyRows(Board boardWithTargetSize)
         {
-            return _rows.Count;
-        }
-
-        private void PadWithEmptyRows(int upperLimit)
-        {
-            while (GetRowCount() < upperLimit)
+            while (_rows.Count < boardWithTargetSize._rows.Count)
             {
                 _rows.Add(new(new List<Cell>()));
             }
@@ -26,13 +20,13 @@
 
         public EqualityState Equals(Board boardToCompare)
         {
-            PadWithEmptyRows(boardToCompare.GetRowCount());
-            boardToCompare.PadWithEmptyRows(GetRowCount());
+            PadWithEmptyRows(boardToCompare);
+            boardToCompare.PadWithEmptyRows(this);
 
             var index = 0;
             var isEqual = true;
 
-            while (index < GetRowCount() && isEqual)
+            while (index < _rows.Count && isEqual)
             {
                 isEqual &= _rows[index].Equals(boardToCompare._rows[index]) == EqualityState.IsEqual;
                 index++;

@@ -11,14 +11,9 @@
             _cells = cells;
         }
 
-        private int GetCellCount()
+        private void PadWithEmptyCells(Row rowWithTargetSize)
         {
-            return _cells.Count;
-        }
-
-        private void PadWithEmptyCells(int upperLimit) You are here - wrapping up this and the integer in GetCellCount
-        {
-            while (GetCellCount() < upperLimit)
+            while (_cells.Count < rowWithTargetSize._cells.Count)
             {
                 _cells.Add(new(CellState.Dead));
             }
@@ -26,13 +21,13 @@
 
         public EqualityState Equals(Row rowToCompare)
         {
-            rowToCompare.PadWithEmptyCells(GetCellCount());
-            PadWithEmptyCells(rowToCompare.GetCellCount());
+            rowToCompare.PadWithEmptyCells(this);
+            PadWithEmptyCells(rowToCompare);
             
             var index = 0;
             var isEqual = true;
 
-            while (index < GetCellCount() && isEqual)
+            while (index < _cells.Count && isEqual)
             {
                 isEqual = _cells[index].Equals(rowToCompare._cells[index]) == EqualityState.IsEqual;
                 index++;

@@ -1,37 +1,6 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=79681bca_002D9e69_002D47af_002Db4ae_002Dae317d7f61ee/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="RomanNumeralsConverterShould" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;And&gt;&#xD;
-    &lt;Or&gt;&#xD;
-      &lt;And&gt;&#xD;
-        &lt;TestAncestor&gt;&#xD;
-          &lt;TestId&gt;MSTest::A38F3CF7-2EA9-488F-87D2-D3961DC727B4::net6.0::Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.RomanNumeralsWithTPP.RomanNumeralsConverterShould&lt;/TestId&gt;&#xD;
-          &lt;TestId&gt;MSTest::A38F3CF7-2EA9-488F-87D2-D3961DC727B4::net6.0::Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.RomanNumeralsWithTPP.RomanNumeralsConverterWindBackShould&lt;/TestId&gt;&#xD;
-        &lt;/TestAncestor&gt;&#xD;
-        &lt;Not&gt;&#xD;
-          &lt;And&gt;&#xD;
-            &lt;TestAncestor&gt;&#xD;
-              &lt;TestId&gt;MSTest::A38F3CF7-2EA9-488F-87D2-D3961DC727B4::net6.0::Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.RomanNumeralsWithTPP.RomanNumeralsConverterShould&lt;/TestId&gt;&#xD;
-            &lt;/TestAncestor&gt;&#xD;
-            &lt;Project Location="C:\Users\happiness\Source\Repos\Crafting-Code-Exercises\Crafting-Code-Exercises\Crafting-Code-Exercises" Presentation="&amp;lt;Crafting-Code-Exercises&amp;gt;" /&gt;&#xD;
-            &lt;Namespace&gt;Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.RomanNumeralsWithTPP&lt;/Namespace&gt;&#xD;
-          &lt;/And&gt;&#xD;
-        &lt;/Not&gt;&#xD;
-      &lt;/And&gt;&#xD;
-      &lt;TestAncestor&gt;&#xD;
-        &lt;TestId&gt;MSTest::A38F3CF7-2EA9-488F-87D2-D3961DC727B4::net6.0::Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife.GameOfLifeEngineShould&lt;/TestId&gt;&#xD;
-      &lt;/TestAncestor&gt;&#xD;
-    &lt;/Or&gt;&#xD;
-    &lt;Not&gt;&#xD;
-      &lt;And&gt;&#xD;
-        &lt;Project Location="C:\Users\happiness\source\repos\Crafting-Code-Exercises\Crafting-Code-Exercises\Crafting-Code-Exercises" Presentation="&amp;lt;Crafting-Code-Exercises&amp;gt;" /&gt;&#xD;
-        &lt;Namespace&gt;Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.RomanNumeralsWithTPP&lt;/Namespace&gt;&#xD;
-      &lt;/And&gt;&#xD;
-    &lt;/Not&gt;&#xD;
-  &lt;/And&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b4594d4e_002D1a94_002D4f49_002D8d92_002D8ecadbd9e994/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AnagramGeneratorShould" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=90f10e48_002Da5a3_002D4032_002D8f08_002D56d1a2779396/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GameOfLifeEngineShould" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;MSTest::A38F3CF7-2EA9-488F-87D2-D3961DC727B4::net6.0::Crafting_Code_Exercises.Anagrams.AnagramGeneratorShould&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::A38F3CF7-2EA9-488F-87D2-D3961DC727B4::net6.0::Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife.GameOfLifeEngineShould&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
-	</wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
