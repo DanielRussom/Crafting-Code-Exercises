@@ -17,7 +17,8 @@
         public PopulationState GetPopulationState()
         {
             if (_value < 2) return PopulationState.UnderPopulated;
-            if (_value >= 2 && _value <= 3) return PopulationState.PerfectlyPopulated;
+            if (_value == 2) return PopulationState.PerfectlyPopulated;
+            if (_value == 3) return PopulationState.NewlyPopulated;
             return PopulationState.Default;
         }
     }

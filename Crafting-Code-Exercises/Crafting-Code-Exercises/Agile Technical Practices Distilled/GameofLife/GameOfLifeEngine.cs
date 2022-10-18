@@ -45,18 +45,25 @@
         {
             var newCellState = CellState.Dead;
             var numberOfLiveNeighboursForCell = _board.GetNumberOfLiveNeighboursForCell(new CellPosition(cellPosition.Row, cellPosition.Column));
-
-            // Matt King 14/10/2022 - See if we can rmove this at the end and rely on a default newCellState of Dead instead.
-            if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.UnderPopulated)
+            var populatedState = numberOfLiveNeighboursForCell.GetPopulationState();
+            
+            // Matt King 14/10/2022 - See if we can remove this at the end and rely on a default newCellState of Dead instead.
+            if (populatedState == PopulationState.UnderPopulated)
             {
                 newCellState = CellState.Dead;
             }
 
-            if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.PerfectlyPopulated)
+            var currentCellState = _board.Rows[cellPosition.Row].Cells[cellPosition.Column].State;
+            if (currentCellState == CellState.Dead && populatedState == PopulationState.NewlyPopulated)
+            {
+                newCellState = CellState.Alive;
+                return newCellState;
+            }
+
+            if (populatedState == PopulationState.PerfectlyPopulated || populatedState == PopulationState.NewlyPopulated)
             {
                 // Matt King 14/10/2022 - This is a temporary workaround to enable us to continue to defer moving to using a loop.  Remove this!!
-                var currentLeftCentreCellState = _board.Rows[cellPosition.Row].Cells[cellPosition.Column].State;
-                newCellState = currentLeftCentreCellState;
+                newCellState = currentCellState;
             }
 
             return newCellState;

@@ -4,6 +4,7 @@
     {
         UnderPopulated,
         PerfectlyPopulated,
+        NewlyPopulated,
         Default
 
     }
