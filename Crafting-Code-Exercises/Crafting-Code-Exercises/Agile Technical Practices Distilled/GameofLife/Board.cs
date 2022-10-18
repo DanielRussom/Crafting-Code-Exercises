@@ -35,15 +35,22 @@
             return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
         }
 
-        internal LiveNeighbourCount GetNumberOfLiveNeighboursForCell(ColumnPosition columnPosition)
+        internal LiveNeighbourCount GetNumberOfLiveNeighboursForCell(int rowPosition, ColumnPosition columnPosition)
         {
             var neighbourCount = new LiveNeighbourCount(0);
 
             if (_rows.Count < 3) return neighbourCount;
 
-            neighbourCount.IncrementBy(_rows[0].GetNumberOfLiveNeighboursForBorderingRow(columnPosition));
-            neighbourCount.IncrementBy(_rows[1].GetNumberOfLiveNeighboursForContainingRow(columnPosition));
-            neighbourCount.IncrementBy(_rows[2].GetNumberOfLiveNeighboursForBorderingRow(columnPosition));
+            var startRow = rowPosition - 1;
+            var endRow = rowPosition + 1;
+
+            if (startRow >= 0)
+            {
+                neighbourCount.IncrementBy(_rows[startRow].GetNumberOfLiveNeighboursForBorderingRow(columnPosition));
+            }
+
+            neighbourCount.IncrementBy(_rows[rowPosition].GetNumberOfLiveNeighboursForContainingRow(columnPosition));
+            neighbourCount.IncrementBy(_rows[endRow].GetNumberOfLiveNeighboursForBorderingRow(columnPosition));
 
             return neighbourCount;
         }
