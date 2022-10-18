@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 {
-    public class ColumnPosition
+    public class CellPosition
     {
-        public ColumnPosition(int value)
+        public CellPosition(int row, int column)
         {
-            Value = value;
+            Row = row;
+            Column = column;
         }
 
-        internal int Value { get; }
+        internal int Column { get; }
+        internal int Row { get; }
     }
 }

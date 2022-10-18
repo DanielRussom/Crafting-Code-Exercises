@@ -22,7 +22,7 @@
 
             for (var loopCounter = 0; loopCounter <= 2; loopCounter++)
             {
-                var numberOfLiveNeighboursForCell = _board.GetNumberOfLiveNeighboursForCell(0, new ColumnPosition(loopCounter));
+                var numberOfLiveNeighboursForCell = _board.GetNumberOfLiveNeighboursForCell( new CellPosition(0, loopCounter));
                 if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.UnderPopulated)
                 {
                     newCellState = CellState.Dead;
@@ -37,14 +37,12 @@
                 newCellsRow.Add(new Cell(newCellState));
             }
 
-            // you are here - tests are passing - need to refactor the integer row position out then do next test of bottom row.
-
             newRows.Add(new (newCellsRow));
             newCellsRow = new List<Cell>();
 
             for (var loopCounter = 0; loopCounter <=2; loopCounter++)
             {
-                var numberOfLiveNeighboursForCell = _board.GetNumberOfLiveNeighboursForCell(1, new ColumnPosition(loopCounter));
+                var numberOfLiveNeighboursForCell = _board.GetNumberOfLiveNeighboursForCell(new CellPosition(1, loopCounter));
                 if (numberOfLiveNeighboursForCell.GetPopulationState() == PopulationState.UnderPopulated)
                 {
                     newCellState = CellState.Dead;
