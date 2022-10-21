@@ -2,7 +2,7 @@
 {
     public class Board
     {
-        private readonly List<Row> _rows;
+        private List<Row> _rows;
         public List<Row> Rows => _rows;
 
         public Board(List<Row> rows)
@@ -10,6 +10,26 @@
             _rows = rows;
         }
 
+        public void Tick()
+        {
+            var newRows = new List<Row>();
+
+            for (var rowLoopCounter = 0; rowLoopCounter < _rows.Count; rowLoopCounter++)
+            {
+                var rowAboveIndex = rowLoopCounter - 1;
+                var rowBelowIndex = rowLoopCounter + 1;
+                Row? rowAbove = null;
+                Row? rowBelow = null;
+
+                if (rowAboveIndex >= 0) rowAbove = _rows[rowAboveIndex];
+                if (rowBelowIndex < _rows.Count) rowBelow = _rows[rowBelowIndex];
+                var newRow = _rows[rowLoopCounter].Tick(new CellPosition(rowLoopCounter, -1), rowAbove, rowBelow);
+                newRows.Add(newRow);
+            }
+
+            _rows = newRows;
+        }
+        
         private void PadWithEmptyRows(Board boardWithTargetSize)
         {
             while (_rows.Count < boardWithTargetSize._rows.Count)
@@ -33,28 +53,6 @@
             }
 
             return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
-        }
-
-        internal LiveNeighbourCount GetNumberOfLiveNeighboursForCell(CellPosition cellPosition)
-        {
-            if (_rows.Count < 3) return new LiveNeighbourCount(0);
-
-            var startRow = cellPosition.Row - 1;
-            var endRow = cellPosition.Row + 1;
-
-            var neighbourCount = _rows[cellPosition.Row].GetNumberOfLiveNeighboursForContainingRow(cellPosition);
-
-            if (startRow >= 0)
-            {
-                neighbourCount.IncrementBy(_rows[startRow].GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
-            }
-            
-            if (endRow < _rows.Count)
-            {
-                neighbourCount.IncrementBy(_rows[endRow].GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
-            }
-
-            return neighbourCount;
         }
     }
 }

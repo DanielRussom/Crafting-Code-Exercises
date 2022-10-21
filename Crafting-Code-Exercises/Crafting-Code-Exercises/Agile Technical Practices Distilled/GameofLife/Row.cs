@@ -1,14 +1,47 @@
 ﻿namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 {
-    public class Row 
+    public class Row
     {
         private readonly List<Cell> _cells;
 
-        public List<Cell> Cells => _cells;
+        public List<Cell> Cells => _cells;  You are here - remove these public accesors that broke the OC rules.
 
         public Row(List<Cell> cells)
         {
             _cells = cells;
+        }
+
+        public Row Tick(CellPosition cellPosition, Row? rowAbove, Row? rowBelow)
+        {
+            var newCellsRow = new List<Cell>();
+
+            for (var columnLoopCounter = 0; columnLoopCounter < _cells.Count; columnLoopCounter++)
+            {
+                var numberOfLiveNeighboursForCell = GetNumberOfLiveNeighboursForCell(new CellPosition(cellPosition.Row, columnLoopCounter), rowAbove, rowBelow);
+                var newCellState  = numberOfLiveNeighboursForCell.GetPopulationState();
+                newCellsRow.Add(new Cell(newCellState));
+            }
+
+            return new(newCellsRow);
+        }
+
+        internal LiveNeighbourCount GetNumberOfLiveNeighboursForCell(CellPosition cellPosition, Row? rowAbove, Row? rowBelow)
+        {
+            //if (_rows.Count < 3) return new LiveNeighbourCount(0);
+
+            var neighbourCount = GetNumberOfLiveNeighboursForContainingRow(cellPosition);
+
+            if (rowAbove != null)
+            {
+                neighbourCount.IncrementBy(rowAbove.GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
+            }
+
+            if (rowBelow != null)
+            {
+                neighbourCount.IncrementBy(rowBelow.GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
+            }
+
+            return neighbourCount;
         }
 
         private void PadWithEmptyCells(Row rowWithTargetSize)
