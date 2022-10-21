@@ -2,12 +2,34 @@
 {
     public class Board
     {
-        private readonly List<Row> _rows;
-        public List<Row> Rows => _rows;
+        private List<Row> _rows;
 
         public Board(List<Row> rows)
         {
             _rows = rows;
+        }
+
+        public void Tick()
+        {
+            var newRows = new List<Row>();
+
+            for (var rowLoopCounter = 0; rowLoopCounter < _rows.Count; rowLoopCounter++)
+            {
+                var rowAbove = GetRowAtPosition(new(rowLoopCounter - 1));
+                var rowBelow = GetRowAtPosition(new(rowLoopCounter + 1));
+
+                var neighbouringRows = new NeighbouringRows(rowAbove, rowBelow);
+                var newRow = _rows[rowLoopCounter].Tick(new (rowLoopCounter), neighbouringRows);
+                newRows.Add(newRow);
+            }
+
+            _rows = newRows;
+        }
+
+        private Row GetRowAtPosition(RowPosition position)
+        {
+            if (position.Value >= 0 && position.Value < _rows.Count) return _rows[position.Value];
+            return new Row(new List<Cell>());
         }
 
         private void PadWithEmptyRows(Board boardWithTargetSize)
@@ -33,30 +55,6 @@
             }
 
             return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
-        }
-
-        internal LiveNeighbourCount GetNumberOfLiveNeighboursForCell(CellPosition cellPosition)
-        {
-            var neighbourCount = new LiveNeighbourCount(0);
-
-            if (_rows.Count < 3) return neighbourCount;
-
-            var startRow = cellPosition.Row - 1;
-            var endRow = cellPosition.Row + 1;
-
-            if (startRow >= 0)
-            {
-                neighbourCount.IncrementBy(_rows[startRow].GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
-            }
-
-            neighbourCount.IncrementBy(_rows[cellPosition.Row].GetNumberOfLiveNeighboursForContainingRow(cellPosition));
-
-            if (endRow < _rows.Count)
-            {
-                neighbourCount.IncrementBy(_rows[endRow].GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
-            }
-
-            return neighbourCount;
         }
     }
 }
