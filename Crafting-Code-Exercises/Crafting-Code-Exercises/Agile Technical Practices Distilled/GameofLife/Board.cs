@@ -3,7 +3,6 @@
     public class Board
     {
         private List<Row> _rows;
-        public List<Row> Rows => _rows;
 
         public Board(List<Row> rows)
         {

@@ -4,8 +4,6 @@
     {
         private readonly List<Cell> _cells;
 
-        public List<Cell> Cells => _cells;  You are here - remove these public accesors that broke the OC rules.
-
         public Row(List<Cell> cells)
         {
             _cells = cells;
@@ -27,8 +25,6 @@
 
         internal LiveNeighbourCount GetNumberOfLiveNeighboursForCell(CellPosition cellPosition, Row? rowAbove, Row? rowBelow)
         {
-            //if (_rows.Count < 3) return new LiveNeighbourCount(0);
-
             var neighbourCount = GetNumberOfLiveNeighboursForContainingRow(cellPosition);
 
             if (rowAbove != null)
