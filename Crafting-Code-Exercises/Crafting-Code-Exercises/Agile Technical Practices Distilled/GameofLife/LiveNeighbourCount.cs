@@ -10,15 +10,20 @@
             _value = value;
         }
 
-        public LiveNeighbourCount(CellState cellState, int value)
+        public LiveNeighbourCount(CellState cellState, LiveNeighbourCount neighbourCount)
         {
             _cellState = cellState;
-            _value = value;
+            _value = neighbourCount._value;
         }
         
         public void IncrementBy(LiveNeighbourCount liveNeighbourCount)
         {
             _value += liveNeighbourCount._value;
+        }
+
+        public void IncrementIfAlive(CellState cellState)
+        {
+            if (cellState == CellState.Alive) _value += 1;
         }
 
         public CellState GetPopulationState()

@@ -2,7 +2,7 @@
 {
     internal class GameOfLifeEngine
     {
-        private Board _board;
+        private readonly Board _board;
 
         public GameOfLifeEngine(Board seed)
         {

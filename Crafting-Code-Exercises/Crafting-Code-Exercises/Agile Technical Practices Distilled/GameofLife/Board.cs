@@ -15,20 +15,23 @@
 
             for (var rowLoopCounter = 0; rowLoopCounter < _rows.Count; rowLoopCounter++)
             {
-                var rowAboveIndex = rowLoopCounter - 1;
-                var rowBelowIndex = rowLoopCounter + 1;
-                Row? rowAbove = null;
-                Row? rowBelow = null;
+                var rowAbove = GetRowAtPosition(new(rowLoopCounter - 1));
+                var rowBelow = GetRowAtPosition(new(rowLoopCounter + 1));
 
-                if (rowAboveIndex >= 0) rowAbove = _rows[rowAboveIndex];
-                if (rowBelowIndex < _rows.Count) rowBelow = _rows[rowBelowIndex];
-                var newRow = _rows[rowLoopCounter].Tick(new CellPosition(rowLoopCounter, -1), rowAbove, rowBelow);
+                var neighbouringRows = new NeighbouringRows(rowAbove, rowBelow);
+                var newRow = _rows[rowLoopCounter].Tick(new (rowLoopCounter), neighbouringRows);
                 newRows.Add(newRow);
             }
 
             _rows = newRows;
         }
-        
+
+        private Row GetRowAtPosition(RowPosition position)
+        {
+            if (position.Value >= 0 && position.Value < _rows.Count) return _rows[position.Value];
+            return new Row(new List<Cell>());
+        }
+
         private void PadWithEmptyRows(Board boardWithTargetSize)
         {
             while (_rows.Count < boardWithTargetSize._rows.Count)
