@@ -2,24 +2,38 @@
 {
     public class LiveNeighbourCount
     {
+        private int _value;
+        private CellState _cellState;
+
         public LiveNeighbourCount(int value)
         {
             _value = value;
         }
 
-        private int _value;
-
+        public LiveNeighbourCount(CellState cellState, int value)
+        {
+            _cellState = cellState;
+            _value = value;
+        }
+        
         public void IncrementBy(LiveNeighbourCount liveNeighbourCount)
         {
             _value += liveNeighbourCount._value;
         }
 
-        public PopulationState GetPopulationState()
+        public CellState GetPopulationState()
         {
-            if (_value < 2) return PopulationState.UnderPopulated;
-            if (_value == 2) return PopulationState.PerfectlyPopulated;
-            if (_value == 3) return PopulationState.NewlyPopulated;
-            return PopulationState.Default;
+            if (_cellState == CellState.Alive && (_value == 2 || _value == 3))
+            {
+                return CellState.Alive;
+            }
+
+            if (_cellState == CellState.Dead && _value == 3)
+            {
+                return CellState.Alive;
+            }
+
+            return CellState.Dead;
         }
     }
 }

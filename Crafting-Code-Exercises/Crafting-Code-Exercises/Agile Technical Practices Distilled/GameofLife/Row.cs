@@ -62,7 +62,7 @@
             if (start >= 0 && _cells[start].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
             if (end < _cells.Count && _cells[end].Equals(new(CellState.Alive)) == EqualityState.IsEqual) neighbourCount++;
 
-            return new LiveNeighbourCount(neighbourCount);
+            return new LiveNeighbourCount(_cells[cellPosition.Column].State, neighbourCount);
         }
     }
 }

@@ -37,20 +37,18 @@
 
         internal LiveNeighbourCount GetNumberOfLiveNeighboursForCell(CellPosition cellPosition)
         {
-            var neighbourCount = new LiveNeighbourCount(0);
-
-            if (_rows.Count < 3) return neighbourCount;
+            if (_rows.Count < 3) return new LiveNeighbourCount(0);
 
             var startRow = cellPosition.Row - 1;
             var endRow = cellPosition.Row + 1;
+
+            var neighbourCount = _rows[cellPosition.Row].GetNumberOfLiveNeighboursForContainingRow(cellPosition);
 
             if (startRow >= 0)
             {
                 neighbourCount.IncrementBy(_rows[startRow].GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
             }
-
-            neighbourCount.IncrementBy(_rows[cellPosition.Row].GetNumberOfLiveNeighboursForContainingRow(cellPosition));
-
+            
             if (endRow < _rows.Count)
             {
                 neighbourCount.IncrementBy(_rows[endRow].GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
