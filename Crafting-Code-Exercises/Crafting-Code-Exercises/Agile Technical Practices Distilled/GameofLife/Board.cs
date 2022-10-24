@@ -14,7 +14,7 @@
         public void Tick()
         {
             var newRows = new List<Row>();
-            _rows.Add(new Row(new List<Cell> {new (CellState.Dead), new(CellState.Dead), new(CellState.Dead)}));
+            AddBlankRow();
 
             for (var rowLoopCounter = 0; rowLoopCounter < RowCount; rowLoopCounter++)
             {
@@ -27,6 +27,11 @@
             }
 
             _rows = newRows;
+        }
+
+        private void AddBlankRow()
+        {
+            _rows.Add(new Row(new List<Cell> { new(CellState.Dead), new(CellState.Dead), new(CellState.Dead) }));
         }
 
         private Row GetRowAtPosition(RowPosition position)
