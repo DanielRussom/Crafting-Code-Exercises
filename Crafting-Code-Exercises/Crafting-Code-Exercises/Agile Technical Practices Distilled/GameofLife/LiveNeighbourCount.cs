@@ -2,38 +2,42 @@
 {
     public class LiveNeighbourCount
     {
-        private int _value;
-        private CellState _cellState;
+        private int _liveNeighourCount;
+        private readonly Cell _cell;
 
-        public LiveNeighbourCount(int value)
+        private bool IsPerfectlyPopulated => _liveNeighourCount == 2 || _liveNeighourCount == 3;
+        private bool IsNewlyPopulated => _liveNeighourCount == 3;
+
+        public LiveNeighbourCount(int liveNeighourCount)
         {
-            _value = value;
+            _cell = new(CellState.Dead);
+            _liveNeighourCount = liveNeighourCount;
         }
 
-        public LiveNeighbourCount(CellState cellState, LiveNeighbourCount neighbourCount)
+        public LiveNeighbourCount(Cell cell, LiveNeighbourCount neighbourCount)
         {
-            _cellState = cellState;
-            _value = neighbourCount._value;
+            _cell = cell;
+            _liveNeighourCount = neighbourCount._liveNeighourCount;
         }
         
         public void IncrementBy(LiveNeighbourCount liveNeighbourCount)
         {
-            _value += liveNeighbourCount._value;
+            _liveNeighourCount += liveNeighbourCount._liveNeighourCount;
         }
 
-        public void IncrementIfAlive(CellState cellState)
+        public void IncrementIfAlive(Cell cell)
         {
-            if (cellState == CellState.Alive) _value += 1;
+            if (cell.IsAlive()) _liveNeighourCount += 1;
         }
 
         public CellState GetPopulationState()
         {
-            if (_cellState == CellState.Alive && (_value == 2 || _value == 3))
+            if (_cell.IsAlive() && IsPerfectlyPopulated)
             {
                 return CellState.Alive;
             }
 
-            if (_cellState == CellState.Dead && _value == 3)
+            if (!_cell.IsAlive() && IsNewlyPopulated)
             {
                 return CellState.Alive;
             }

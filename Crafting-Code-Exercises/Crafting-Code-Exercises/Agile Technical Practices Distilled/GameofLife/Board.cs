@@ -4,6 +4,8 @@
     {
         private List<Row> _rows;
 
+        private int RowCount => _rows.Count;
+
         public Board(List<Row> rows)
         {
             _rows = rows;
@@ -13,7 +15,7 @@
         {
             var newRows = new List<Row>();
 
-            for (var rowLoopCounter = 0; rowLoopCounter < _rows.Count; rowLoopCounter++)
+            for (var rowLoopCounter = 0; rowLoopCounter < RowCount; rowLoopCounter++)
             {
                 var rowAbove = GetRowAtPosition(new(rowLoopCounter - 1));
                 var rowBelow = GetRowAtPosition(new(rowLoopCounter + 1));
@@ -28,13 +30,13 @@
 
         private Row GetRowAtPosition(RowPosition position)
         {
-            if (position.Value >= 0 && position.Value < _rows.Count) return _rows[position.Value];
+            if (position.Value >= 0 && position.Value < RowCount) return _rows[position.Value];
             return new Row(new List<Cell>());
         }
 
         private void PadWithEmptyRows(Board boardWithTargetSize)
         {
-            while (_rows.Count < boardWithTargetSize._rows.Count)
+            while (RowCount < boardWithTargetSize.RowCount)
             {
                 _rows.Add(new(new List<Cell>()));
             }
@@ -48,7 +50,7 @@
             var index = 0;
             var isEqual = true;
 
-            while (index < _rows.Count && isEqual)
+            while (index < RowCount && isEqual)
             {
                 isEqual &= _rows[index].Equals(boardToCompare._rows[index]) == EqualityState.IsEqual;
                 index++;

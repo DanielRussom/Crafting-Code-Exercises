@@ -654,7 +654,6 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
-
         // Row 1 // [  X ] vs [    ] - IsEqual after one tick
         // Row 2 // [    ]    [ X  ]
         // Row 3 // [X X ]    [    ]

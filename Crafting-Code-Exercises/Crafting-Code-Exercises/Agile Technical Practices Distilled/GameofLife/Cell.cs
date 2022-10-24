@@ -2,13 +2,16 @@
 {
     public class Cell
     {
-        private CellState _state;
-
-        public CellState State => _state;
+        private readonly CellState _state;
 
         public Cell(CellState state)
         {
             _state = state;
+        }
+
+        public bool IsAlive()
+        {
+            return _state == CellState.Alive;
         }
 
         public EqualityState Equals(Cell other)

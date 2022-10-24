@@ -4,6 +4,8 @@
     {
         private readonly List<Cell> _cells;
 
+        private int CellsCount => _cells.Count;
+
         public Row(List<Cell> cells)
         {
             _cells = cells;
@@ -13,7 +15,7 @@
         {
             var newCellsRow = new List<Cell>();
 
-            for (var columnLoopCounter = 0; columnLoopCounter < _cells.Count; columnLoopCounter++)
+            for (var columnLoopCounter = 0; columnLoopCounter < CellsCount; columnLoopCounter++)
             {
                 newCellsRow.Add(GetCellStateUsingNeighbours(new CellPosition(rowPosition.Value, columnLoopCounter), neighbouringRows));
             }
@@ -35,11 +37,11 @@
             var loopEnd = cellPosition.Column + 1;
 
             if (loopStart < 0) loopStart = 0;
-            if (loopEnd >= _cells.Count) loopEnd = _cells.Count - 1;
+            if (loopEnd >= CellsCount) loopEnd = CellsCount - 1;
 
             for (var loopCounter = loopStart; loopCounter <= loopEnd; loopCounter++)
             {
-                neighbourCount.IncrementIfAlive(_cells[loopCounter].State);
+                neighbourCount.IncrementIfAlive(_cells[loopCounter]);
             }
 
             return neighbourCount;
@@ -51,10 +53,10 @@
             var start = cellPosition.Column - 1;
             var end = cellPosition.Column + 1;
 
-            if (start >= 0) neighbourCount.IncrementIfAlive(_cells[start].State);
-            if (end < _cells.Count) neighbourCount.IncrementIfAlive(_cells[end].State);
+            if (start >= 0) neighbourCount.IncrementIfAlive(_cells[start]);
+            if (end < CellsCount) neighbourCount.IncrementIfAlive(_cells[end]);
 
-            return new LiveNeighbourCount(_cells[cellPosition.Column].State, neighbourCount);
+            return new LiveNeighbourCount(_cells[cellPosition.Column], neighbourCount);
         }
 
         public EqualityState Equals(Row rowToCompare)
@@ -65,7 +67,7 @@
             var index = 0;
             var isEqual = true;
 
-            while (index < _cells.Count && isEqual)
+            while (index < CellsCount && isEqual)
             {
                 isEqual = _cells[index].Equals(rowToCompare._cells[index]) == EqualityState.IsEqual;
                 index++;
@@ -76,7 +78,7 @@
 
         private void PadWithEmptyCells(Row rowWithTargetSize)
         {
-            while (_cells.Count < rowWithTargetSize._cells.Count)
+            while (CellsCount < rowWithTargetSize.CellsCount)
             {
                 _cells.Add(new(CellState.Dead));
             }
