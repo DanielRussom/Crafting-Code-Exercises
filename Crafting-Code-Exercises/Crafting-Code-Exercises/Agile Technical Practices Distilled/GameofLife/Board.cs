@@ -14,6 +14,7 @@
         public void Tick()
         {
             var newRows = new List<Row>();
+            _rows.Add(new Row(new List<Cell> {new (CellState.Dead), new(CellState.Dead), new(CellState.Dead)}));
 
             for (var rowLoopCounter = 0; rowLoopCounter < RowCount; rowLoopCounter++)
             {
