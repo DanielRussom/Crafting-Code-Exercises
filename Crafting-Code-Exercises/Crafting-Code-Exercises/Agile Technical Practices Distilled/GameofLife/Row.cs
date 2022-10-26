@@ -6,6 +6,11 @@
 
         private int CellsCount => _cells.Count;
 
+        public Row()
+        {
+            _cells = new List<Cell> { new(CellState.Dead), new(CellState.Dead), new(CellState.Dead) };
+        }
+
         public Row(List<Cell> cells)
         {
             _cells = cells;
@@ -98,6 +103,11 @@
         public void RemoveDeadColumn()
         {
             _cells.RemoveAt(0);
+        }
+
+        public bool IsDead()
+        {
+            return _cells.All(cell => !cell.IsAlive());
         }
     }
 }

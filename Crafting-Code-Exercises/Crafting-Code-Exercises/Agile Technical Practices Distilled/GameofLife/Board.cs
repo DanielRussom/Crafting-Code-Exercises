@@ -34,7 +34,7 @@
 
         private void RemoveDeadRowFromTheTop()
         {
-            if (_rows[0].Equals(new(new List<Cell> { new(CellState.Dead), new(CellState.Dead), new(CellState.Dead) })) == EqualityState.IsEqual)
+            if (_rows[0].IsDead())
             {
                 _rows.RemoveAt(0);
             }
@@ -57,8 +57,8 @@
 
         private void AddDeadRows()
         {
-            _rows.Insert(0, new Row(new List<Cell> { new(CellState.Dead), new(CellState.Dead), new(CellState.Dead) }));
-            _rows.Add(new Row(new List<Cell> { new(CellState.Dead), new(CellState.Dead), new(CellState.Dead) }));
+            _rows.Insert(0, new());
+            _rows.Add(new());
         }
 
         private Row GetRowAtPosition(RowPosition position)
