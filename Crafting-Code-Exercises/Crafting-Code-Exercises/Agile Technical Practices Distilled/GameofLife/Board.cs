@@ -14,8 +14,8 @@
         public void Tick()
         {
             var newRows = new List<Row>();
-            AddBlankRows();
-            AddBlankColumn(); // matt King 26/10/22 - when in refactor stage rename this and use dead instead of blank.
+            AddDeadRows();
+            AddDeadColumnToTheLeft();
 
             for (var rowLoopCounter = 0; rowLoopCounter < RowCount; rowLoopCounter++)
             {
@@ -28,11 +28,11 @@
             }
 
             _rows = newRows;
-            RemoveBlankColumn();
-            RemoveBlankRowFromTheTop();
+            RemoveDeadColumnFromTheLeft();
+            RemoveDeadRowFromTheTop();
         }
 
-        private void RemoveBlankRowFromTheTop()
+        private void RemoveDeadRowFromTheTop()
         {
             if (_rows[0].Equals(new(new List<Cell> { new(CellState.Dead), new(CellState.Dead), new(CellState.Dead) })) == EqualityState.IsEqual)
             {
@@ -40,22 +40,22 @@
             }
         }
 
-        private void RemoveBlankColumn()
+        private void RemoveDeadColumnFromTheLeft()
         {
-            var isFirstColumnCompletelyBlank = _rows.All(row => row.IsFirstColumnDead());
+            var isFirstColumnCompletelyDead = _rows.All(row => row.IsFirstColumnDead());
 
-            if (isFirstColumnCompletelyBlank)
+            if (isFirstColumnCompletelyDead)
             {
-                _rows.ForEach(row => row.RemoveBlankColumn());
+                _rows.ForEach(row => row.RemoveDeadColumn());
             }
         }
 
-        private void AddBlankColumn()
+        private void AddDeadColumnToTheLeft()
         {
-            _rows.ForEach(row => row.AddBlankColumn());
+            _rows.ForEach(row => row.AddDeadColumn());
         }
 
-        private void AddBlankRows()
+        private void AddDeadRows()
         {
             _rows.Insert(0, new Row(new List<Cell> { new(CellState.Dead), new(CellState.Dead), new(CellState.Dead) }));
             _rows.Add(new Row(new List<Cell> { new(CellState.Dead), new(CellState.Dead), new(CellState.Dead) }));
