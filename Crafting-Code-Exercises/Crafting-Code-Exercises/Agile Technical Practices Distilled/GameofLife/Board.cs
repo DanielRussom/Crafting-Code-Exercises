@@ -15,6 +15,7 @@
         {
             var newRows = new List<Row>();
             AddBlankRow();
+            AddBlankColumn();
 
             for (var rowLoopCounter = 0; rowLoopCounter < RowCount; rowLoopCounter++)
             {
@@ -27,6 +28,22 @@
             }
 
             _rows = newRows;
+            RemoveBlankColumn();
+        }
+
+        private void RemoveBlankColumn()
+        {
+            var isFirstColumnCompletelyBlank = _rows.All(row => row.IsFirstColumnDead());
+
+            if (isFirstColumnCompletelyBlank)
+            {
+                _rows.ForEach(row => row.RemoveBlankColumn());
+            }
+        }
+
+        private void AddBlankColumn()
+        {
+            _rows.ForEach(row => row.AddBlankColumn());
         }
 
         private void AddBlankRow()

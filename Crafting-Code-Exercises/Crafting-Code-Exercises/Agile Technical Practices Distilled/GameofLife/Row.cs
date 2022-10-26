@@ -84,5 +84,20 @@
                 _cells.Add(new(CellState.Dead));
             }
         }
+
+        public void AddBlankColumn()
+        {
+            _cells.Insert(0, new(CellState.Dead));
+        }
+
+        public bool IsFirstColumnDead()
+        {
+            return !_cells.First().IsAlive();
+        }
+
+        public void RemoveBlankColumn()
+        {
+            _cells.RemoveAt(0);
+        }
     }
 }
