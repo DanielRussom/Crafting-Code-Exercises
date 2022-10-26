@@ -14,6 +14,7 @@
         public Row Tick(RowPosition rowPosition, NeighbouringRows neighbouringRows)
         {
             var newCellsRow = new List<Cell>();
+            _cells.Add(new(CellState.Dead));
 
             for (var columnLoopCounter = 0; columnLoopCounter < CellsCount; columnLoopCounter++)
             {
