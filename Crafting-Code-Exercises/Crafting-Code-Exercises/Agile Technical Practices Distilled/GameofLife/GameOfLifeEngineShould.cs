@@ -747,9 +747,9 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
-        // Row 1 // [ X  ] vs [   ] - IsEqual after one tick
-        // Row 2 // [ X  ]    [XXX]
-        // Row 3 // [ X  ]    [   ]
+        // Row 1 // [X  ] vs [   ] - IsEqual after one tick
+        // Row 2 // [X  ]    [XXX]
+        // Row 3 // [X  ]    [   ]
         [DataRow(new[] { CellState.Alive, CellState.Dead, CellState.Dead, }, new[] { CellState.Dead, CellState.Dead, CellState.Dead },
             new[] { CellState.Alive, CellState.Dead, CellState.Dead }, new[] { CellState.Alive, CellState.Alive, CellState.Alive },
             new[] { CellState.Alive, CellState.Dead, CellState.Dead }, new[] { CellState.Dead, CellState.Dead, CellState.Dead },
@@ -823,5 +823,7 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
+         you are here - about to add a four by four grid expanding upwards and maybe downwards to see if we can 
+         break the code that currently considers a dead row as being 3 cells.
     }
 }
