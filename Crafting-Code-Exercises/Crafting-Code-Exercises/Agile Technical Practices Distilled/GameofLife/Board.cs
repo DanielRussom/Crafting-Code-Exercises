@@ -14,8 +14,8 @@
         public void Tick()
         {
             var newRows = new List<Row>();
-            AddBlankRow();
-            AddBlankColumn();
+            AddBlankRows();
+            AddBlankColumn(); // matt King 26/10/22 - when in refactor stage rename this and use dead instead of blank.
 
             for (var rowLoopCounter = 0; rowLoopCounter < RowCount; rowLoopCounter++)
             {
@@ -29,6 +29,15 @@
 
             _rows = newRows;
             RemoveBlankColumn();
+            RemoveBlankRowFromTheTop();
+        }
+
+        private void RemoveBlankRowFromTheTop()
+        {
+            if (_rows[0].Equals(new(new List<Cell> { new(CellState.Dead), new(CellState.Dead), new(CellState.Dead) })) == EqualityState.IsEqual)
+            {
+                _rows.RemoveAt(0);
+            }
         }
 
         private void RemoveBlankColumn()
@@ -46,8 +55,9 @@
             _rows.ForEach(row => row.AddBlankColumn());
         }
 
-        private void AddBlankRow()
+        private void AddBlankRows()
         {
+            _rows.Insert(0, new Row(new List<Cell> { new(CellState.Dead), new(CellState.Dead), new(CellState.Dead) }));
             _rows.Add(new Row(new List<Cell> { new(CellState.Dead), new(CellState.Dead), new(CellState.Dead) }));
         }
 
