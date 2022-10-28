@@ -823,7 +823,162 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
         }
 
-         you are here - about to add a four by four grid expanding upwards and maybe downwards to see if we can 
-         break the code that currently considers a dead row as being 3 cells.
+        // Row 0 //           [ X ]
+        // Row 1 // [ XXX]    [ X ]
+        // Row 2 // [    ] vs [ X ] - IsEqual after one tick
+        // Row 3 // [    ]    [   ]
+
+        [DataRow(                                                                new[] { CellState.Dead, CellState.Alive, CellState.Dead },
+            new[] { CellState.Dead, CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Dead, CellState.Alive, CellState.Dead },
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Dead, CellState.Alive, CellState.Dead },
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Dead, CellState.Dead, CellState.Dead },
+            EqualityState.IsEqual, DisplayName = "ApplyExpansionRuleComparingAfterOneTickTo4By3BoardExpandingUpwards 1")]
+
+        // Row 0 //           [ XX]
+        // Row 1 // [XXXX]    [ XX]
+        // Row 2 // [    ] vs [ XX] - IsEqual after one tick
+        // Row 3 // [    ]    [   ]
+
+        [DataRow(                                                                 new[] { CellState.Dead, CellState.Alive, CellState.Alive },
+            new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Dead, CellState.Alive, CellState.Alive },
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Dead, CellState.Alive, CellState.Alive },
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Dead, CellState.Dead, CellState.Dead },
+            EqualityState.IsEqual, DisplayName = "ApplyExpansionRuleComparingAfterOneTickTo4By3BoardExpandingUpwards 1")]
+
+        [TestMethod]
+        public void ApplyExpansionRuleComparingAfterOneTickTo4By3BoardExpandingUpwards(
+
+                                      CellState[] boardToCompareRow0,
+            CellState[] row1SeedData, CellState[] boardToCompareRow1,
+            CellState[] row2SeedData, CellState[] boardToCompareRow2,
+            CellState[] row3SeedData, CellState[] boardToCompareRow3,
+                                      EqualityState expectedEqualityState)
+        {
+            var seed = new Board(new List<Row>
+            {
+                new(row1SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row2SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row3SeedData.Select(cellState => new Cell(cellState)).ToList())
+            });
+
+            var boardToCompare = new Board(new List<Row>
+            {
+                new(boardToCompareRow0.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow1.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow2.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow3.Select(cellState => new Cell(cellState)).ToList()),
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+            gameOfLifeEngine.Tick();
+
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
+        }
+
+        // Row 0 // [X  X]    [      ]
+        // Row 1 // [X  X]    [XXXXXX]
+        // Row 2 // [X  X] vs [XXXXXX] - IsEqual after one tick
+        // Row 3 // [X  X]    [      ]
+        
+        [DataRow(new[] { CellState.Alive, CellState.Dead, CellState.Dead, CellState.Alive }, new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead },
+            new[] { CellState.Alive, CellState.Dead, CellState.Dead, CellState.Alive }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Alive, CellState.Dead, CellState.Dead, CellState.Alive }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Alive, CellState.Dead, CellState.Dead, CellState.Alive }, new[] { CellState.Dead } ,
+            EqualityState.IsEqual, DisplayName = "ApplyExpansionRuleComparingAfterOneTickOn4By4BoardExpandingLeftAndRight 1")]
+        
+        [TestMethod]
+        public void ApplyExpansionRuleComparingAfterOneTickOn4By4BoardExpandingLeftAndRight(
+        
+            CellState[] row0SeedData, CellState[] boardToCompareRow0,
+            CellState[] row1SeedData, CellState[] boardToCompareRow1,
+            CellState[] row2SeedData, CellState[] boardToCompareRow2,
+            CellState[] row3SeedData, CellState[] boardToCompareRow3,
+                                      EqualityState expectedEqualityState)
+        {
+            var seed = new Board(new List<Row>
+            {
+                new(row0SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row1SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row2SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row3SeedData.Select(cellState => new Cell(cellState)).ToList())
+            });
+        
+            var boardToCompare = new Board(new List<Row>
+            {
+                new(boardToCompareRow0.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow1.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow2.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow3.Select(cellState => new Cell(cellState)).ToList()),
+            });
+        
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+            gameOfLifeEngine.Tick();
+        
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
+        }
+
+        // Row 0 //           [ XX ]
+        // Row 1 // [XXXX]    [ XX ]
+        // Row 2 // [    ]    [ XX ]
+        // Row 3 // [    ] vs [ XX ] - IsEqual after one tick
+        // Row 4 // [XXXX]    [ XX ]
+        // Row 5 //           [ XX ]
+        [DataRow(                                                                               new[] { CellState.Dead, CellState.Alive, CellState.Alive, CellState.Dead },
+            new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Dead, CellState.Alive, CellState.Alive, CellState.Dead },
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Dead, CellState.Alive, CellState.Alive, CellState.Dead },
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Dead, CellState.Alive, CellState.Alive, CellState.Dead },
+            new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Dead, CellState.Alive, CellState.Alive, CellState.Dead },
+                                                                                          new[] { CellState.Dead, CellState.Alive, CellState.Alive, CellState.Dead },
+            EqualityState.IsEqual, DisplayName = "ApplyExpansionRuleComparingAfterOneTickOn4By4BoardExpandingUpwardsAndDownwards 1")]
+
+        // Row 0 //             [XXXXXX]
+        // Row 1 // [XXXXXXXX]  [XXXXXX]
+        // Row 2 // [    ]      [XXXXXX]
+        // Row 3 // [    ] vs   [XXXXXX] - IsEqual after one tick
+        // Row 4 // [XXXXXXXX]  [XXXXXX]
+        // Row 5 //             [XXXXXX]
+
+        [DataRow(                                                                                                                                                     new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[]  { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+                                                                                                                                                              new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            EqualityState.IsEqual, DisplayName = "ApplyExpansionRuleComparingAfterOneTickOnForcingUsToChangeOurPaddingOfADeadRowToMoreThanThreeCells 1")]
+
+
+        [TestMethod]
+        public void ApplyExpansionRuleComparingAfterOneTickExpandingUpwardsAndDownwards(
+                                      CellState[] boardToCompareRow0,
+            CellState[] row1SeedData, CellState[] boardToCompareRow1,
+            CellState[] row2SeedData, CellState[] boardToCompareRow2,
+            CellState[] row3SeedData, CellState[] boardToCompareRow3,
+            CellState[] row4SeedData, CellState[] boardToCompareRow4,
+                                      CellState[] boardToCompareRow5,
+                                      EqualityState expectedEqualityState)
+        {
+            var seed = new Board(new List<Row>
+            {
+                new(row1SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row2SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row3SeedData.Select(cellState => new Cell(cellState)).ToList()),
+                new(row4SeedData.Select(cellState => new Cell(cellState)).ToList())
+            });
+
+            var boardToCompare = new Board(new List<Row>
+            {
+                new(boardToCompareRow0.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow1.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow2.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow3.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow4.Select(cellState => new Cell(cellState)).ToList()),
+                new(boardToCompareRow5.Select(cellState => new Cell(cellState)).ToList()),
+            });
+
+            var gameOfLifeEngine = new GameOfLifeEngine(seed);
+            gameOfLifeEngine.Tick();
+
+            Assert.AreEqual(expectedEqualityState, gameOfLifeEngine.BoardIsEqualTo(boardToCompare));
+        }
     }
 }

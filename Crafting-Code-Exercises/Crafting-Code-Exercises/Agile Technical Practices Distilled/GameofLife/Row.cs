@@ -97,11 +97,20 @@
 
         public bool IsFirstColumnDead()
         {
+            if (_cells.Count == 0) return true;
+
             return !_cells.First().IsAlive();
+        }
+
+        public bool IsRowEmpty()
+        {
+            return _cells.Count == 0;
         }
 
         public void RemoveDeadColumn()
         {
+            if (!_cells.Any()) return;
+
             _cells.RemoveAt(0);
         }
 

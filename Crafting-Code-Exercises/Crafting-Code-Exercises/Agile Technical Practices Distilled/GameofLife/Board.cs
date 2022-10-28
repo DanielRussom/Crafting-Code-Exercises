@@ -27,8 +27,11 @@
                 newRows.Add(newRow);
             }
 
+            you are here - changing the logic that adds a new row into which expansion can occur as at the moment we only create a 3 cell row.
+            // Dan would like to see ths tate of rows on line 33 for the failing test
+
             _rows = newRows;
-            RemoveDeadColumnFromTheLeft();
+            RemoveDeadColumnsFromTheLeft();
             RemoveDeadRowFromTheTop();
         }
 
@@ -40,13 +43,14 @@
             }
         }
 
-        private void RemoveDeadColumnFromTheLeft()
+        private void RemoveDeadColumnsFromTheLeft()
         {
-            var isFirstColumnCompletelyDead = _rows.All(row => row.IsFirstColumnDead());
+            var populatedRows = _rows.Where(row => !row.IsRowEmpty()).ToList();
 
-            if (isFirstColumnCompletelyDead)
+            while (populatedRows.Any() && populatedRows.All(row => row.IsFirstColumnDead()))
             {
                 _rows.ForEach(row => row.RemoveDeadColumn());
+                populatedRows = _rows.Where(row => !row.IsRowEmpty()).ToList();
             }
         }
 
@@ -79,6 +83,9 @@
         {
             PadWithEmptyRows(boardToCompare);
             boardToCompare.PadWithEmptyRows(this);
+
+            RemoveDeadColumnsFromTheLeft();
+            boardToCompare.RemoveDeadColumnsFromTheLeft();
 
             var index = 0;
             var isEqual = true;
