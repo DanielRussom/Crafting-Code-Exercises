@@ -23,6 +23,7 @@
         public Row Tick(RowPosition rowPosition, NeighbouringRows neighbouringRows)
         {
             var newCellsRow = new List<Cell>();
+            neighbouringRows.PadRowWithEmptyCells(this);
             _cells.Add(new(CellState.Dead));
 
             for (var columnLoopCounter = 0; columnLoopCounter < CellsCount; columnLoopCounter++)
@@ -86,7 +87,7 @@
             return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
         }
 
-        private void PadWithEmptyCells(Row rowWithTargetSize)
+        internal void PadWithEmptyCells(Row rowWithTargetSize)
         {
             while (CellsCount < rowWithTargetSize.CellsCount)
             {

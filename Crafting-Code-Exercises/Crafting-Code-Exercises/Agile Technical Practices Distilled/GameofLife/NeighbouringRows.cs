@@ -17,5 +17,11 @@
             neighbourCount.IncrementBy(_rowBelow.GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
             return neighbourCount;
         }
+
+        internal void PadRowWithEmptyCells(Row rowToBePadded)
+        {
+            rowToBePadded.PadWithEmptyCells(_rowAbove);
+            rowToBePadded.PadWithEmptyCells(_rowBelow);
+        }
     }
 }
