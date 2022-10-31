@@ -26,10 +26,7 @@
                 var newRow = _rows[rowLoopCounter].Tick(new (rowLoopCounter), neighbouringRows);
                 newRows.Add(newRow);
             }
-
-            you are here - changing the logic that adds a new row into which expansion can occur as at the moment we only create a 3 cell row.
-            // Dan would like to see ths tate of rows on line 33 for the failing test
-
+            
             _rows = newRows;
             RemoveDeadColumnsFromTheLeft();
             RemoveDeadRowFromTheTop();
@@ -61,8 +58,9 @@
 
         private void AddDeadRows()
         {
-            _rows.Insert(0, new());
-            _rows.Add(new());
+            if (_rows.Count == 0) return;
+            _rows.Insert(0, new(_rows.First()));
+            _rows.Add(new(_rows.Last()));
         }
 
         private Row GetRowAtPosition(RowPosition position)

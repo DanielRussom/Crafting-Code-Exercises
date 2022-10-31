@@ -6,9 +6,13 @@
 
         private int CellsCount => _cells.Count;
 
-        public Row()
+        public Row(Row rowToAlignWith)
         {
-            _cells = new List<Cell> { new(CellState.Dead), new(CellState.Dead), new(CellState.Dead) };
+            _cells = new List<Cell>();
+            for (var loopCounter = 1; loopCounter <= rowToAlignWith.CellsCount; loopCounter++)
+            {
+                _cells.Add(new(CellState.Dead));
+            }
         }
 
         public Row(List<Cell> cells)

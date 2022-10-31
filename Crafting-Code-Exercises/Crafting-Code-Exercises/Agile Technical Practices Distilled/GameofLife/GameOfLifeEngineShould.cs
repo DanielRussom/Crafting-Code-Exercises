@@ -931,20 +931,35 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
                                                                                           new[] { CellState.Dead, CellState.Alive, CellState.Alive, CellState.Dead },
             EqualityState.IsEqual, DisplayName = "ApplyExpansionRuleComparingAfterOneTickOn4By4BoardExpandingUpwardsAndDownwards 1")]
 
-        // Row 0 //             [XXXXXX]
-        // Row 1 // [XXXXXXXX]  [XXXXXX]
-        // Row 2 // [    ]      [XXXXXX]
-        // Row 3 // [    ] vs   [XXXXXX] - IsEqual after one tick
-        // Row 4 // [XXXXXXXX]  [XXXXXX]
-        // Row 5 //             [XXXXXX]
+        // Row 0 //               [XXXXXX]
+        // Row 1 // [XXXXXXXX]    [XXXXXX]
+        // Row 2 // [        ]    [XXXXXX]
+        // Row 3 // [        ] vs [XXXXXX] - IsEqual after one tick
+        // Row 4 // [XXXXXXXX]    [XXXXXX]
+        // Row 5 //               [XXXXXX]
 
         [DataRow(                                                                                                                                                     new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
             new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
-            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[]  { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
-            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[]  { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
             new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
                                                                                                                                                               new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
             EqualityState.IsEqual, DisplayName = "ApplyExpansionRuleComparingAfterOneTickOnForcingUsToChangeOurPaddingOfADeadRowToMoreThanThreeCells 1")]
+
+        // Row 0 //               [XXXXXX]
+        // Row 1 // [XXXXXXXX]    [XXXXXX]
+        // Row 2 // [    ]        [XXXXXX]
+        // Row 3 // [    ]     vs [XXXXXX] - IsEqual after one tick
+        // Row 4 // [XXXXXXXX]    [XXXXXX]
+        // Row 5 //               [XXXXXX]
+
+        [DataRow(new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Dead, CellState.Dead, CellState.Dead, CellState.Dead }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            new[] { CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive, CellState.Alive },
+            EqualityState.IsEqual, DisplayName = "ApplyExpansionRuleComparingAfterOneTickOnForcingUsToChangeOurPaddingOfADeadRowToMoreThanThreeCells 2")]
 
 
         [TestMethod]
