@@ -29,7 +29,13 @@
             
             _rows = newRows;
             RemoveDeadColumnsFromTheLeft();
+            RemoveDeadRows();
+        }
+
+        private void RemoveDeadRows()
+        {
             RemoveDeadRowFromTheTop();
+            RemoveDeadRowFromTheBottom();
         }
 
         private void RemoveDeadRowFromTheTop()
@@ -37,6 +43,14 @@
             while (_rows.Any() && _rows[0].IsDead())
             {
                 _rows.RemoveAt(0);
+            }
+        }
+
+        private void RemoveDeadRowFromTheBottom()
+        {
+            while (_rows.Any() && _rows[^1].IsDead())
+            {
+                _rows.RemoveAt(_rows.Count - 1);
             }
         }
 

@@ -1069,6 +1069,14 @@ namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
             new[] { CellState.Dead, CellState.Dead, CellState.Alive }, new[] { CellState.Dead, CellState.Alive, CellState.Alive },
             new[] { CellState.Alive, CellState.Alive, CellState.Alive }, new[] { CellState.Alive, CellState.Alive, CellState.Dead }, 
             EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterThreeTick 1")]
+        
+        // Row 1 // [XXX] vs [ XX] - IsEqual after one tick
+        // Row 2 // [X  ]    [XX ]
+        // Row 3 // [ X ]    [  X]
+        [DataRow(new[] { CellState.Alive, CellState.Alive, CellState.Alive, }, new[] { CellState.Dead, CellState.Alive, CellState.Alive },
+            new[] { CellState.Alive, CellState.Dead, CellState.Dead }, new[] { CellState.Alive, CellState.Alive, CellState.Dead },
+            new[] { CellState.Dead, CellState.Alive, CellState.Dead }, new[] { CellState.Dead, CellState.Dead, CellState.Alive },
+            EqualityState.IsEqual, DisplayName = "ApplySurvivalRuleTo3By3SeedComparingAfterThreeTick 2")]
 
         [TestMethod]
         public void ApplySurvivalRuleTo3By3SeedComparingAfterThreeTick(CellState[] row1SeedData, CellState[] boardToCompareRow1,
