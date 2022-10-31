@@ -24,7 +24,7 @@
         {
             var newCellsRow = new List<Cell>();
             neighbouringRows.PadRowWithEmptyCells(this);
-            _cells.Add(new(CellState.Dead));
+            if (_cells.Last().IsAlive()) _cells.Add(new(CellState.Dead));
 
             for (var columnLoopCounter = 0; columnLoopCounter < CellsCount; columnLoopCounter++)
             {

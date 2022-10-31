@@ -34,7 +34,7 @@
 
         private void RemoveDeadRowFromTheTop()
         {
-            if (_rows[0].IsDead())
+            while (_rows.Any() && _rows[0].IsDead())
             {
                 _rows.RemoveAt(0);
             }
