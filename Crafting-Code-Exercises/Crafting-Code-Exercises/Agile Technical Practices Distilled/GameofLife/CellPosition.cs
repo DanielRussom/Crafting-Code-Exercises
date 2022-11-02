@@ -5,10 +5,10 @@
         public CellPosition(int row, int column)
         {
             Row = new (row);
-            Column = column;
+            Column = new(column);
         }
 
-        internal int Column { get; }
+        internal ColumnPosition Column { get; }
         internal RowPosition Row { get; }
     }
 }

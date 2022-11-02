@@ -20,7 +20,7 @@
             _cells = cells;
         }
 
-        public Row Tick(RowPosition rowPosition, NeighbouringRows neighbouringRows)
+        public Row Tick(NeighbouringRows neighbouringRows)
         {
             var newCellsRow = new List<Cell>();
             neighbouringRows.PadRowWithEmptyCells(this);
@@ -28,24 +28,24 @@
 
             for (var columnLoopCounter = 0; columnLoopCounter < CellsCount; columnLoopCounter++)
             {
-                newCellsRow.Add(GetCellStateUsingNeighbours(new CellPosition(rowPosition.Value, columnLoopCounter), neighbouringRows));
+                newCellsRow.Add(GetCellStateUsingNeighbours(new ColumnPosition(columnLoopCounter), neighbouringRows));
             }
 
             return new(newCellsRow);
         }
 
-        internal Cell GetCellStateUsingNeighbours(CellPosition cellPosition, NeighbouringRows neighbouringRows)
+        internal Cell GetCellStateUsingNeighbours(ColumnPosition columnPosition, NeighbouringRows neighbouringRows)
         {
-            var neighbourCount = GetNumberOfLiveNeighboursForContainingRow(cellPosition);
-            neighbourCount.IncrementBy(neighbouringRows.GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
+            var neighbourCount = GetNumberOfLiveNeighboursForContainingRow(columnPosition);
+            neighbourCount.IncrementBy(neighbouringRows.GetNumberOfLiveNeighboursForBorderingRow(columnPosition));
             return new Cell(neighbourCount.GetPopulationState());
         }
 
-        public LiveNeighbourCount GetNumberOfLiveNeighboursForBorderingRow(CellPosition cellPosition)
+        public LiveNeighbourCount GetNumberOfLiveNeighboursForBorderingRow(ColumnPosition columnPosition)
         {
             var neighbourCount = new LiveNeighbourCount(0);
-            var loopStart = cellPosition.Column - 1;
-            var loopEnd = cellPosition.Column + 1;
+            var loopStart = columnPosition.Value - 1;
+            var loopEnd = columnPosition.Value + 1;
 
             if (loopStart < 0) loopStart = 0;
             if (loopEnd >= CellsCount) loopEnd = CellsCount - 1;
@@ -58,16 +58,16 @@
             return neighbourCount;
         }
 
-        public LiveNeighbourCount GetNumberOfLiveNeighboursForContainingRow(CellPosition cellPosition)
+        public LiveNeighbourCount GetNumberOfLiveNeighboursForContainingRow(ColumnPosition columnPosition)
         {
             var neighbourCount = new LiveNeighbourCount(0);
-            var start = cellPosition.Column - 1;
-            var end = cellPosition.Column + 1;
+            var start = columnPosition.Value - 1;
+            var end = columnPosition.Value + 1;
 
             if (start >= 0) neighbourCount.IncrementIfAlive(_cells[start]);
             if (end < CellsCount) neighbourCount.IncrementIfAlive(_cells[end]);
 
-            return new LiveNeighbourCount(_cells[cellPosition.Column], neighbourCount);
+            return new LiveNeighbourCount(_cells[columnPosition.Value], neighbourCount);
         }
 
         public EqualityState Equals(Row rowToCompare)

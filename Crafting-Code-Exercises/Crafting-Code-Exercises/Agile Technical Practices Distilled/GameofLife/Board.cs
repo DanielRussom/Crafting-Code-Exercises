@@ -13,23 +13,33 @@
 
         public void Tick()
         {
-            var newRows = new List<Row>();
             AddDeadRows();
             AddDeadColumnToTheLeft();
-
-            for (var rowLoopCounter = 0; rowLoopCounter < RowCount; rowLoopCounter++)
-            {
-                var rowAbove = GetRowAtPosition(new(rowLoopCounter - 1));
-                var rowBelow = GetRowAtPosition(new(rowLoopCounter + 1));
-
-                var neighbouringRows = new NeighbouringRows(rowAbove, rowBelow);
-                var newRow = _rows[rowLoopCounter].Tick(new (rowLoopCounter), neighbouringRows);
-                newRows.Add(newRow);
-            }
-            
-            _rows = newRows;
+            UpdateBoard();
             RemoveDeadColumnsFromTheLeft();
             RemoveDeadRows();
+        }
+
+        private void UpdateBoard()
+        {
+            var newRows = new List<Row>();
+            for (var rowIndex = 0; rowIndex < RowCount; rowIndex++)
+            {
+                var neighbouringRows = BuildNeighbouringRows(rowIndex);
+                var newRow = _rows[rowIndex].Tick(neighbouringRows);
+                newRows.Add(newRow);
+            }
+
+            _rows = newRows;
+        }
+
+        private NeighbouringRows BuildNeighbouringRows(int rowIndex)
+        {
+            var rowAbove = GetRowAtPosition(new(rowIndex - 1));
+            var rowBelow = GetRowAtPosition(new(rowIndex + 1));
+
+            var neighbouringRows = new NeighbouringRows(rowAbove, rowBelow);
+            return neighbouringRows;
         }
 
         private void RemoveDeadRows()

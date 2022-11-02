@@ -11,10 +11,10 @@
             _rowBelow = rowBelow;
         }
 
-        internal LiveNeighbourCount GetNumberOfLiveNeighboursForBorderingRow(CellPosition cellPosition)
+        internal LiveNeighbourCount GetNumberOfLiveNeighboursForBorderingRow(ColumnPosition columnPosition)
         {
-            var neighbourCount = _rowAbove.GetNumberOfLiveNeighboursForBorderingRow(cellPosition);
-            neighbourCount.IncrementBy(_rowBelow.GetNumberOfLiveNeighboursForBorderingRow(cellPosition));
+            var neighbourCount = _rowAbove.GetNumberOfLiveNeighboursForBorderingRow(columnPosition);
+            neighbourCount.IncrementBy(_rowBelow.GetNumberOfLiveNeighboursForBorderingRow(columnPosition));
             return neighbourCount;
         }
 
