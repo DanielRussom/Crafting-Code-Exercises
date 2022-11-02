@@ -125,22 +125,37 @@
 
         public bool Equals(Board boardToCompare)
         {
-            PadWithEmptyRows(boardToCompare);
-            boardToCompare.PadWithEmptyRows(this);
-
-            RemoveDeadColumnsFromTheLeft();
-            boardToCompare.RemoveDeadColumnsFromTheLeft();
+            AlignBoardDimensions(boardToCompare);
 
             var index = 0;
             var isEqual = true;
 
             while (index < RowCount && isEqual)
             {
-                isEqual &= _rows[index].Equals(boardToCompare._rows[index]);
+                isEqual &= CompareRows(boardToCompare, index);
                 index++;
             }
 
             return isEqual;
+        }
+
+         You are here - about to re-order the methods and Look to split up this class.
+
+        private bool CompareRows(Board boardToCompare, int index)
+        {
+            var row = _rows[index];
+            var rowToCompare = boardToCompare._rows[index];
+            
+            return row.Equals(rowToCompare);
+        }
+
+        private void AlignBoardDimensions(Board boardToCompare)
+        {
+            PadWithEmptyRows(boardToCompare);
+            boardToCompare.PadWithEmptyRows(this);
+
+            RemoveDeadColumnsFromTheLeft();
+            boardToCompare.RemoveDeadColumnsFromTheLeft();
         }
     }
 }
