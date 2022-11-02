@@ -44,8 +44,8 @@
         public LiveNeighbourCount GetNumberOfLiveNeighboursForBorderingRow(ColumnPosition columnPosition)
         {
             var neighbourCount = new LiveNeighbourCount(0);
-            var loopStart = columnPosition.Value - 1;
-            var loopEnd = columnPosition.Value + 1;
+            var loopStart = columnPosition.PositionToTheLeft;
+            var loopEnd = columnPosition.PositionToTheRight;
 
             if (loopStart < 0) loopStart = 0;
             if (loopEnd >= CellsCount) loopEnd = CellsCount - 1;
@@ -61,13 +61,11 @@
         public LiveNeighbourCount GetNumberOfLiveNeighboursForContainingRow(ColumnPosition columnPosition)
         {
             var neighbourCount = new LiveNeighbourCount(0);
-            var start = columnPosition.Value - 1;
-            var end = columnPosition.Value + 1;
 
-            if (start >= 0) neighbourCount.IncrementIfAlive(_cells[start]);
-            if (end < CellsCount) neighbourCount.IncrementIfAlive(_cells[end]);
+            if (columnPosition.PositionToTheLeft >= 0) neighbourCount.IncrementIfAlive(_cells[columnPosition.PositionToTheLeft]);
+            if (columnPosition.PositionToTheRight < CellsCount) neighbourCount.IncrementIfAlive(_cells[columnPosition.PositionToTheRight]);
 
-            return new LiveNeighbourCount(_cells[columnPosition.Value], neighbourCount);
+            return new LiveNeighbourCount(_cells[columnPosition.Position], neighbourCount);
         }
 
         public EqualityState Equals(Row rowToCompare)

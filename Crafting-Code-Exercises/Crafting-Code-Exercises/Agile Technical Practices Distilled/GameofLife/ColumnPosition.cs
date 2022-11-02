@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
+﻿namespace Crafting_Code_Exercises.Agile_Technical_Practices_Distilled.GameofLife
 {
     public class ColumnPosition
     {
-        public int Value { get; }
+        public int Position { get; }
 
-        internal ColumnPosition(int value)
+        public int PositionToTheLeft => Position - 1;
+        public int PositionToTheRight => Position + 1;
+
+        internal ColumnPosition(int position)
         {
-            Value = value;
+            Position = position;
         }
     }
 }
