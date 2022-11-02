@@ -2,11 +2,13 @@
 {
     public class RowPosition
     {
-        public int Value { get; }
-
-        internal RowPosition(int value)
+        public int Position { get; }
+        public RowPosition PositionAbove => new (Position - 1);
+        public RowPosition PositionBelow => new (Position + 1);
+        
+        internal RowPosition(int position)
         {
-            Value = value;
+            Position = position;
         }
     }
 }

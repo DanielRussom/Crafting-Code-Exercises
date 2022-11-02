@@ -6,13 +6,9 @@
 
         private int CellsCount => _cells.Count;
 
-        public Row(Row rowToAlignWith)
+        public Row()
         {
             _cells = new List<Cell>();
-            for (var loopCounter = 1; loopCounter <= rowToAlignWith.CellsCount; loopCounter++)
-            {
-                _cells.Add(new(CellState.Dead));
-            }
         }
 
         public Row(List<Cell> cells)
@@ -100,14 +96,14 @@
 
         public bool IsFirstColumnDead()
         {
-            if (_cells.Count == 0) return true;
+            if (CellsCount == 0) return true;
 
             return !_cells.First().IsAlive();
         }
 
-        public bool IsRowEmpty()
+        public bool IsPopulated()
         {
-            return _cells.Count == 0;
+            return CellsCount > 0;
         }
 
         public void RemoveDeadColumn()

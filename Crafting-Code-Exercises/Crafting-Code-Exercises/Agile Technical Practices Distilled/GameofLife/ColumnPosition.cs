@@ -3,7 +3,6 @@
     public class ColumnPosition
     {
         public int Position { get; }
-
         public int PositionToTheLeft => Position - 1;
         public int PositionToTheRight => Position + 1;
 

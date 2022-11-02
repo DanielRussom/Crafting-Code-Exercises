@@ -5,6 +5,9 @@
         private List<Row> _rows;
 
         private int RowCount => _rows.Count;
+        private bool RowsArePopulated => RowCount > 0;
+        private bool FirstRowIsDead => _rows[0].IsDead();
+        private bool LastRowIsDead => _rows[^1].IsDead();
 
         public Board(List<Row> rows)
         {
@@ -25,18 +28,23 @@
             var newRows = new List<Row>();
             for (var rowIndex = 0; rowIndex < RowCount; rowIndex++)
             {
-                var neighbouringRows = BuildNeighbouringRows(rowIndex);
-                var newRow = _rows[rowIndex].Tick(neighbouringRows);
-                newRows.Add(newRow);
+                newRows.Add(BuildNewRow(new RowPosition(rowIndex)));
             }
 
             _rows = newRows;
         }
 
-        private NeighbouringRows BuildNeighbouringRows(int rowIndex)
+        private Row BuildNewRow(RowPosition rowPosition)
         {
-            var rowAbove = GetRowAtPosition(new(rowIndex - 1));
-            var rowBelow = GetRowAtPosition(new(rowIndex + 1));
+            var neighbouringRows = BuildNeighbouringRows(rowPosition);
+            var newRow = _rows[rowPosition.Position].Tick(neighbouringRows);
+            return newRow;
+        }
+
+        private NeighbouringRows BuildNeighbouringRows(RowPosition rowPosition)
+        {
+            var rowAbove = GetRowAtPosition(rowPosition.PositionAbove);
+            var rowBelow = GetRowAtPosition(rowPosition.PositionBelow);
 
             var neighbouringRows = new NeighbouringRows(rowAbove, rowBelow);
             return neighbouringRows;
@@ -50,29 +58,43 @@
 
         private void RemoveDeadRowFromTheTop()
         {
-            while (_rows.Any() && _rows[0].IsDead())
+            while (RowsArePopulated && FirstRowIsDead)
             {
-                _rows.RemoveAt(0);
+                RemoveFirstRow();
+            }
+        }
+        private void RemoveDeadRowFromTheBottom()
+        {
+            while (RowsArePopulated && LastRowIsDead)
+            {
+                RemoveLastRow();
             }
         }
 
-        private void RemoveDeadRowFromTheBottom()
+        private void RemoveFirstRow()
         {
-            while (_rows.Any() && _rows[^1].IsDead())
-            {
-                _rows.RemoveAt(_rows.Count - 1);
-            }
+            _rows.RemoveAt(0);
+        }
+        
+        private void RemoveLastRow()
+        {
+            _rows.RemoveAt(RowCount - 1);
         }
 
         private void RemoveDeadColumnsFromTheLeft()
         {
-            var populatedRows = _rows.Where(row => !row.IsRowEmpty()).ToList();
+            var populatedRows = GetPopulatedRows();
 
             while (populatedRows.Any() && populatedRows.All(row => row.IsFirstColumnDead()))
             {
                 _rows.ForEach(row => row.RemoveDeadColumn());
-                populatedRows = _rows.Where(row => !row.IsRowEmpty()).ToList();
+                populatedRows = GetPopulatedRows();
             }
+        }
+
+        private List<Row> GetPopulatedRows()
+        {
+            return _rows.Where(row => row.IsPopulated()).ToList();
         }
 
         private void AddDeadColumnToTheLeft()
@@ -82,22 +104,22 @@
 
         private void AddDeadRows()
         {
-            if (_rows.Count == 0) return;
-            _rows.Insert(0, new(_rows.First()));
-            _rows.Add(new(_rows.Last()));
+            if (RowCount == 0) return;
+            _rows.Insert(0, new());
+            _rows.Add(new());
         }
 
         private Row GetRowAtPosition(RowPosition position)
         {
-            if (position.Value >= 0 && position.Value < RowCount) return _rows[position.Value];
-            return new Row(new List<Cell>());
+            if (position.Position >= 0 && position.Position < RowCount) return _rows[position.Position];
+            return new Row();
         }
 
         private void PadWithEmptyRows(Board boardWithTargetSize)
         {
             while (RowCount < boardWithTargetSize.RowCount)
             {
-                _rows.Add(new(new List<Cell>()));
+                _rows.Add(new());
             }
         }
 
