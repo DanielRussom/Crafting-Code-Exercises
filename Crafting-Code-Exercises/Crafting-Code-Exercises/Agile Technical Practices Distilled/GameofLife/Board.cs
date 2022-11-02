@@ -104,7 +104,7 @@
 
         private void AddDeadRows()
         {
-            if (RowCount == 0) return;
+            if (!RowsArePopulated) return;
             _rows.Insert(0, new());
             _rows.Add(new());
         }
@@ -123,7 +123,7 @@
             }
         }
 
-        public EqualityState Equals(Board boardToCompare)
+        public bool Equals(Board boardToCompare)
         {
             PadWithEmptyRows(boardToCompare);
             boardToCompare.PadWithEmptyRows(this);
@@ -136,11 +136,11 @@
 
             while (index < RowCount && isEqual)
             {
-                isEqual &= _rows[index].Equals(boardToCompare._rows[index]) == EqualityState.IsEqual;
+                isEqual &= _rows[index].Equals(boardToCompare._rows[index]);
                 index++;
             }
 
-            return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
+            return isEqual;
         }
     }
 }

@@ -14,9 +14,9 @@
             return _state == CellState.Alive;
         }
 
-        public EqualityState Equals(Cell other)
+        public bool Equals(Cell other)
         {
-            return _state == other._state ? EqualityState.IsEqual : EqualityState.IsNotEqual;
+            return _state == other._state;
         }
     }
 }

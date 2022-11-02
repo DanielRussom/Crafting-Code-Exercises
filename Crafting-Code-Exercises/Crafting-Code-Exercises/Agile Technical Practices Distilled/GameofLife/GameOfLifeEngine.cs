@@ -9,7 +9,7 @@
             _board = seed;
         }
 
-        internal EqualityState BoardIsEqualTo(Board expectedBoard)
+        internal bool BoardIsEqualTo(Board expectedBoard)
         {
             return _board.Equals(expectedBoard);
         }

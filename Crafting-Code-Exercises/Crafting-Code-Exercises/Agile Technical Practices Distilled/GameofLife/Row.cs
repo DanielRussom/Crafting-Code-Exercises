@@ -64,7 +64,7 @@
             return new LiveNeighbourCount(_cells[columnPosition.Position], neighbourCount);
         }
 
-        public EqualityState Equals(Row rowToCompare)
+        public bool Equals(Row rowToCompare)
         {
             rowToCompare.PadWithEmptyCells(this);
             PadWithEmptyCells(rowToCompare);
@@ -74,11 +74,11 @@
 
             while (index < CellsCount && isEqual)
             {
-                isEqual = _cells[index].Equals(rowToCompare._cells[index]) == EqualityState.IsEqual;
+                isEqual = _cells[index].Equals(rowToCompare._cells[index]);
                 index++;
             }
 
-            return isEqual ? EqualityState.IsEqual : EqualityState.IsNotEqual;
+            return isEqual;
         }
 
         internal void PadWithEmptyCells(Row rowWithTargetSize)
