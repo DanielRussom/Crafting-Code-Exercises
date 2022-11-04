@@ -3,15 +3,30 @@
     public class Board
     {
         private List<Row> _rows;
-
         private int RowCount => _rows.Count;
         private bool RowsArePopulated => RowCount > 0;
-        private bool FirstRowIsDead => _rows[0].IsDead();
-        private bool LastRowIsDead => _rows[^1].IsDead();
+        private bool FirstRowIsDead => _rows.First().IsDead();
+        private bool LastRowIsDead => _rows.Last().IsDead();
 
         public Board(List<Row> rows)
         {
             _rows = rows;
+        }
+
+        public bool Equals(Board boardToCompare)
+        {
+            AlignBoardDimensions(boardToCompare);
+
+            var index = 0;
+            var isEqual = true;
+
+            while (index < RowCount && isEqual)
+            {
+                isEqual &= CompareRow(boardToCompare, index);
+                index++;
+            }
+
+            return isEqual;
         }
 
         public void Tick()
@@ -21,6 +36,59 @@
             UpdateBoard();
             RemoveDeadColumnsFromTheLeft();
             RemoveDeadRows();
+        }
+
+        private void AlignBoardDimensions(Board boardToCompare)
+        {
+            PadWithEmptyRows(boardToCompare);
+            boardToCompare.PadWithEmptyRows(this);
+
+            RemoveDeadColumnsFromTheLeft();
+            boardToCompare.RemoveDeadColumnsFromTheLeft();
+        }
+
+        private void PadWithEmptyRows(Board boardWithTargetSize)
+        {
+            while (RowCount < boardWithTargetSize.RowCount)
+            {
+                _rows.Add(new());
+            }
+        }
+
+        private void RemoveDeadColumnsFromTheLeft()
+        {
+            var populatedRows = GetPopulatedRows();
+
+            while (populatedRows.Any() && populatedRows.All(row => row.IsFirstColumnDeadOrEmpty()))
+            {
+                _rows.ForEach(row => row.RemoveDeadColumn());
+                populatedRows = GetPopulatedRows();
+            }
+        }
+
+        private List<Row> GetPopulatedRows()
+        {
+            return _rows.Where(row => row.IsPopulated()).ToList();
+        }
+
+        private bool CompareRow(Board boardToCompare, int index)
+        {
+            var row = _rows[index];
+            var rowToCompare = boardToCompare._rows[index];
+
+            return row.Equals(rowToCompare);
+        }
+
+        private void AddDeadRows()
+        {
+            if (!RowsArePopulated) return;
+            _rows.Insert(0, new());
+            _rows.Add(new());
+        }
+
+        private void AddDeadColumnToTheLeft()
+        {
+            _rows.ForEach(row => row.InsertSingleDeadCell());
         }
 
         private void UpdateBoard()
@@ -50,6 +118,12 @@
             return neighbouringRows;
         }
 
+        private Row GetRowAtPosition(RowPosition position)
+        {
+            if (position.Position >= 0 && position.Position < RowCount) return _rows[position.Position];
+            return new Row();
+        }
+
         private void RemoveDeadRows()
         {
             RemoveDeadRowFromTheTop();
@@ -75,87 +149,10 @@
         {
             _rows.RemoveAt(0);
         }
-        
+
         private void RemoveLastRow()
         {
             _rows.RemoveAt(RowCount - 1);
-        }
-
-        private void RemoveDeadColumnsFromTheLeft()
-        {
-            var populatedRows = GetPopulatedRows();
-
-            while (populatedRows.Any() && populatedRows.All(row => row.IsFirstColumnDead()))
-            {
-                _rows.ForEach(row => row.RemoveDeadColumn());
-                populatedRows = GetPopulatedRows();
-            }
-        }
-
-        private List<Row> GetPopulatedRows()
-        {
-            return _rows.Where(row => row.IsPopulated()).ToList();
-        }
-
-        private void AddDeadColumnToTheLeft()
-        {
-            _rows.ForEach(row => row.AddDeadColumn());
-        }
-
-        private void AddDeadRows()
-        {
-            if (!RowsArePopulated) return;
-            _rows.Insert(0, new());
-            _rows.Add(new());
-        }
-
-        private Row GetRowAtPosition(RowPosition position)
-        {
-            if (position.Position >= 0 && position.Position < RowCount) return _rows[position.Position];
-            return new Row();
-        }
-
-        private void PadWithEmptyRows(Board boardWithTargetSize)
-        {
-            while (RowCount < boardWithTargetSize.RowCount)
-            {
-                _rows.Add(new());
-            }
-        }
-
-        public bool Equals(Board boardToCompare)
-        {
-            AlignBoardDimensions(boardToCompare);
-
-            var index = 0;
-            var isEqual = true;
-
-            while (index < RowCount && isEqual)
-            {
-                isEqual &= CompareRows(boardToCompare, index);
-                index++;
-            }
-
-            return isEqual;
-        }
-
-         You are here - about to re-order the methods and Look to split up this class.
-
-        private bool CompareRows(Board boardToCompare, int index)
-        {
-            var row = _rows[index];
-            var rowToCompare = boardToCompare._rows[index];
-            
-            return row.Equals(rowToCompare);
-        }
-
-        private void AlignBoardDimensions(Board boardToCompare)
-        {
-            PadWithEmptyRows(boardToCompare);
-            boardToCompare.PadWithEmptyRows(this);
-
-            RemoveDeadColumnsFromTheLeft();
-            boardToCompare.RemoveDeadColumnsFromTheLeft();
         }
     }
 }

@@ -18,10 +18,10 @@
             return neighbourCount;
         }
 
-        internal void PadRowWithEmptyCells(Row rowToBePadded)
+        internal void PadRowWithDeadCells(Row rowToBePadded)
         {
-            rowToBePadded.PadWithEmptyCells(_rowAbove);
-            rowToBePadded.PadWithEmptyCells(_rowBelow);
+            rowToBePadded.PadWithDeadCells(_rowAbove);
+            rowToBePadded.PadWithDeadCells(_rowBelow);
         }
     }
 }

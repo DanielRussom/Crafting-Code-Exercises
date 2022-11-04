@@ -3,8 +3,8 @@
     public class LiveNeighbourCount
     {
         private int _liveNeighourCount;
-        private readonly Cell _cell;
 
+        private readonly Cell _cell;
         private bool IsPerfectlyPopulated => _liveNeighourCount == 2 || _liveNeighourCount == 3;
         private bool IsNewlyPopulated => _liveNeighourCount == 3;
 
